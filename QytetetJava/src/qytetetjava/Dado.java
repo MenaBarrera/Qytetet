@@ -5,6 +5,8 @@
  */
 package qytetetjava;
 
+import java.util.Random;
+
 /**
  *
  * @author vladislav
@@ -19,7 +21,10 @@ public class Dado {
     }
     
     int tirar(){
-        throw new UnsupportedOperationException("Sin implementar");
+        Random rand = new Random();
+        
+        return rand.nextInt(6) + 1;
+        
     }
 
     @Override

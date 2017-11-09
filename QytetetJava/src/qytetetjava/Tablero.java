@@ -18,10 +18,27 @@ public class Tablero {
         inicializar();
     }
 
-    public Casilla getCarcel() {
+    Casilla getCarcel() {
         return carcel;
     }
+    
+    boolean esCasillaCarcel(int numeroCasilla){
+        return this.casillas.get(numeroCasilla).getTipo() == TipoCasilla.CALLE;
+    }
+    
+    // precondicion: 0 <= numeroCasilla <= 19
+    Casilla obtenerCasillaNumero(int numeroCasilla){
+        return casillas.get(numeroCasilla);
+    }
+    
+    Casilla obtenerNuevaCasilla(Casilla casilla, int desplazamiento){
+        int numCasilla = casilla.getNumeroCasilla();
+        numCasilla = casillas.size() % (numCasilla + desplazamiento);
+        
+        return this.casillas.get(numCasilla);
+    }
 
+    
     @Override
     public String toString() {
         return "Tablero{" + "casillas=" + casillas + ", carcel=" + carcel + '}';

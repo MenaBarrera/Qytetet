@@ -107,6 +107,10 @@ public class Qytetet {
         throw new UnsupportedOperationException("Sin implementar");
     }
     
+    public ArrayList<Jugador> getJugadores(){
+        return this.jugadores;
+    }
+    
     private void inicializarCartasSorpresa(){
         mazo = new ArrayList();
         
