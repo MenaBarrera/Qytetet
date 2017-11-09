@@ -34,7 +34,11 @@ public class Jugador {
     }
     
     public boolean tengoPropiedades(){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean ret = false;
+        if(propiedades.size() > 0){
+            ret = true;
+        }
+        return ret;
     }
     
     boolean actualizarPosicion(Casilla casilla){
@@ -44,17 +48,17 @@ public class Jugador {
     boolean comprarTitulo(){
         throw new UnsupportedOperationException("Sin implementar");
     }
-    
+    /*
     Sorpresa devolverCartaLibertad(){
-        throw new UnsupportedOperationException("Sin implementar");
+        
     }
-    
+    */
     void irACarcel(Casilla casilla){
         throw new UnsupportedOperationException("Sin implementar");
     }
     
     void modificarSaldo(int cantidad){
-        throw new UnsupportedOperationException("Sin implementar");
+        saldo = saldo + cantidad;
     }
     
     int obtenerCapital(){
@@ -62,7 +66,13 @@ public class Jugador {
     }
     
     ArrayList<TituloPropiedad> obtenerPropiedadesHipotecadas(boolean hipotecada){
-        throw new UnsupportedOperationException("Sin implementar");
+        ArrayList<TituloPropiedad> ret = new ArrayList();
+        for (TituloPropiedad t : propiedades){
+            if (t.getHipotecada() == hipotecada){
+                ret.add(t);
+            }
+        }
+        return ret;
     }
     
     void pagarCobrarPorCasaYHotel(int cantidad){
@@ -106,7 +116,12 @@ public class Jugador {
     }
     
     boolean tengoCartaLibertad(){
-        throw new UnsupportedOperationException("Sin implementar");
+        if( cartaLibertad != null ){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     
     void venderPropiedad(Casilla casilla){
@@ -126,9 +141,14 @@ public class Jugador {
     }
     
     private boolean tengoSaldo(int cantidad){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean ret = false;
+        
+        if(saldo >= cantidad ){
+            ret = true;
+        }
+        return ret;
     }
-
+    
     @Override
     public String toString() {
         return "Jugador{" + "encarcelado=" + encarcelado + ", nombre=" + nombre + ", saldo=" + saldo + ", casillaActual=" + casillaActual + ", cartaLibertad=" + cartaLibertad + ", propiedades=" + propiedades + '}';
