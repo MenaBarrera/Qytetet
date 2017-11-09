@@ -65,7 +65,12 @@ public class TituloPropiedad {
     }
     
     boolean tengoPropietario(){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean ret = false;
+        
+        if(propietario != null)
+            ret = true;
+        
+        return ret;
     }
     
     void setPropietario(){
