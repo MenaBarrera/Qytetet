@@ -1,3 +1,5 @@
 # Qytetet
 
-Prática Programación y Diseño orientado a objetos 2017-2018
+Prática Programación y Diseño orientado a objetos 
+Universidad de Granada
+2017-2018
