@@ -56,6 +56,11 @@ public class TituloPropiedad {
         return precioEdificar;
     }
 
+    Casilla getCasilla() {
+        return casilla;
+    }
+
+    
     void setHipotecada(boolean hipotecada) {
         this.hipotecada = hipotecada;
     }

@@ -48,11 +48,13 @@ public class Jugador {
     boolean comprarTitulo(){
         throw new UnsupportedOperationException("Sin implementar");
     }
-    /*
+    
     Sorpresa devolverCartaLibertad(){
-        
+        Sorpresa cartaAux = new Sorpresa(cartaLibertad.getTexto(), cartaLibertad.getValor(), cartaLibertad.getTipo());
+        cartaLibertad = null;
+        return cartaAux;
     }
-    */
+    
     void irACarcel(Casilla casilla){
         throw new UnsupportedOperationException("Sin implementar");
     }
@@ -62,7 +64,13 @@ public class Jugador {
     }
     
     int obtenerCapital(){
-        throw new UnsupportedOperationException("Sin implementar");
+        int capital = saldo;
+        
+        for (TituloPropiedad prop: propiedades){
+            capital += (prop.getCasilla().getNumCasas() + prop.getCasilla().getNumHoteles()) * prop.getPrecioEdificar() + prop.getCasilla().getCoste();
+        }
+        
+        return capital;
     }
     
     ArrayList<TituloPropiedad> obtenerPropiedadesHipotecadas(boolean hipotecada){
@@ -128,11 +136,25 @@ public class Jugador {
     }
     
     private int cuantasCasasHotelesTengo(){
-        throw new UnsupportedOperationException("Sin implementar");
+        int result = 0;
+        
+        for (TituloPropiedad prop: propiedades){
+            result+= prop.getCasilla().getNumCasas() + prop.getCasilla().getNumHoteles();
+        }
+        
+        return result;
     }
     
     private void eliminarDeMisPropiedades(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean borrada = false;
+        int i = propiedades.size();
+        
+        while(!borrada && i >= 0){
+            if (propiedades.get(i).getCasilla() == casilla){
+                propiedades.remove(i);
+                borrada = true;
+            }
+        }
     }
     
     private boolean esDeMiPropiedad(Casilla casilla){
