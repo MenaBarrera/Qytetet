@@ -78,8 +78,8 @@ public class TituloPropiedad {
         return ret;
     }
     
-    void setPropietario(){
-        throw new UnsupportedOperationException("Sin implementar");
+    void setPropietario(Jugador propietario){
+        this.propietario = propietario;
     }
     
     void setCasilla(Casilla casilla){

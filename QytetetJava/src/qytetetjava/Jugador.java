@@ -158,7 +158,14 @@ public class Jugador {
     }
     
     private boolean esDeMiPropiedad(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean poseido = false;
+        
+        for (TituloPropiedad prop: propiedades){
+            if (prop.getCasilla() == casilla)
+                poseido = true;
+        }
+        
+        return poseido;
     }
     
     private boolean tengoSaldo(int cantidad){
