@@ -7,6 +7,7 @@ package qytetetjava;
 
 // Importamos ArrayList
 import java.util.ArrayList;
+import java.util.Random;
 /**
  *
  * @author vladislav
@@ -36,7 +37,7 @@ public class Qytetet {
         inicializarCartasSorpresa();
         inicializarJugadores(nombres);        
         dado = Dado.getInstance();
-        jugadorActual = jugadores.get(0);
+        salidaJugadores();
     }
     
     public static Qytetet getInstance(ArrayList<String> nombres) throws IllegalArgumentException{
@@ -92,11 +93,34 @@ public class Qytetet {
     }
     
     public ArrayList<Casilla> propiedadesHipotecadasJugador(boolean hipotecadas){
-        throw new UnsupportedOperationException("Sin implementar");
+        ArrayList<Casilla> casillas = new ArrayList();
+        
+        ArrayList<TituloPropiedad> prop = jugadorActual.obtenerPropiedadesHipotecadas(hipotecadas);
+        
+        for (int i = 0; i < MAX_CASILLAS; i++){
+            for (TituloPropiedad aux: prop){
+                if (aux == tablero.obtenerCasillaNumero(i).getTitulo())
+                    casillas.add(tablero.obtenerCasillaNumero(i));
+            }            
+        }
+            
+        return casillas;
     }
     
     public Jugador siguienteJugador(){
-        throw new UnsupportedOperationException("Sin implementar");
+        int pos = 0;
+        boolean encontrado = false;
+        
+        for (int i = 0; i < jugadores.size() && !encontrado; i++){
+            if (jugadorActual.equals(jugadores.get(i))){
+                encontrado = true;
+                pos = i;
+            }                
+        }
+        
+        jugadorActual = jugadores.get((pos + 1) % jugadores.size());
+        
+        return jugadorActual;
     }
     
     public boolean venderPropiedad(Casilla casilla){
@@ -140,7 +164,12 @@ public class Qytetet {
     }
     
     private void salidaJugadores(){
-        throw new UnsupportedOperationException("Sin implementar");
+        for (Jugador iter: jugadores)
+            iter.setCasillaActual(tablero.obtenerCasillaNumero(0));
+        
+        Random rand = new Random();
+        jugadorActual = jugadores.get(rand.nextInt(jugadores.size()));
+       
     }
     
     public static Qytetet getQytetet(){
