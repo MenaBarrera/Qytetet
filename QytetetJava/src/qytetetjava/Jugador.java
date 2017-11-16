@@ -91,6 +91,14 @@ public class Jugador {
         throw new UnsupportedOperationException("Sin implementar");
     }
     
+    boolean puedoVenderPropiedad(Casilla casilla){
+        boolean ret = false;
+        
+        ret = esDeMiPropiedad(casilla);
+        
+        return ret;
+    }
+    
     boolean puedoEdificarCasa(Casilla casilla){
         throw new UnsupportedOperationException("Sin implementar");
     }
@@ -146,17 +154,15 @@ public class Jugador {
     }
     
     private void eliminarDeMisPropiedades(Casilla casilla){
-        boolean borrada = false;
-        int i = propiedades.size();
-        
-        while(!borrada && i >= 0){
-            if (propiedades.get(i).getCasilla() == casilla){
-                propiedades.remove(i);
-                borrada = true;
-            }
+
+        TituloPropiedad titulo = casilla.getTitulo();
+        int index;
+
+        if(this.propiedades.contains(titulo)){
+            index = this.propiedades.indexOf(titulo);
+            this.propiedades.remove(index);
         }
     }
-    
     private boolean esDeMiPropiedad(Casilla casilla){
         boolean poseido = false;
         
