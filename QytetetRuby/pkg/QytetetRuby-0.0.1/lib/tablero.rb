@@ -11,15 +11,22 @@ module ModeloQytetet
     end
     
     def es_casilla_carcel(numeroCasilla)
-      
+      if @casillas.at(numeroCasilla).tipo == TipoCasilla::CARCEL
+        return true
+      else
+        return false
+      end      
     end
     
     def obtener_casilla_numero(numeroCasilla)
-      
+      return @casilla.at(numeroCasilla)
     end
     
     def obtener_nueva_casilla(casilla, desplazamiento)
+      numero_casilla = casilla.numeroCasilla
+      numero_casilla = (numero_casilla + desplazamiento) % @casillas.length
       
+      return @casillas.at(numero_casilla) 
     end
     
     def inicializar

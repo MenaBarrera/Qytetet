@@ -18,7 +18,12 @@ module ModeloQytetet
     end
 
     def tengo_propiedades()
-
+      ret = false
+      
+      if(@propiedades.size() > 0)
+        ret = true
+      end
+      return ret
     end
 
     def actualizar_posicion(casilla)
@@ -30,14 +35,18 @@ module ModeloQytetet
     end
     
     def devolver_carta_libertad()
-      
+       @cartaAux = Sorpresa.new(cartaLibertad.getTexto(), cartaLibertad.getValor(), cartaLibertad.getTipo())
+       @cartaLibertad = nil
+       
+      return @cartaAux   
     end
     
     def ir_a_carcel(casilla)
       
     end
     
-    def modificar_saldo(contidad)
+    def modificar_saldo(cantidad)
+      @saldo += cantidad
       
     end
     
@@ -46,7 +55,14 @@ module ModeloQytetet
     end
     
     def obtener_propiedades_hipotecadas(hipotecada)
+      hipotecada_parametro = Array.new
       
+      for i in @propiedades
+        if(i.hipotecada == hipotecada)
+          hipotecada_parametro << i
+        end
+      end
+      return hipotecada_parametro
     end
     
     def pagar_cobrar_por_casa_y_hotel(cantidad)
@@ -74,11 +90,11 @@ module ModeloQytetet
     end
     
     def puedo_vender_propiedad(casilla)
-      
+      return es_de_mi_propiedad && !casilla.hipotecada
     end
     
     def tengo_carta_libertad()
-      
+      return @carta_libertad != nil
     end
     
     def vender_propiedad(casilla)
@@ -90,15 +106,30 @@ module ModeloQytetet
     end
     
     def eliminar_de_mis_propiedades(casilla)
-      
+      for i in @propiedades
+        if(i.casilla == casilla)
+          @propiedades.delete(i)
+        end
+      end
     end
     
     def es_de_mi_propiedad(casilla)
-      
+      poseido = false;
+      for i in @propiedades
+        if(i.casilla == casilla)
+          poseido = true
+        end
+      end
+      return poseido
     end
 
     def tengo_saldo(cantidad)
+      ret = false
       
+      if(@saldo >= cantidad)
+        ret = true
+      end
+      return ret
     end
     
     def to_s

@@ -6,8 +6,8 @@
 module ModeloQytetet
   class TituloPropiedad
     attr_reader :nombre, :alquilerBase, :factorRevalorizacion, :hipotecaBase, :precioEdificar
-    attr_writer :casilla , :propietario
-    attr_accessor :hipotecada
+    attr_writer :propietario
+    attr_accessor :hipotecada, :casilla 
     def initialize(nom, alqBase, factReval, hipotBase, precEdificar)
       @nombre = nom
       @hipotecada = false
@@ -28,7 +28,12 @@ module ModeloQytetet
     end
     
     def tengo_propietario()
+      ret = false
       
+      if(@propietario !=nil)
+        ret = true
+      end
+      return ret
     end
     
     
