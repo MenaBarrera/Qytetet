@@ -54,7 +54,7 @@ module ModeloQytetet
     end
     
     def esta_hipotecada
-      
+      return @tituloPropiedad.hipotecada
     end
     
     # hacerlo así?
@@ -88,7 +88,11 @@ module ModeloQytetet
     end
     
     def soy_edificable
-      
+      if (@tipo == TipoCasilla::CALLE)
+        return true
+      else
+        return false
+      end
     end
     
     def tengo_titulo_propiedad

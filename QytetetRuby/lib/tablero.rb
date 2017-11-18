@@ -5,7 +5,7 @@
 
 module ModeloQytetet
   class Tablero
-    attr_reader :carcel
+    attr_reader :carcel, :casillas
     def initialize
       inicializar
     end
@@ -19,7 +19,7 @@ module ModeloQytetet
     end
     
     def obtener_casilla_numero(numeroCasilla)
-      return @casilla.at(numeroCasilla)
+      return @casillas.at(numeroCasilla)
     end
     
     def obtener_nueva_casilla(casilla, desplazamiento)

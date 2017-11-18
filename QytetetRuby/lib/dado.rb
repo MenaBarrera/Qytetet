@@ -14,7 +14,7 @@ module ModeloQytetet
     end
     
     def tirar
-      
+      return rand(6) + 1
     end
     
     def to_s

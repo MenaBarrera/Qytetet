@@ -9,7 +9,7 @@ require "singleton"
 module ModeloQytetet
   class Qytetet
     include Singleton
-    attr_reader :cartaActual, :jugadorActual
+    attr_reader :cartaActual, :jugadorActual, :jugadores
     @@MAX_JUGADORES = 4
     @@MAX_CARTAS = 10
     @@MAX_CASILLAS = 20
@@ -21,7 +21,7 @@ module ModeloQytetet
       inicializar_tablero
       inicializar_cartas_sorpresa
       inicializar_jugadores(["pepe", "pablo", "mario"])
-      @jugadorActual = @jugadores[0]
+      salida_jugadores
       @cartaActual = nil
     end
     
@@ -66,11 +66,33 @@ module ModeloQytetet
     end
     
     def propiedades_hipotecadas_jugador(hipotecadas)
+      casillas = Array.new
+      propiedades = @jugadorActual.obtener_propiedades_hipotecadas(hipotecadas)
       
+      for item in @tablero.casillas
+        for aux in propiedades
+          if (aux == item.tituloPropiedad)
+            casillas << item
+          end
+        end
+      end
+      
+      return casillas
     end
     
     def siguiente_jugador
+      pos = 0
+      long = @jugadores.length
       
+      for i in 0..long
+        if (@jugadorActual == @jugadores.at(i))
+          pos = i
+        end
+      end
+      
+      @jugadorActual = @jugadores.at((pos + 1) % long)
+      
+      return @jugadorActual
     end
     
     def vender_propiedad(casilla)
@@ -113,7 +135,11 @@ module ModeloQytetet
     end
     
     def salida_jugadores
+      for jugador in @jugadores
+        jugador.casilla_actual = @tablero.obtener_casilla_numero(0)
+      end
       
+      @jugadorActual = @jugadores.at(rand(@jugadores.length))
     end
     
     def to_s
