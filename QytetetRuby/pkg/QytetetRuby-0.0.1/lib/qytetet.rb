@@ -71,7 +71,7 @@ module ModeloQytetet
       
       for item in @tablero.casillas
         for aux in propiedades
-          if (aux == item.tituloPropiedad)
+          if (aux == item.titulo)
             casillas << item
           end
         end

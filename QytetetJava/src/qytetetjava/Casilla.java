@@ -79,6 +79,77 @@ public class Casilla {
     private void setTituloPropiedad(TituloPropiedad titulo){
         this.titulo = titulo;
     }
+    
+    TituloPropiedad asignarPropietario(Jugador jugador) {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    int calcularValorHipoteca() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    int cancelarHipoteca() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    int cobrarAlquiler() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    int edificarCasa() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    int edificarHotel() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    boolean estaHipotecada() {
+        return this.titulo.getHipotecada();
+    }
+    
+    int getPrecioEdificar() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    int hipotecar() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    int precioTotalComprar() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    boolean propietarioEncarcelado() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    boolean sePuedeEdificarCasa() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    boolean sePuedeEdificarHotel() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    boolean soyEdificable() {
+        if (this.tipo == TipoCasilla.CALLE)
+            return true;
+        else
+            return false;
+    }
+    
+    boolean tengoPropietario() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    int venderTitulo() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
+    void asignarTituloPropiedad() {
+        throw new UnsupportedOperationException("Sin implementar");
+    }
 
     @Override
     public String toString() {

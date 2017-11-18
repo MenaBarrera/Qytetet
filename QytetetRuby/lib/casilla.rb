@@ -5,19 +5,19 @@
 
 module ModeloQytetet
   class Casilla
-    attr_reader :numeroCasilla, :coste, :tipo, :tituloPropiedad
-    attr_accessor :numHoteles, :numCasas, :tituloPropiedad
+    attr_reader :numeroCasilla, :coste, :tipo
+    attr_accessor :numHoteles, :numCasas, :titulo
     def initialize(numCas, tipoCas, cost, propiedad)
       @numeroCasilla = numCas
       @coste = cost
       @numHoteles = 0
       @numCasas = 0
       @tipo = tipoCas
-      @tituloPropiedad = propiedad
+      @titulo = propiedad
       
       # Se puede hacer esto?
-      if @tituloPropiedad != nil
-        @tituloPropiedad.casilla = self
+      if @titulo != nil
+        @titulo.casilla = self
       end
     end
     
@@ -54,7 +54,7 @@ module ModeloQytetet
     end
     
     def esta_hipotecada
-      return @tituloPropiedad.hipotecada
+      return @titulo.hipotecada
     end
     
     # hacerlo así?
@@ -116,6 +116,6 @@ module ModeloQytetet
       end
     end
     
-    private :tituloPropiedad= , :asignar_titulo_propiedad
+    private :titulo= , :asignar_titulo_propiedad
   end
 end
