@@ -73,7 +73,21 @@ public class Qytetet {
     }
     
     public boolean hipotecaPropiedad(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean sePuedeHipotecar, puedoHipotecar = false;
+        if (casilla.soyEdificable()) {
+            sePuedeHipotecar = !casilla.estaHipotecada();
+            
+            if (sePuedeHipotecar) {
+                puedoHipotecar = jugadorActual.puedoHipotecar(casilla);
+                
+                if (puedoHipotecar) {
+                    int cantidadRecibida = casilla.hipotecar();
+                    jugadorActual.modificarSaldo(cantidadRecibida);
+                }
+            }
+        }
+        
+        return puedoHipotecar;
     }
     
     public void inicializarJuego(ArrayList<String> nombres){

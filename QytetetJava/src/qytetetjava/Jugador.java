@@ -108,7 +108,9 @@ public class Jugador {
     }
     
     boolean puedoHipotecar(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean esMia = esDeMiPropiedad(casilla);
+        
+        return esMia;
     }
     
     boolean puedoPagarHipoteca(Casilla casilla){

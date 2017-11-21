@@ -85,7 +85,12 @@ public class Casilla {
     }
     
     int calcularValorHipoteca() {
-        throw new UnsupportedOperationException("Sin implementar");
+        int hipotecaBase = this.titulo.getHipotecaBase();
+        
+        int cantidadRecibida;
+        cantidadRecibida = hipotecaBase + (int)(numCasas * (float)0.5 * hipotecaBase + numHoteles * hipotecaBase);
+        
+        return cantidadRecibida;
     }
     
     int cancelarHipoteca() {
@@ -113,7 +118,10 @@ public class Casilla {
     }
     
     int hipotecar() {
-        throw new UnsupportedOperationException("Sin implementar");
+        this.titulo.setHipotecada(true);
+        int cantidadRecibida = calcularValorHipoteca();
+        
+        return cantidadRecibida;
     }
     
     int precioTotalComprar() {
