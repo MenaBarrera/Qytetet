@@ -92,11 +92,11 @@ public class Jugador {
     }
     
     boolean puedoVenderPropiedad(Casilla casilla){
-        boolean ret = false;
+        boolean esMia, hipotecada;
+        esMia = esDeMiPropiedad(casilla);
+        hipotecada = casilla.estaHipotecada();
         
-        ret = esDeMiPropiedad(casilla);
-        
-        return ret;
+        return esMia && !hipotecada;
     }
     
     boolean puedoEdificarCasa(Casilla casilla){
@@ -142,7 +142,9 @@ public class Jugador {
     }
     
     void venderPropiedad(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        int precioVenta = casilla.venderTitulo();
+        modificarSaldo(precioVenta);
+        eliminarDeMisPropiedades(casilla);
     }
     
     private int cuantasCasasHotelesTengo(){

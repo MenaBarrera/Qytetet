@@ -152,7 +152,15 @@ public class Casilla {
     }
     
     int venderTitulo() {
-        throw new UnsupportedOperationException("Sin implementar");
+        int precioVenta, precioCompra;
+        precioCompra = this.coste + (this.numCasas + this.numHoteles) * this.titulo.getPrecioEdificar();
+        precioVenta = (int) (precioCompra + titulo.getFactorRevalorizacion() * precioCompra);
+        
+        this.titulo.setPropietario(null);
+        setNumHoteles(0);
+        setNumCasas(0);
+        
+        return precioVenta;
     }
     
     void asignarTituloPropiedad() {

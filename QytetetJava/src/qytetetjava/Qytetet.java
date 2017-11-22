@@ -138,7 +138,13 @@ public class Qytetet {
     }
     
     public boolean venderPropiedad(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean puedoVender = jugadorActual.puedoVenderPropiedad(casilla);
+        
+        if (puedoVender) {
+            jugadorActual.venderPropiedad(casilla);
+        }
+        
+        return puedoVender;
     }
     
     private void encarcelarJugador(){
