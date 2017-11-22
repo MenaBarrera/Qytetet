@@ -44,7 +44,7 @@ public class Tablero {
         return "Tablero{" + "casillas=" + casillas + ", carcel=" + carcel + '}';
     }
     
-    private void inicializar(){
+    public void inicializar(){
         this.casillas = new ArrayList();
         
         // Creamos las casillas que son calles

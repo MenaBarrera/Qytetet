@@ -47,11 +47,50 @@ public class Jugador {
     }
     
     boolean actualizarPosicion(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean ret = false;
+        if(casilla.getNumeroCasilla() < casillaActual.getNumeroCasilla() ){
+            this.modificarSaldo(Qytetet.SALDO_INICIAL);
+        }
+        
+        this.setCasillaActual(casilla);
+        
+        if(casilla.soyEdificable()){
+            boolean tengoPropietario = casilla.tengoPropietario(); 
+        
+            if(casilla.tengoPropietario()){
+                encarcelado = casilla.propietarioEncarcelado();
+            
+                if(!encarcelado){
+                   int costeAlquiler = casilla.cobrarAlquiler();
+                   this.modificarSaldo(-costeAlquiler);
+                }
+            }
+        }
+        else if(casilla.getTipo() == TipoCasilla.IMPUESTO){
+            int coste = casilla.getCoste();
+            this.modificarSaldo(-coste);
+        }
+       return true; // QUE POLLAS DEVUELVE ESTO ???
     }
     
     boolean comprarTitulo(){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean puedoComprar = false;
+        if(casillaActual.soyEdificable()){
+            boolean tengoPropietario = casillaActual.tengoPropietario();
+            
+            if(!tengoPropietario){
+                int costeCompra = casillaActual.getCoste();
+                
+                if(costeCompra <= saldo){
+                    TituloPropiedad titulo = casillaActual.asignarPropietario(this);
+                    titulo.setPropietario(this);
+                    propiedades.add(titulo);
+                    this.modificarSaldo(-costeCompra);
+                    puedoComprar = true;
+                }
+            }
+        }
+        return puedoComprar;    
     }
     
     Sorpresa devolverCartaLibertad(){
@@ -112,7 +151,14 @@ public class Jugador {
     }
     
     boolean puedoEdificarCasa(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean esMia = this.esDeMiPropiedad(casilla);
+        
+        if(esMia){
+            int costeEdificarCasa = casilla.getPrecioEdificar();
+            boolean tengoSaldo = this.tengoSaldo(-costeEdificarCasa);
+        }
+        return esMia;
+
     }
     
     boolean puedoEdificarHotel(Casilla casilla){

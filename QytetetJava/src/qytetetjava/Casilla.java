@@ -98,11 +98,17 @@ public class Casilla {
     }
     
     int cobrarAlquiler() {
-        throw new UnsupportedOperationException("Sin implementar");
+        int costeAlquilerBase = titulo.getAlquilerBase();
+        int costeAlquiler = (costeAlquilerBase + )
+        titulo.cobrarAlquiler(costeAlquiler);
     }
     
     int edificarCasa() {
-        throw new UnsupportedOperationException("Sin implementar");
+        int nuevoNum = numCasas+1;
+        this.setNumCasas(nuevoNum);
+        int costeEdificarCasa = titulo.getPrecioEdificar();
+        
+        return costeEdificarCasa;
     }
     
     int edificarHotel() {
@@ -114,7 +120,8 @@ public class Casilla {
     }
     
     int getPrecioEdificar() {
-        throw new UnsupportedOperationException("Sin implementar");
+        int costeEdificarCasa = titulo.getPrecioEdificar();
+        return costeEdificarCasa;
     }
     
     int hipotecar() {
@@ -128,8 +135,11 @@ public class Casilla {
         throw new UnsupportedOperationException("Sin implementar");
     }
     
+  
+    
     boolean propietarioEncarcelado() {
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean encarcelado = titulo.propietarioEncarcelado();
+        return encarcelado;
     }
     
     boolean sePuedeEdificarCasa() {
@@ -148,7 +158,8 @@ public class Casilla {
     }
     
     boolean tengoPropietario() {
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean tengoPropietario = titulo.tengoPropietario();
+        return tengoPropietario;
     }
     
     int venderTitulo() {

@@ -34,9 +34,9 @@ public class Qytetet {
     // Constructor privado
     
     private Qytetet(ArrayList<String> nombres) throws IllegalArgumentException{
-        inicializarTablero();
+        inicializarJugadores(nombres); 
+        inicializarTablero();       
         inicializarCartasSorpresa();
-        inicializarJugadores(nombres);        
         dado = Dado.getInstance();
         salidaJugadores();
     }
@@ -98,11 +98,26 @@ public class Qytetet {
     }
     
     public boolean comprarTituloPropiedad(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean puedoComprar = jugadorActual.comprarTitulo();
+        return puedoComprar;
     }
     
     public boolean edificarCasa(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean puedoEdificar = false;
+        
+        if(casilla.soyEdificable()){
+            boolean sePuedeEdificar = casilla.sePuedeEdificarCasa();
+            
+            if(sePuedeEdificar){
+                puedoEdificar = jugadorActual.puedoEdificarCasa(casilla);
+                
+                if(puedoEdificar){
+                    int costeEdificarCasa = casilla.edificarCasa();
+                    jugadorActual.modificarSaldo(-costeEdificarCasa);
+                }
+            }
+        }
+        return puedoEdificar;
     }
     
     public boolean edificarHotel(Casilla casilla){
@@ -136,7 +151,11 @@ public class Qytetet {
     }
     
     public void inicializarJuego(ArrayList<String> nombres){
-        throw new UnsupportedOperationException("Sin implementar");
+        inicializarJugadores(nombres); 
+        inicializarCartasSorpresa();
+        inicializarTablero();
+        salidaJugadores();
+        tablero.inicializar();
     }
     
     public boolean intentarSalirCarcel(MetodoSalirCarcel metodo){
