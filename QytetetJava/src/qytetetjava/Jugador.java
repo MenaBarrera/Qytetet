@@ -61,7 +61,8 @@ public class Jugador {
     }
     
     void irACarcel(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        setCasillaActual(casilla);
+        setEncarcelado(true);
     }
     
     void modificarSaldo(int cantidad){
@@ -89,11 +90,17 @@ public class Jugador {
     }
     
     void pagarCobrarPorCasaYHotel(int cantidad){
-        throw new UnsupportedOperationException("Sin implementar");
+        int numeroTotal = cuantasCasasHotelesTengo();
+        modificarSaldo(cantidad * numeroTotal);
     }
     
     boolean pagarLibertad(int cantidad){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean tengoSaldo = tengoSaldo(cantidad);
+        
+        if (tengoSaldo)
+            modificarSaldo(-cantidad);
+        
+        return tengoSaldo;
     }
     
     boolean puedoVenderPropiedad(Casilla casilla){

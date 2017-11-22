@@ -45,8 +45,52 @@ public class Qytetet {
         qytetet = new Qytetet(nombres);
         return qytetet;
     }
+    
     public boolean aplicarSorpresa(){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean tienePropietario = false;
+        
+        if (cartaActual.getTipo() == TipoSorpresa.PAGAROBRAR) {
+            int cantidad = cartaActual.getValor();
+            jugadorActual.modificarSaldo(cantidad);
+        }
+        
+        else if (cartaActual.getTipo() == TipoSorpresa.IRACASILLA) {
+            int numeroCasilla = cartaActual.getValor();
+            boolean esCarcel = tablero.esCasillaCarcel(numeroCasilla);
+            
+            if (esCarcel)
+                encarcelarJugador();
+            
+            else {
+                Casilla nuevaCasilla = tablero.obtenerCasillaNumero(numeroCasilla);
+                tienePropietario = jugadorActual.actualizarPosicion(nuevaCasilla);
+            }
+        }
+        
+        else if(cartaActual.getTipo() == TipoSorpresa.PORCASAHOTEL) {
+            int cantidad = cartaActual.getValor();
+            jugadorActual.pagarCobrarPorCasaYHotel(cantidad);
+        }
+        
+        else if (cartaActual.getTipo() == TipoSorpresa.PORJUGADOR) {
+            for (Jugador jugador: jugadores) {
+                if (jugador != jugadorActual) {
+                    int cantidad = cartaActual.getValor();
+                    jugador.modificarSaldo(cantidad);
+                    jugadorActual.modificarSaldo(-cantidad);
+                }
+            }
+        }
+        
+        if (cartaActual.getTipo() == TipoSorpresa.SALIRCARCEL) {
+            jugadorActual.setCartaLibertad(cartaActual);
+        }
+        
+        else {
+            mazo.add(cartaActual);          // hay que hacer esto?
+        }
+        
+        return tienePropietario;
     }
     
     public boolean cancelarHipoteca(Casilla casilla){
@@ -96,7 +140,23 @@ public class Qytetet {
     }
     
     public boolean intentarSalirCarcel(MetodoSalirCarcel metodo){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean libre = false;
+        
+        if (metodo == MetodoSalirCarcel.TIRANDODADO) {
+            int valorDado = dado.tirar();
+            libre = valorDado > 5;
+        }
+        
+        else {
+            int cantidad = Qytetet.PRECIO_LIBERTAD;
+            boolean tengoSaldo = jugadorActual.pagarLibertad(cantidad);
+            libre = tengoSaldo;
+        }
+        
+        if (libre)
+            jugadorActual.setEncarcelado(false);
+        
+        return libre;
     }
     
     boolean jugar(){
@@ -156,7 +216,14 @@ public class Qytetet {
     }
     
     private void encarcelarJugador(){
-        throw new UnsupportedOperationException("Sin implementar");
+        if (!jugadorActual.tengoCartaLibertad()) {
+            Casilla carcel = tablero.getCarcel();
+            jugadorActual.irACarcel(carcel);
+        }
+        else {
+            Sorpresa carta = jugadorActual.devolverCartaLibertad();
+            mazo.add(carta);                                        // esto es incluirAlFinal()?
+        }
     }
     
     public ArrayList<Jugador> getJugadores(){
