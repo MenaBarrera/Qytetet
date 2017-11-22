@@ -160,7 +160,22 @@ public class Qytetet {
     }
     
     boolean jugar(){
-        throw new UnsupportedOperationException("Sin implementar");
+        int valorDado = dado.tirar();
+        Casilla casillaPosicion = jugadorActual.getCasillaActual();
+        Casilla nuevaCasilla = tablero.obtenerNuevaCasilla(casillaPosicion, valorDado);
+        boolean tienePropietario = jugadorActual.actualizarPosicion(nuevaCasilla);
+        
+        if (!nuevaCasilla.soyEdificable()) {
+            if (nuevaCasilla.getTipo() == TipoCasilla.JUEZ)
+                encarcelarJugador();
+            
+            else if(nuevaCasilla.getTipo() == TipoCasilla.SORPRESA) {
+                cartaActual = mazo.get(0);
+                mazo.remove(0);
+            }
+        }
+        
+        return tienePropietario;
     }
     
     public LinkedHashMap obtenerRanking(){
