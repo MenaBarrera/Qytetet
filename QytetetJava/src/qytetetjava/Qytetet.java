@@ -8,6 +8,7 @@ package qytetetjava;
 // Importamos ArrayList
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.LinkedHashMap;
 /**
  *
  * @author vladislav
@@ -102,8 +103,15 @@ public class Qytetet {
         throw new UnsupportedOperationException("Sin implementar");
     }
     
-    public ArrayList<Jugador> obtenerRanking(){
-        throw new UnsupportedOperationException("Sin implementar");
+    public LinkedHashMap obtenerRanking(){
+        LinkedHashMap ranking = new LinkedHashMap();
+        
+        for (Jugador jugador: jugadores) {
+            int capital = jugador.obtenerCapital();
+            ranking.put(jugador.getNombre(), capital);
+        }
+        
+        return ranking;
     }
     
     public ArrayList<Casilla> propiedadesHipotecadasJugador(boolean hipotecadas){

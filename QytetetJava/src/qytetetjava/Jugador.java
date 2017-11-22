@@ -32,6 +32,11 @@ public class Jugador {
     public boolean getEncarcelado(){
         return encarcelado;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
     
     public boolean tengoPropiedades(){
         boolean ret = false;
