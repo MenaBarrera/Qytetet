@@ -199,7 +199,9 @@ public class Qytetet {
         LinkedHashMap ranking = new LinkedHashMap();
         ArrayList<Jugador> aux = (ArrayList<Jugador>)jugadores.clone();
         
-        aux.sort((j1, j2) -> Integer.compare(j1.obtenerCapital(), j2.obtenerCapital()));
+        
+        // ESTO ES EXPERIMENTAL, NO SE SI FUNCIONARA
+        aux.sort((j1, j2) -> j1.obtenerCapital() - j2.obtenerCapital());
         
         for (Jugador jugador: aux) {
             int capital = jugador.obtenerCapital();
