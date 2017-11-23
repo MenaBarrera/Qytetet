@@ -29,10 +29,6 @@ module ModeloQytetet
       new(numCas, TipoCasilla::CALLE, cost, prop)
     end
     
-    def asignar_propiedario(jugador)
-      
-    end
-    
     def calcular_valor_hipoteca
       hipoteca_base = @titulo.hipotecaBase
       
@@ -122,7 +118,19 @@ module ModeloQytetet
     
     def vender_titulo
       precio_compra = @coste + (@numCasas + @numHoteles) * @titulo.precioEdificar
-      precio_venta = 
+      precio_venta = precio_compra + @titulo.factorRevalorizacion * precio_compra
+      
+      @titulo.propietario = nil
+      @numHoteles = 0
+      @numCasas = 0
+      
+      return precio_venta
+    end
+    
+    def asignar_propietario(jugador)
+      @titulo.propietario = jugador
+      
+      return @titulo
     end
     
     def asignar_titulo_propiedad
