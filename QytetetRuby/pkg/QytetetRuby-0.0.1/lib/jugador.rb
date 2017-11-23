@@ -7,6 +7,7 @@ module ModeloQytetet
   class Jugador
     attr_accessor :casilla_actual, :encarcelado
     attr_writer :carta_libertad
+    attr_reader :nombre
 
     def initialize(nom)
       @encarcelado = false

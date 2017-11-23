@@ -42,8 +42,18 @@ module ModeloQytetet
       puedo_edificar = false
       
       if (casilla.soy_edificable)
-        se_puede_edificar
+        se_puede_edificar = casilla.se_puede_edificar_casa
+        
+        if (se_puede_edificar)
+          puedo_edificar = @jugadorActual.puedo_edificar_casa(casilla)
+          
+          if (puedo_edificar)
+            coste_edificar_casa = casilla.edificar_casa
+            @jugadorActual.modificar_saldo(-coste_edificar_casa)
+          end
+        end
       end
+      
       return puedo_edificar
     end
     
@@ -52,11 +62,28 @@ module ModeloQytetet
     end
     
     def hipoteca_propiedad(casilla)
+      puedo_hipotecar = false
+      if (casilla.soy_edificable)
+        se_puede_hipotecar = !casilla.esta_hipotecada
+        
+        if (se_puede_hipotecar)
+          puedo_hipotecar = @jugadorActual.puedo_hipotecar(casilla)
+          
+          if (puedo_hipotecar)
+            cantidad_recibida = casilla.hipotecar
+            @jugadorActual.modificar_saldo(cantidad_recibida)
+          end
+        end
+      end
       
+      return puedo_hipotecar
     end
     
     def inicializar_juego(nombres)
-      
+      inicializar_jugadores(nombres)
+      inicializar_cartas_sorpresa
+      inicializar_tablero
+      salida_jugadores
     end
     
     def intentar_salir_carcel(metodo)
@@ -68,7 +95,16 @@ module ModeloQytetet
     end
     
     def obtener_ranking
+      ranking = {}
       
+      jugadores = @jugadores.sort { |j1,j2| j1.obtener_capital < j2.obtener_capital }
+      
+      jugadores.each do |jugador|
+        capital = jugador.obtener_capital
+        ranking[jugador.nombre] = capital
+      end
+      
+      return ranking      
     end
     
     def propiedades_hipotecadas_jugador(hipotecadas)

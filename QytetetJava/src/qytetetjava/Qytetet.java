@@ -154,7 +154,6 @@ public class Qytetet {
         inicializarCartasSorpresa();
         inicializarTablero();
         salidaJugadores();
-        tablero.inicializar();
     }
     
     public boolean intentarSalirCarcel(MetodoSalirCarcel metodo){
@@ -198,8 +197,11 @@ public class Qytetet {
     
     public LinkedHashMap obtenerRanking(){
         LinkedHashMap ranking = new LinkedHashMap();
+        ArrayList<Jugador> aux = (ArrayList<Jugador>)jugadores.clone();
         
-        for (Jugador jugador: jugadores) {
+        aux.sort((j1, j2) -> Integer.compare(j1.obtenerCapital(), j2.obtenerCapital()));
+        
+        for (Jugador jugador: aux) {
             int capital = jugador.obtenerCapital();
             ranking.put(jugador.getNombre(), capital);
         }
