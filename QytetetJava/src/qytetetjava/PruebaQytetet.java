@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ 
 package qytetetjava;
 
 //Hace falta importar el paquete de la clase
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  *
  * @author vladislav
- */
+ 
 public class PruebaQytetet {
     private static ArrayList<Sorpresa> mazo = new ArrayList();
     private static Tablero tablero = new Tablero();
@@ -60,7 +60,7 @@ public class PruebaQytetet {
     }
     /**
      * @param args the command line arguments
-     */
+     
     
     public static void main(String[] args) {
         // TODO code application logic here
@@ -97,7 +97,7 @@ public class PruebaQytetet {
         
         
         try{
-            qytetet = Qytetet.getInstance(nombres);
+            qytetet = Qytetet.getInstance();
             System.out.println("\nBIENVENIDOS A QYTETET");
             System.out.print(qytetet.toString());
 
@@ -112,3 +112,4 @@ public class PruebaQytetet {
     }
     
 }
+*/

@@ -33,16 +33,18 @@ public class Qytetet {
     
     // Constructor privado
     
-    private Qytetet(ArrayList<String> nombres) throws IllegalArgumentException{
-        inicializarJugadores(nombres); 
+    private Qytetet() throws IllegalArgumentException{
+        
         inicializarTablero();       
         inicializarCartasSorpresa();
         dado = Dado.getInstance();
-        salidaJugadores();
+       // salidaJugadores();
     }
-    
-    public static Qytetet getInstance(ArrayList<String> nombres) throws IllegalArgumentException{
-        qytetet = new Qytetet(nombres);
+    public Jugador getJugadorActual(){
+        return jugadorActual;
+    }
+    public static Qytetet getInstance() throws IllegalArgumentException{
+        qytetet = new Qytetet();
         return qytetet;
     }
     
@@ -128,9 +130,6 @@ public class Qytetet {
         return cartaActual;
     }
     
-    public Jugador getJugadorActual(){
-        return jugadorActual;
-    }
     
     public boolean hipotecaPropiedad(Casilla casilla){
         boolean sePuedeHipotecar, puedoHipotecar = false;
@@ -308,9 +307,6 @@ public class Qytetet {
     @Override
     public String toString() {
         return "Qytetet{" + "\ncartaActual=" + cartaActual + "\nmazo=" + mazo.toString() + "\njugadores=" + jugadores.toString() + "\njugadorActual=" + jugadorActual.toString() + "\ntablero=" + tablero.toString() + "\ndado=" + dado.toString() + '}';
-    }
-
-    
-    
-    
+    }  
+ 
 }
