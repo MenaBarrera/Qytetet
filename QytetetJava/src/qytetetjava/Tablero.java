@@ -64,12 +64,13 @@ public class Tablero {
         titulosCalles.add(new TituloPropiedad("Calle de los Nardos", 750, 0.2f, 100, 1000));
         
         // Añadimos todas las casillas en orden menos la carcel
-        this.carcel = new Casilla(5, TipoCasilla.CARCEL);
         this.casillas.add(new Casilla(0, TipoCasilla.SALIDA));
         this.casillas.add(new Casilla(1, 400, titulosCalles.get(i++)));
         this.casillas.add(new Casilla(2, 360, titulosCalles.get(i++)));
         this.casillas.add(new Casilla(3, 380, titulosCalles.get(i++)));
         this.casillas.add(new Casilla(4, 300, titulosCalles.get(i++)));
+        this.casillas.add(new Casilla(5, TipoCasilla.CARCEL));
+        this.carcel = this.casillas.get(5);
         this.casillas.add(new Casilla(6, TipoCasilla.SORPRESA));
         this.casillas.add(new Casilla(7, 500, titulosCalles.get(i++)));
         this.casillas.add(new Casilla(8, 490, titulosCalles.get(i++)));

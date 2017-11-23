@@ -47,7 +47,6 @@ module ModeloQytetet
       titulos_calles << TituloPropiedad.new("Calle del Trueno", 600, 0.1, 55, 650)
       titulos_calles << TituloPropiedad.new("Calle de los Nardos", 750, 0.2, 100, 1000)
       
-      @carcel = Casilla.iniciar_casilla(5, TipoCasilla::CARCEL)
       @casillas << Casilla.iniciar_casilla(0, TipoCasilla::SALIDA)
       @casillas << Casilla.iniciar_calle(1, 400, titulos_calles[i])
       i += 1
@@ -57,6 +56,8 @@ module ModeloQytetet
       i+= 1
       @casillas << Casilla.iniciar_calle(4, 300, titulos_calles[i])
       i+= 1
+      @casillas << Casilla.iniciar_casilla(5, TipoCasilla::CARCEL)
+      @carcel = @casillas.at(5)
       @casillas << Casilla.iniciar_casilla(6, TipoCasilla::SORPRESA)
       @casillas << Casilla.iniciar_calle(7, 500, titulos_calles[i])
       i+= 1

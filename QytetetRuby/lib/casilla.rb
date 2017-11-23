@@ -146,6 +146,6 @@ module ModeloQytetet
       end
     end
     
-    private :titulo= , :asignar_titulo_propiedad
+    private :titulo= , :asignar_propietario
   end
 end
