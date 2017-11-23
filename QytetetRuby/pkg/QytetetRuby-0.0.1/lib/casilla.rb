@@ -122,11 +122,19 @@ module ModeloQytetet
     
     def vender_titulo
       precio_compra = @coste + (@numCasas + @numHoteles) * @titulo.precioEdificar
-      precio_venta = 
+      precio_venta = precio_compra + @titulo.factorRevalorizacion * precio_compra
+      
+      @titulo.propietario = nil
+      @numHoteles = 0
+      @numCasas = 0
+      
+      return precio_venta
     end
     
-    def asignar_titulo_propiedad
+    def asignar_propietario(jugador)
+      @titulo.propietario = jugador
       
+      return @titulo
     end
     
     def to_s
