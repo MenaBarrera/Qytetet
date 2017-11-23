@@ -29,7 +29,7 @@ public class TituloPropiedad {
         this.precioEdificar = precioEdificar;
     }
     void cobrarAlquiler(int coste){
-        throw new UnsupportedOperationException("Sin implementar");
+        propietario.modificarSaldo(-coste);
     }
     
      String getNombre() {

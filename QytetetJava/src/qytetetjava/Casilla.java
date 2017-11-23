@@ -99,8 +99,10 @@ public class Casilla {
     
     int cobrarAlquiler() {
         int costeAlquilerBase = titulo.getAlquilerBase();
-        int costeAlquiler = (costeAlquilerBase + )
+        int costeAlquiler = (costeAlquilerBase + (int)(numCasas*0.5 + numHoteles*2) );
         titulo.cobrarAlquiler(costeAlquiler);
+        
+        return costeAlquiler;
     }
     
     int edificarCasa() {

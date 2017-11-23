@@ -47,7 +47,7 @@ public class Jugador {
     }
     
     boolean actualizarPosicion(Casilla casilla){
-        boolean ret = false;
+        boolean tengoPropietario = false;
         if(casilla.getNumeroCasilla() < casillaActual.getNumeroCasilla() ){
             this.modificarSaldo(Qytetet.SALDO_INICIAL);
         }
@@ -55,7 +55,7 @@ public class Jugador {
         this.setCasillaActual(casilla);
         
         if(casilla.soyEdificable()){
-            boolean tengoPropietario = casilla.tengoPropietario(); 
+            tengoPropietario = casilla.tengoPropietario(); 
         
             if(casilla.tengoPropietario()){
                 encarcelado = casilla.propietarioEncarcelado();
@@ -70,7 +70,7 @@ public class Jugador {
             int coste = casilla.getCoste();
             this.modificarSaldo(-coste);
         }
-       return true; // QUE POLLAS DEVUELVE ESTO ???
+       return tengoPropietario; // QUE DEVUELVE ESTO ???
     }
     
     boolean comprarTitulo(){
@@ -180,10 +180,7 @@ public class Jugador {
     }
     
     void setCasillaActual(Casilla casilla){
-        if (casilla.getTipo() == TipoCasilla.CALLE)
-            casillaActual = new Casilla(casilla.getNumeroCasilla(), casilla.getCoste(), casilla.getTitulo());
-        else
-            casillaActual = new Casilla(casilla.getNumeroCasilla(),casilla.getTipo());
+            casillaActual = casilla; 
     }
     
     void setEncarcelado(boolean encarcelado){
