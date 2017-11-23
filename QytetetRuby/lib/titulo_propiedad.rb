@@ -6,8 +6,7 @@
 module ModeloQytetet
   class TituloPropiedad
     attr_reader :nombre, :alquilerBase, :factorRevalorizacion, :hipotecaBase, :precioEdificar
-    attr_writer :propietario
-    attr_accessor :hipotecada, :casilla 
+    attr_accessor :hipotecada, :casilla, :propietario 
     def initialize(nom, alqBase, factReval, hipotBase, precEdificar)
       @nombre = nom
       @hipotecada = false
@@ -19,12 +18,16 @@ module ModeloQytetet
       @casilla = nil
     end
     
-    def cobrar_alquiler()
-      
+    def cobrar_alquiler(coste)
+      @propietario.modificar_saldo(-coste)
     end
     
     def propietario()
       
+    end
+    
+    def propietario_encarcelado
+      return @propietario.encarcelado
     end
     
     def tengo_propietario()

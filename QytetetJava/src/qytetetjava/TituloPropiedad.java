@@ -66,7 +66,7 @@ public class TituloPropiedad {
     }
     
     boolean propietarioEncarcelado(){
-        throw new UnsupportedOperationException("Sin implementar");
+        return propietario.getEncarcelado();
     }
     
     boolean tengoPropietario(){

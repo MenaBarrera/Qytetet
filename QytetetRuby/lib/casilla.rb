@@ -34,7 +34,11 @@ module ModeloQytetet
     end
     
     def calcular_valor_hipoteca
+      hipoteca_base = @titulo.hipotecaBase
       
+      cantidad_recibida = hipoteca_base + (@numCasas * 0.5 * hipoteca_base + @numHoteles * hipoteca_base)
+      
+      return cantidad_recibida
     end
     
     def cancelar_hipoteca
@@ -42,11 +46,19 @@ module ModeloQytetet
     end
     
     def cobrar_alquiler
+      coste_alquiler_base = @titulo.alquilerBase
+      coste_alquiler = (coste_alquiler_base + (@numCasas * 0.5 + @numHoteles * 2))
+      @titulo.cobrar_alquiler(coste_alquiler)
       
+      return coste_alquiler
     end
     
     def edificar_casa
+      nuevo_num = @numCasas + 1
+      @numCasas = nuevo_num
+      coste_edificar_casas = @titulo.precioEdificar
       
+      return coste_edificar_casas
     end
     
     def edificar_hotel
@@ -64,11 +76,16 @@ module ModeloQytetet
     
     # hacerlo así?
     def get_precio_edificar
+      coste_edificar_casa = @titulo.precioEdificar
       
+      return coste_edificar_casa
     end
     
     def hipotecar
+      @titulo.hipotecada = true
+      cantidad_recibida = calcular_valor_hipoteca
       
+      return cantidad_recibida
     end
     
     def precio_total_comprar
@@ -76,7 +93,9 @@ module ModeloQytetet
     end
     
     def propietario_encarcelado
+      encarcelado = @titulo.propietario_encarcelado
       
+      return encarcelado
     end
     
     def se_puede_edificar_casa
@@ -95,12 +114,15 @@ module ModeloQytetet
       end
     end
     
-    def tengo_titulo_propiedad
+    def tengo_propietario
+      tengo_propietario = @titulo.tengo_propietario
       
+      return tengo_propietario
     end
     
     def vender_titulo
-      
+      precio_compra = @coste + (@numCasas + @numHoteles) * @titulo.precioEdificar
+      precio_venta = 
     end
     
     def asignar_titulo_propiedad
