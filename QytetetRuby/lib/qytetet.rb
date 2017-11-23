@@ -34,11 +34,17 @@ module ModeloQytetet
     end
     
     def comprar_titulo_propiedad(casilla)
-      
+      puedo_comprar = @jugadorActual.comprar_titulo
+      return puedo_comprar
     end
     
     def edificar_casa(casilla)
+      puedo_edificar = false
       
+      if (casilla.soy_edificable)
+        se_puede_edificar
+      end
+      return puedo_edificar
     end
     
     def edificar_hotel(casilla)
