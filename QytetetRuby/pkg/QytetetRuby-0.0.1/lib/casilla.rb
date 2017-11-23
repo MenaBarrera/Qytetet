@@ -29,10 +29,6 @@ module ModeloQytetet
       new(numCas, TipoCasilla::CALLE, cost, prop)
     end
     
-    def asignar_propiedario(jugador)
-      
-    end
-    
     def calcular_valor_hipoteca
       hipoteca_base = @titulo.hipotecaBase
       
@@ -137,6 +133,10 @@ module ModeloQytetet
       return @titulo
     end
     
+    def asignar_titulo_propiedad
+      
+    end
+    
     def to_s
       if (@tipo == TipoCasilla::CALLE)
         "Número casilla: #{@numeroCasilla} \n Coste: #{@coste} \n Número Hoteles: #{@numHoteles} \n Número Casas: #{@numCasas} \n Tipo: #{@tipo} \n Título propiedad: #{@tituloPropiedad}"
@@ -146,6 +146,6 @@ module ModeloQytetet
       end
     end
     
-    private :titulo= , :asignar_propietario
+    private :titulo= , :asignar_titulo_propiedad
   end
 end
