@@ -36,7 +36,7 @@ public class ControladorQytetet {
        
        System.out.println("---------------- JUEGO -------------");
        System.out.print(juego.toString());
-       
+    
    }
       public static void main(String[] args) {
           ControladorQytetet k= new ControladorQytetet();
