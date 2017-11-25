@@ -4,7 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/mena/Desktop/Qytetet/QytetetRuby/lib/jugador.rb</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetRuby/lib/tipo_casilla.rb</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetRuby/lib/casilla.rb</file>
             <file>file:/Users/mena/Desktop/Qytetet/QytetetRuby/lib/dado.rb</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetRuby/lib/tipo_sorpresa.rb</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetRuby/lib/tablero.rb</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetRuby/lib/qytetet.rb</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetRuby/lib/titulo_propiedad.rb</file>
         </group>
     </open-files>
 </project-private>
