@@ -26,7 +26,47 @@ module ModeloQytetet
     end
     
     def aplicar_sorpresa
+      tiene_propietario = false
       
+      if (@cartaActual.tipo == TipoSorpresa::PAGARCOBRAR)
+        cantidad = @cartaActual.valor
+        @jugadorActual.modificar_saldo(cantidad)
+        
+      elsif (@cartaActual.tipo == TipoSorpresa::IRACASILLA)
+        numero_casilla = @cartaActual.valor
+        es_carcel = @tablero.es_casilla_carcel(numero_casilla)
+        
+        if (es_carcel)
+          encarcelar_jugador
+          
+        else
+          nueva_casilla = @tablero.obtener_casilla_numero(numero_casilla)
+          tiene_propietario = @jugadorActual.actualizar_posicion(nueva_casilla)
+        end
+        
+      elsif (@cartaActual.tipo == TipoSorpresa::PORCASAHOTEL)
+        cantidad = @cartaActual.valor
+        @jugadorActual.pagar_cobrar_por_casa_y_hotel(cantidad)
+        
+      elsif (@cartaActual.tipo == TipoSorpresa::PORJUGADOR)
+        for jugador in @jugadores
+          if (jugador != @jugadorActual)
+            cantidad = @cartaActual
+            jugador.modificar_saldo(cantidad)
+            @jugadorActual.modificar_saldo(-cantidad)
+          end
+        end
+        
+      end
+      
+      if (@cartaActual.tipo == TipoSorpresa::SALIRCARCEL)
+        @jugadorActual.carta_libertad = @cartaActual
+        
+      else
+        @mazo << @cartaActual
+      end
+      
+      return tiene_propietario
     end
     
     def cancelar_hipoteca(casilla)
@@ -87,11 +127,42 @@ module ModeloQytetet
     end
     
     def intentar_salir_carcel(metodo)
+      libre = false
       
+      if (metodo == MetodosSalirCarcel::TIRANDODADO)
+        valor_dado = @dado.tirar
+        libre = valor_dado > 5
+        
+      else
+        cantidad = @@PRECIO_LIBERTAD
+        tengo_saldo = @jugadorActual.pagar_libertad(cantidad)
+        libre = tengo_saldo
+      end
+      
+      if (libre)
+        @jugadorActual.encarcelado = false
+      end
+      
+      return libre
     end
     
     def jugar
+      valor_dado = @dado.tirar
+      casilla_posicion = @jugadorActual.casilla_actual
+      nueva_casilla = @tablero.obtener_nueva_casilla(casilla_posicion, valor_dado)
+      tiene_propietario = @jugadorActual.actualizar_posicion(nueva_casilla)
       
+      if (!nueva_casilla.soy_edificable)
+        if (nueva_casilla.tipo == TipoCasilla::JUEZ)
+          encarcelar_jugador
+          
+        elsif (nueva_casilla.tipo == TipoCasilla::SORPRESA)
+          @cartaActual = @mazo.at(0)
+          @mazo.delete_at(0)
+        end
+      end
+      
+      return tiene_propietario
     end
     
     def obtener_ranking
@@ -138,11 +209,24 @@ module ModeloQytetet
     end
     
     def vender_propiedad(casilla)
+      puedo_vender = @jugadorActual.puedo_vender_propiedad(casilla)
       
+      if (puedo_vender)
+        @jugadorActual.vender_propiedad(casilla)
+      end
+      
+      return puedo_vender
     end
     
     def encarcelar_jugador
-      
+      if (!@jugadorActual.tengo_carta_libertad)
+        carcel = @tablero.carcel
+        @jugadorActual.ir_a_carcel(carcel)
+        
+      else
+        carta = @jugadorActual.devolver_carta_libertad
+        @mazo << carta
+      end
     end
     
     def inicializar_cartas_sorpresa
