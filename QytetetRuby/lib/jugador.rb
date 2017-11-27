@@ -28,11 +28,52 @@ module ModeloQytetet
     end
 
     def actualizar_posicion(casilla)
-
+      tengo_propietario = false
+      if(casilla.numeroCasilla < @casillaActual.numeroCasilla)
+        modificar_saldo(Qytetet.SALDO_SALIDA);
+      end
+      
+      @casilla_actual = casilla;
+      
+      if(casilla.soy_edificable)
+        tengo_propietario = casilla.tengo_propietario
+        
+        if(tengo_propietario)
+          @encarcelado = casilla.propietario_encarcelado
+          
+          if(!encarcelado)
+            coste_alquiler = casilla.cobrar_alquiler()
+            modificar_saldo(-coste_alquiler)
+            
+          end
+        end
+      else
+        casilla.tipo == TipoCasilla::IMPUESTO
+        coste = casilla.coste
+        modificar_saldo(coste)
+      end
     end
 
+    
     def comprar_titulo()
-
+      puedo_comprar = false
+      
+      if(@casilla_actual.soy_edificable)
+        tengo_propietario = @casilla_actual.tengo_propietario
+        
+        if(!tengo_propietario)
+          coste_compra = @casilla_actual.coste
+          
+          if(coste_compra <= @saldo)
+            titulo = @casilla_actual.asignar_propietario(self) #NO ESTOY SEGURO DE QUE SEA SELF
+            @casilla_actual.titulo.propietario = self
+            @propiedades << titulo                              # no hay que hacer new de titulo?
+            modificar_saldo(-coste_compra)
+            puedo_comprar = true
+          end
+        end
+      end
+      return puedo_comprar
     end
     
     def devolver_carta_libertad()
@@ -75,6 +116,12 @@ module ModeloQytetet
     end
     
     def puedo_edificar_casa(casilla)
+      es_mia = es_de_mi_propiedad(casilla)
+      
+      if(es_mia)
+        coste_edificar_casa = casilla.precioEdificar
+        tengo_saldo = tengo_saldo(coste_edificar_casa)
+      end
       
     end
     
