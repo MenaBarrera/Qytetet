@@ -47,12 +47,15 @@ module ModeloQytetet
             
           end
         end
-      else
-        casilla.tipo == TipoCasilla::IMPUESTO
+        
+        else if casilla.tipo == TipoCasilla::IMPUESTO
         coste = casilla.coste
-        modificar_saldo(coste)
+        modificar_saldo(-coste)
+        end
       end
+      return tengo_propietario
     end
+    
 
     
     def comprar_titulo()
@@ -146,7 +149,11 @@ module ModeloQytetet
     end
     
     def vender_propiedad(casilla)
-      
+      es_mia = es_de_mi_propiedad
+      hipotecada = casilla.esta_hipotecada
+      precio_venta = casilla.vender_propiedad(casilla)
+      modificar_saldo(precio_venta)
+      eliminar_de_mis_propiedades(casilla)  
     end
     
     def cuantas_casas_y_hoteles_tengo()
