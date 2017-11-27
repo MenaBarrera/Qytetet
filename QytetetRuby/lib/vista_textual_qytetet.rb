@@ -9,7 +9,7 @@ class VistaTextualQytetet
      
     begin #Hasta que se hace una seleccionn valida
       valido= true
-      for m in menu #se muestran las opciones del menuº
+      for m in menu #se muestran las opciones del menuï¿½
         mostrar( "#{m[0]}" + " : " + "#{m[1]}")
       end
       mostrar( "\n Elige un numero de opcion: ")
@@ -75,7 +75,7 @@ def menu_elegir_propiedad(listaPropiedades) # numero y nombre de propiedades
         numero_opcion=numero_opcion+1
     end
     puts menuEP.inspect
-    salida=seleccion_menu(menuEP); # Método para controlar la elección correcta en el menú 
+    salida=seleccion_menu(menuEP); # Mï¿½todo para controlar la elecciï¿½n correcta en el menï¿½ 
     salida;
 end  
   
@@ -85,7 +85,7 @@ end
        begin
         self.mostrar("Escribe el numero de jugadores: (de 2 a 4):");
         lectura = gets.chomp #lectura de teclado
-        valido=comprobar_opcion(lectura, 2, 4); #método para comprobar la elección correcta
+        valido=comprobar_opcion(lectura, 2, 4); #mï¿½todo para comprobar la elecciï¿½n correcta
       end while(!valido)
     
       for i in 1..Integer(lectura)  #pide nombre de jugadores y los mete en un array
@@ -100,13 +100,18 @@ end
     puts texto
   end
   
+  def esperar
+    mostrar("Pulse una tecla para continuar")
+    espera = gets
+  end
+  
   private :comprobar_opcion, :seleccion_menu
   
  
 end
 end
 
- #   # --------------------el siguiente método va en ControladorQytetet
+ #   # --------------------el siguiente mï¿½todo va en ControladorQytetet
 # def elegir_propiedad(propiedades) # lista de propiedades a elegir
 #        @vista.mostrar("\tCasilla\tTitulo");
 #        

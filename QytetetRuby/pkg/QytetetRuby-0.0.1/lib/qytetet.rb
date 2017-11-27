@@ -18,10 +18,6 @@ module ModeloQytetet
     
     def initialize
       @dado = Dado.instance
-      inicializar_tablero
-      inicializar_cartas_sorpresa
-      inicializar_jugadores(["pepe", "pablo", "mario"])
-      salida_jugadores
       @cartaActual = nil
     end
     
@@ -120,9 +116,9 @@ module ModeloQytetet
     end
     
     def inicializar_juego(nombres)
-      inicializar_jugadores(nombres)
-      inicializar_cartas_sorpresa
       inicializar_tablero
+      inicializar_cartas_sorpresa
+      inicializar_jugadores(nombres)
       salida_jugadores
     end
     
