@@ -64,9 +64,30 @@ public class ControladorQytetet {
                            noTienePropietario = juego.aplicarSorpresa();
                            if(!jugador.getEncarcelado()){
                                if(!bancarrota()){
-                                   if(casilla.getTipo() == TipoCasilla.CALLE)
+                                   if(casilla.getTipo() == TipoCasilla.CALLE){
+                                       if(noTienePropietario){
+                                           int saldo = jugador.getSaldo();
+                                           vista.mostrar("El saldo disponible es de: " + saldo);
+                                           vista.mostrar("El precio de la propiedad es de: " +casilla.getCoste());
+                                           vista.mostrar("el saldo final seria de " +(saldo-casilla.getCoste()));
+                                           boolean quieroComprar = vista.elegirQuieroComprar();
+                                           
+                                           if(quieroComprar){
+                                                boolean comprado = juego.comprarTituloPropiedad(casilla);
+                                                vista.mostrar("El saldo actual del jugador " +jugador.getNombre() + " es de " + jugador.getSaldo());
+                                    
+                                            }
+                                       }
+                                   }
                                }
                            }
+                       }
+                       //OTRO
+                       if(!jugador.getEncarcelado() && !bancarrota() && jugador.tengoPropiedades()){
+                           
+                           
+                           int opcion=vista.menuElegirPropiedad(listaPropiedades);
+                           casilla = elegirPropiedad(jugador.get)
                        }
                    }
                }
@@ -102,6 +123,20 @@ public class ControladorQytetet {
 
     private void actualizarCasilla() {
         casilla = jugador.getCasillaActual();
+    }
+    
+    public Casilla elegirPropiedad(ArrayList<Casilla> propiedades){ 
+         //este metodo toma una lista de propiedades y genera una lista de strings, con el numero y nombre de las propiedades
+         //luego llama a la vista para que el usuario pueda elegir.
+        vista.mostrar("\tCasilla\tTitulo");
+        int seleccion;
+        ArrayList<String> listaPropiedades= new ArrayList();
+        for ( Casilla casilla1: propiedades) {
+            listaPropiedades.add( "\t"+casilla1.getNumeroCasilla()+"\t"+casilla1.getTitulo().getNombre()); 
+        }
+        seleccion=vista.menuElegirPropiedad(listaPropiedades);  
+        
+        return propiedades.get(seleccion);
     }
 }
 

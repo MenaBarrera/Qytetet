@@ -32,7 +32,7 @@ public class TituloPropiedad {
         propietario.modificarSaldo(-coste);
     }
     
-     String getNombre() {
+    public String getNombre() {
         return nombre;
     }
 

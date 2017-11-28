@@ -55,6 +55,8 @@ public class Casilla {
     public TituloPropiedad getTitulo() {
         return titulo;
     }
+    
+    
 
     public void setNumHoteles(int numHoteles) {
         this.numHoteles = numHoteles;
