@@ -24,8 +24,8 @@ public class ControladorQytetet {
        vista.mostrar("\n\n\nInformacion de la casilla actual" + casilla);
        
        while(!finJuego){
-           boolean libre = !jugador.getEncarcelado();
-           int opcion = -1;
+           boolean libre = !(jugador.getEncarcelado());
+           eleccion = -1;
            if(!libre){
              vista.mostrar("El jugador " + jugador.getNombre() + " está encarcelado");
              int metodo = vista.menuSalirCarcel();
@@ -43,6 +43,7 @@ public class ControladorQytetet {
                actualizarCasilla();
                vista.mostrar(jugador.getNombre() + " \n\nse desplaza hasta la casilla numero " + casilla.getNumeroCasilla());
                vista.mostrar("\n\nInformación de la casilla:" + casilla);
+               vista.mostrar("jugador name::: " + jugador.getNombre());
                
                if(!bancarrota()){
                    if(!jugador.getEncarcelado()){
