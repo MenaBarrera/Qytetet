@@ -92,6 +92,10 @@ public class Jugador {
         }
         return puedoComprar;    
     }
+
+    public int getSaldo() {
+        return saldo;
+    }
     
     Sorpresa devolverCartaLibertad(){
         Sorpresa cartaAux = new Sorpresa(cartaLibertad.getTexto(), cartaLibertad.getValor(), cartaLibertad.getTipo());

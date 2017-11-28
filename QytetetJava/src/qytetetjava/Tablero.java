@@ -32,8 +32,8 @@ public class Tablero {
     }
     
     Casilla obtenerNuevaCasilla(Casilla casilla, int desplazamiento){
-        int numCasilla = casilla.getNumeroCasilla();
-        numCasilla = casillas.size() % (numCasilla + desplazamiento);
+        int numCasilla = casilla.getNumeroCasilla(); 
+        numCasilla += (numCasilla + desplazamiento) % casillas.size()  ;
         
         return this.casillas.get(numCasilla);
     }

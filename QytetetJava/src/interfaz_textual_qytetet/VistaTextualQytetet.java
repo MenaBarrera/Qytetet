@@ -26,7 +26,7 @@ public int menuGestionInmobiliaria(){ //ejemplo de men�
  }
 
  public int menuSalirCarcel(){
-     this.mostrar("Elige la gestion inmobiliaria que deseas hacer");
+     this.mostrar("Elige Metodo salir carcel ");
     Map<Integer, String> menuSC = new TreeMap();
     menuSC.put(0, "Tirando el dado"); 
     menuSC.put(1, "Pagando mi libertad");
@@ -35,9 +35,22 @@ public int menuGestionInmobiliaria(){ //ejemplo de men�
     return salida;
  }
   
-//  public boolean elegirQuieroComprar(){
-//    // se pide si o no se quiere comprar una propiedad. Por completar
-// }
+  public boolean elegirQuieroComprar(){
+      int quieroComprar;
+      String lectura;
+      boolean ret;
+      
+      mostrar("Quieres comprar la propiedad? \n0 -> si\n1 -> no ");
+      lectura = in.nextLine();
+      quieroComprar = Integer.parseInt(lectura);
+      
+      if(quieroComprar == 0)
+          ret = true;
+      else
+          ret = false;
+      
+      return ret;
+ }
  
         
  public int menuElegirPropiedad(ArrayList<String> listaPropiedades){  //numero y nombre de propiedades            
@@ -111,7 +124,11 @@ public ArrayList<String> obtenerNombreJugadores() { //m�todo para pedir el nom
          
     System.out.println(texto);
 }
- 
+
+public void esperar(){
+    mostrar("\nPulse tecla para continuar");
+  String lectura = in.nextLine();   
+}
 
 }
  

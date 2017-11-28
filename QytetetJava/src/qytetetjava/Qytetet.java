@@ -171,12 +171,12 @@ public class Qytetet {
         salidaJugadores();
     }
     
-    public boolean intentarSalirCarcel(MetodoSalirCarcel metodo){
-        boolean libre = false;
+    public boolean intentarSalirCarcel(int metodo){
+        boolean libre;
         
-        if (metodo == MetodoSalirCarcel.TIRANDODADO) {
+        if (metodo == 1) {
             int valorDado = dado.tirar();
-            libre = valorDado > 5;
+            libre = (valorDado > 5);
         }
         
         else {
@@ -191,10 +191,14 @@ public class Qytetet {
         return libre;
     }
     
-    boolean jugar(){
+    public boolean jugar(){
         int valorDado = dado.tirar();
+        
+        System.out.println("valorDado: " + valorDado);
         Casilla casillaPosicion = jugadorActual.getCasillaActual();
         Casilla nuevaCasilla = tablero.obtenerNuevaCasilla(casillaPosicion, valorDado);
+        System.out.println("\n\nCasilla nueva ---" + nuevaCasilla);
+                
         boolean tienePropietario = jugadorActual.actualizarPosicion(nuevaCasilla);
         
         if (!nuevaCasilla.soyEdificable()) {
