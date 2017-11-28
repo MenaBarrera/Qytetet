@@ -167,6 +167,7 @@ public class ControladorQytetet {
             }
             if(!bancarrota()){
                 juego.siguienteJugador();
+                jugador = juego.getJugadorActual();
                 vista.mostrar("Siguente jugador ::: Nombre::: "+ jugador.getNombre());
             }
             if(bancarrota()){
