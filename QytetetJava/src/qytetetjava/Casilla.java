@@ -165,10 +165,13 @@ public class Casilla {
     }
     
     boolean soyEdificable() {
+        boolean ret = false;
+        
         if (this.tipo == TipoCasilla.CALLE)
-            return true;
+            ret = true;
         else
-            return false;
+            ret =  false;
+        return ret;
     }
     
     boolean tengoPropietario() {
