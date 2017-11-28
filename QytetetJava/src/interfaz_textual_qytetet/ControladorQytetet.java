@@ -17,13 +17,11 @@ public class ControladorQytetet {
    private VistaTextualQytetet vista = new VistaTextualQytetet();
    
    public void desarrolloJuego(){
-       
+       if(jugador.getEncarcelado()){
+           
+       }
    }
-   /*
-   private Casilla elegirPropiedad(ArrayList<Casilla> propiedades){
-       
-   }
-   */
+ 
    
    public void inicializacionJuego(){
        ArrayList<String> names = new ArrayList();
