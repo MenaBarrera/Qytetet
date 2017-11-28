@@ -84,10 +84,8 @@ public class ControladorQytetet {
                        }
                        //OTRO
                        if(!jugador.getEncarcelado() && !bancarrota() && jugador.tengoPropiedades()){
-                           
-                           
-                           int opcion=vista.menuElegirPropiedad(listaPropiedades);
-                           casilla = elegirPropiedad(jugador.get)
+                           listaPropiedades = elegirPropiedad(jugador.getPropiedades());
+                           int opcion = vista.menuElegirPropiedad(listaPropiedades)
                        }
                    }
                }

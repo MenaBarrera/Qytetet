@@ -25,6 +25,10 @@ public class Jugador {
         this.nombre = nombre;
     }
     
+    public ArrayList<TituloPropiedad> getPropiedades(){
+        return propiedades;
+    }
+    
     public Casilla getCasillaActual(){
         return casillaActual;
     }
