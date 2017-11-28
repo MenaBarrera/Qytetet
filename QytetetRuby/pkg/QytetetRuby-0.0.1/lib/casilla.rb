@@ -58,7 +58,12 @@ module ModeloQytetet
     end
     
     def edificar_hotel
+      nuevo_num = @numHoteles + 1
+      @numHoteles = nuevo_num
+      @numCasas = 0
+      coste_edificar_hotel = @titulo.precioEdificar
       
+      return coste_edificar_hotel
     end
     
     def esta_hipotecada
@@ -95,11 +100,11 @@ module ModeloQytetet
     end
     
     def se_puede_edificar_casa
-      
+      return @numCasas < 4
     end
     
     def se_puede_edificar_hotel
-      
+      return @numHoteles < 4 && @numCasas == 4
     end
     
     def soy_edificable

@@ -116,7 +116,12 @@ public class Casilla {
     }
     
     int edificarHotel() {
-        throw new UnsupportedOperationException("Sin implementar");
+        int nuevoNum = numHoteles + 1;
+        numHoteles = nuevoNum;
+        numCasas = 0;
+        int costeEdificarHotel = titulo.getPrecioEdificar();
+        
+        return costeEdificarHotel;
     }
     
     boolean estaHipotecada() {
@@ -147,11 +152,11 @@ public class Casilla {
     }
     
     boolean sePuedeEdificarCasa() {
-        throw new UnsupportedOperationException("Sin implementar");
+        return numCasas < 4;
     }
     
     boolean sePuedeEdificarHotel() {
-        throw new UnsupportedOperationException("Sin implementar");
+        return numHoteles < 4 && numCasas == 4;
     }
     
     boolean soyEdificable() {

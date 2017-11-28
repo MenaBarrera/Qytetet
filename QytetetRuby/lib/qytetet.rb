@@ -94,7 +94,22 @@ module ModeloQytetet
     end
     
     def edificar_hotel(casilla)
+      puedo_edificar = false
       
+      if (casilla.soy_edificable)
+        se_puede_edificar = casilla.se_puede_edificar_hotel
+        
+        if (se_puede_edificar)
+          puedo_edificar = @jugadorActual.puedo_edificar_hotel(casilla)
+          
+          if (puedo_edificar)
+            coste_edificar_hotel = casilla.edificar_hotel
+            @jugadorActual.modificar_saldo(-coste_edificar_hotel)
+          end
+        end
+      end
+      
+      return puedo_edificar
     end
     
     def hipoteca_propiedad(casilla)

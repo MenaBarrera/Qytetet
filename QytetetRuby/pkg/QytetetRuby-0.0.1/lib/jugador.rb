@@ -133,22 +133,26 @@ module ModeloQytetet
     
     def puedo_edificar_casa(casilla)
       es_mia = es_de_mi_propiedad(casilla)
+      tengo_saldo = false
       
       if(es_mia)
         coste_edificar_casa = casilla.precioEdificar
         tengo_saldo = tengo_saldo(coste_edificar_casa)
       end
       
+      return es_mia && tengo_saldo
     end
     
     def puedo_edificar_hotel(casilla)
-      puedo_edificar = false
+      tengo_saldo = false
       es_mia = es_de_mi_propiedad(casilla)
       
-      if(casilla.numCasas == 4 && casilla.precioEdificar < @saldo)
-        puedo_edificar = true
+      if(es_mia)
+        coste_edificar = casilla.precioEdificar
+        tengo_saldo = tengo_saldo(coste_edificar)
       end
-      return puedo_edificar
+      
+      return es_mia && tengo_saldo
     end
     
     def puedo_hipotecar(casilla)

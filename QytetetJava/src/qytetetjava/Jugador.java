@@ -152,17 +152,26 @@ public class Jugador {
     
     boolean puedoEdificarCasa(Casilla casilla){
         boolean esMia = this.esDeMiPropiedad(casilla);
+        boolean tengoSaldo = false;
         
         if(esMia){
             int costeEdificarCasa = casilla.getPrecioEdificar();
-            boolean tengoSaldo = this.tengoSaldo(-costeEdificarCasa);
+            tengoSaldo = this.tengoSaldo(-costeEdificarCasa);
         }
-        return esMia;
+        return esMia && tengoSaldo;
 
     }
     
     boolean puedoEdificarHotel(Casilla casilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        boolean tengoSaldo = false;
+        boolean esMia = esDeMiPropiedad(casilla);
+        
+        if (esMia){
+            int costeEdificar = casilla.getPrecioEdificar();
+            tengoSaldo = tengoSaldo(costeEdificar);
+        }
+        
+        return esMia && tengoSaldo;
     }
     
     boolean puedoHipotecar(Casilla casilla){
