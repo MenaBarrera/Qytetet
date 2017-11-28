@@ -60,7 +60,11 @@ public class TituloPropiedad {
         return casilla;
     }
 
+    public Jugador getPropietario() {
+        return propietario;
+    }
     
+        
     void setHipotecada(boolean hipotecada) {
         this.hipotecada = hipotecada;
     }

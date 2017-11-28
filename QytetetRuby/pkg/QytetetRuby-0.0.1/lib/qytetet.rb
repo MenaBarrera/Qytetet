@@ -66,7 +66,21 @@ module ModeloQytetet
     end
     
     def cancelar_hipoteca(casilla)
+      puedo_cancelar = false
+      if (casilla.soy_edificable)
+        se_puede_cancelar = casilla.esta_hipotecada
+        
+        if (se_puede_cancelar)
+          puedo_cancelar = @jugadorActual == casilla.titulo.propietario
+          
+          if (puedo_cancelar)
+            coste_cancelar = casilla.cancelar_hipoteca
+            @jugadorActual.modificar_saldo(-coste_cancelar)
+          end
+        end
+      end
       
+      return puedo_cancelar
     end
     
     def comprar_titulo_propiedad(casilla)

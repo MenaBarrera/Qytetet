@@ -96,7 +96,10 @@ public class Casilla {
     }
     
     int cancelarHipoteca() {
-        throw new UnsupportedOperationException("Sin implementar");
+        titulo.setHipotecada(false);
+        int cantidadPagar = (int) (calcularValorHipoteca() * 1.1);
+        
+        return cantidadPagar;
     }
     
     int cobrarAlquiler() {

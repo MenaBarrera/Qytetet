@@ -38,7 +38,10 @@ module ModeloQytetet
     end
     
     def cancelar_hipoteca
+      @titulo.hipotecada = false
+      cantidad_pagar = calcular_valor_hipoteca * 1.1
       
+      return cantidad_pagar
     end
     
     def cobrar_alquiler
