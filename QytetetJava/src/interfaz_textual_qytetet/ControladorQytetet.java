@@ -5,6 +5,7 @@
  */
 package interfaz_textual_qytetet;
 import java.util.ArrayList;
+import java.util.Scanner;
 import qytetetjava.*;
 /**
  *
@@ -38,21 +39,28 @@ public class ControladorQytetet {
            }
            
            if(libre){
+               provocarEspera();
                boolean noTienePropietario;
                noTienePropietario = !(juego.jugar());
                actualizarCasilla();
+               separador();
                vista.mostrar(jugador.getNombre() + " \n\nse desplaza hasta la casilla numero " + casilla.getNumeroCasilla());
+               separador();
                vista.mostrar("\n\nInformación de la casilla:" + casilla);
+               separador();
                vista.mostrar("jugador name::: " + jugador.getNombre());
+               provocarEspera();
                
                if(!bancarrota()){
                    if(!jugador.getEncarcelado()){
                        if(casilla.getTipo() == TipoCasilla.CALLE){
                            if(noTienePropietario){
                                 int saldo = jugador.getSaldo();
+                                separador();
                                 vista.mostrar("El saldo disponible es de: " + saldo);
                                 vista.mostrar("El precio de la propiedad es de: " +casilla.getCoste());
                                 vista.mostrar("el saldo final seria de " +(saldo-casilla.getCoste()));
+                                separador();
                                 boolean quieroComprar = vista.elegirQuieroComprar();
                                 
                                 if(quieroComprar){
@@ -69,15 +77,20 @@ public class ControladorQytetet {
                                    if(casilla.getTipo() == TipoCasilla.CALLE){
                                        if(noTienePropietario){
                                            int saldo = jugador.getSaldo();
+                                           separador();
+                                           separador();
                                            vista.mostrar("El saldo disponible es de: " + saldo);
                                            vista.mostrar("El precio de la propiedad es de: " +casilla.getCoste());
                                            vista.mostrar("el saldo final seria de " +(saldo-casilla.getCoste()));
+                                           separador();
+                                           separador();
                                            boolean quieroComprar = vista.elegirQuieroComprar();
                                            
                                            if(quieroComprar){
                                                 boolean comprado = juego.comprarTituloPropiedad(casilla);
+                                                separador();
                                                 vista.mostrar("El saldo actual del jugador " +jugador.getNombre() + " es de " + jugador.getSaldo());
-                                    
+                                                separador();
                                             }
                                        }
                                    }
@@ -86,7 +99,7 @@ public class ControladorQytetet {
                        }
                        //OTRO
                        if(!jugador.getEncarcelado() && !bancarrota() && jugador.tengoPropiedades()){
-                           
+                           separador();
                            ArrayList<TituloPropiedad> listaPropiedades = jugador.getPropiedades();
                            ArrayList<Casilla> casillas = new ArrayList();
                            ArrayList<String> names = new ArrayList();
@@ -98,16 +111,17 @@ public class ControladorQytetet {
                            }
                            
                            boolean correcto;
-                           
+                           separador();
                            while(eleccion != 0){
+                               separador();
                                vista.mostrar("ELIGE PROPIEDADES\n");
                                Casilla casilla_metodo = elegirPropiedad(casillas);
                                
-                               
+                               separador();
                                vista.mostrar("\ncasilla_actual" + casilla_metodo);
-                               
+                               separador();
                                eleccion = vista.menuGestionInmobiliaria();
-
+                               separador();
                                if(eleccion == 1){
                                    vista.mostrar("saldo previo: " + jugador.getSaldo());
                                    correcto = juego.edificarCasa(casilla_metodo);
@@ -174,9 +188,17 @@ public class ControladorQytetet {
             if(!bancarrota()){
                 juego.siguienteJugador();
                 jugador = juego.getJugadorActual();
+                separador();
+                separador();
                 vista.mostrar("Siguente jugador ::: Nombre::: "+ jugador.getNombre());
+                separador();
+                separador();
             }
             if(bancarrota()){
+                separador();
+                separador();
+                separador();
+                separador();
                 juego.obtenerRanking();
                 finJuego = true;
             }
@@ -186,6 +208,10 @@ public class ControladorQytetet {
    boolean bancarrota(){
        return jugador.getSaldo() <= 0;
    }
+   
+   public void separador(){
+        System.out.println("\n---------------------------------------\n");
+    }
    
    public void inicializacionJuego(){
        ArrayList<String> names = new ArrayList();
@@ -225,7 +251,22 @@ public class ControladorQytetet {
         seleccion=vista.menuElegirPropiedad(listaPropiedades);  
         
         return propiedades.get(seleccion);
+        
     }
+    private static final Scanner in = new Scanner (System.in);
+    public void provocarEspera(){
+        
+        String n;
+        separador();
+        vista.mostrar("\n\nESPERA: PULSA CUALQUIER TECLA");
+        separador();
+        n = in.nextLine();
+        
+    }
+    
+    
 }
+
+
 
  
