@@ -64,9 +64,9 @@ class VistaTextualQytetet
   def elegir_quiero_comprar
     #se pide si o no se quiere comprar una propiedad
     mostrar("¿Deseas comprar la propiedad?\n0) NO\n1) SÍ")
-    comprar = gets
+    comprar = gets.chomp
     
-    if (comprar == 0)
+    if (comprar == "0")
       return false
       
     else

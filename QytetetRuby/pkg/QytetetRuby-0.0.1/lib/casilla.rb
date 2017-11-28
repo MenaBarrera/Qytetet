@@ -5,8 +5,8 @@
 
 module ModeloQytetet
   class Casilla
-    attr_reader :numeroCasilla, :coste, :tipo
-    attr_accessor :numHoteles, :numCasas, :titulo
+    attr_reader :coste, :tipo
+    attr_accessor :numHoteles, :numCasas, :titulo, :numeroCasilla
     def initialize(numCas, tipoCas, cost, propiedad)
       @numeroCasilla = numCas
       @coste = cost

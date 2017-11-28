@@ -7,7 +7,7 @@ module ModeloQytetet
   class Jugador
     attr_accessor :casilla_actual, :encarcelado
     attr_writer :carta_libertad
-    attr_reader :nombre, :saldo
+    attr_reader :nombre, :saldo, :propiedades
 
     def initialize(nom)
       @encarcelado = false
@@ -136,7 +136,7 @@ module ModeloQytetet
       tengo_saldo = false
       
       if(es_mia)
-        coste_edificar_casa = casilla.precioEdificar
+        coste_edificar_casa = casilla.titulo.precioEdificar
         tengo_saldo = tengo_saldo(coste_edificar_casa)
       end
       
@@ -148,7 +148,7 @@ module ModeloQytetet
       es_mia = es_de_mi_propiedad(casilla)
       
       if(es_mia)
-        coste_edificar = casilla.precioEdificar
+        coste_edificar = casilla.titulo.precioEdificar
         tengo_saldo = tengo_saldo(coste_edificar)
       end
       

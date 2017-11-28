@@ -109,8 +109,9 @@ module ModeloQytetet
     
     def edificar_hotel(casilla)
       puedo_edificar = false
+      soy_edificable = casilla.soy_edificable
       
-      if (casilla.soy_edificable)
+      if (soy_edificable)
         se_puede_edificar = casilla.se_puede_edificar_hotel
         
         if (se_puede_edificar)
@@ -173,8 +174,6 @@ module ModeloQytetet
     
     def jugar
       valor_dado = @dado.tirar
-      
-      puts "Ha salido un #{valor_dado}!"
       
       casilla_posicion = @jugadorActual.casilla_actual
       nueva_casilla = @tablero.obtener_nueva_casilla(casilla_posicion, valor_dado)

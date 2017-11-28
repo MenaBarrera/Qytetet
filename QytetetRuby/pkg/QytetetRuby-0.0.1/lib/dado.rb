@@ -14,7 +14,9 @@ module ModeloQytetet
     end
     
     def tirar
-      return rand(6) + 1
+      valor = rand(6) + 1
+      puts "Ha salido un #{valor}!"
+      return valor
     end
     
     def to_s
