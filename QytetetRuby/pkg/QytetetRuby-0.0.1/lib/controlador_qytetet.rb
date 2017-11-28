@@ -46,7 +46,10 @@ module InterfazTextualQytetet
         @vista.mostrar("Turno de " + @jugador.nombre)
         @vista.mostrar("Informacion de la casilla actual:\n#{@casilla}")
         @vista.esperar
-        libre = @jugador.encarcelado
+        
+        # Comprobamos el estado del jugador
+        # antes de continuar
+        libre = !@jugador.encarcelado
         
         if (!libre)
           @vista.mostrar("#{@jugador.nombre}, estas encarcelado/a")
@@ -56,23 +59,94 @@ module InterfazTextualQytetet
         end
         
         if (libre)
+          @vista.mostrar("#{@jugador.nombre} tira el dado")
           no_tiene_propietario = @juego.jugar
-          bancarrota = jugador_en_bancarrota
+          actualizar_casilla
           
-          if (!bancarrota && !@jugador.encarcelado)
-            
+          @vista.mostrar("#{@jugador.nombre} se desplaza hasta la casilla numero #{@casilla.numeroCasilla}")
+          @vista.mostrar("Información de la casilla:\n#{@casilla.to_s}")
+          
+          if (!bancarrota)
+            if (!@jugador.encarcelado)
+              if (@casilla.tipo == TipoCasilla::CALLE)
+                if (!no_tiene_propietario)
+                  @vista.mostrar("La casilla actul se puede adquirir")
+                  quiero_comprar = @vista.elegir_quiero_comprar
+                  saldo = @jugador.saldo
+                  @vista.mostrar("El saldo actual de #{@jugador.nombre} es #{saldo}")
+
+                  if (quiero_comprar)
+                    comprado = @juego.comprar_titulo_propiedad(@casilla)
+                    @vista.mostrar("Gracias por tu compra.")
+                    @vista.mostrar("El saldo de #{@jugador.nombre} se ha quedado en #{@jugador.saldo}")
+                    @vista.mostrar("El importe ha sido de #{saldo - @jugador.saldo}")
+                  end
+                end
+              
+              elsif (@casilla.tipo == TipoCasilla::SORPRESA)
+                no_tiene_propietario = @juego.aplicar_sorpresa
+              
+                #Actualizar la posicion actual de ser necesario
+                if (@casilla != @jugador.casilla_actual)
+                  actualizar_casilla
+                  @vista.mostrar("#{@jugador.nombre} se desplaza hasta la casilla numero #{@casilla.numeroCasilla}")
+                  @vista.mostrar("Información de la casilla:\n#{@casilla.to_s}")
+                end
+              
+
+                if (!bancarrota)
+                  if (!@jugador.encarcelado)
+                    if (@casilla.tipo == TipoCasilla::CALLE)
+                      if (!no_tiene_propietario)
+                        @vista.mostrar("La casilla actul se puede adquirir")
+                        quiero_comprar = @vista.elegir_quiero_comprar
+                        saldo = @jugador.saldo
+                        @vista.mostrar("El saldo actual de #{@jugador.nombre} es #{saldo}")
+                        
+                        if (quiero_comprar)
+                          comprado = @juego.comprar_titulo_propiedad(@casilla)
+                          @vista.mostrar("Gracias por tu compra.")
+                          @vista.mostrar("El saldo de #{@jugador.nombre} se ha quedado en #{@jugador.saldo}")
+                          @vista.mostrar("El importe ha sido de #{saldo - @jugador.saldo}")
+                        end
+                      end
+                    end
+                  end
+                end
+              end
+              
+
+              if (!@jugador.encarcelado && !bancarrota && @jugador.tengo_propiedades)
+                
+              end
+            end            
           end
         end
+        
+        if (!bancarrota)
+          cambio_turno
+        end
+        
+        if (bancarrota)
+          fin_juego = true
+        end
       end
+      
+      @vista.mostrar("Fin de la partida!")
+      @vista.mostrar("A continuación puedes consultar los marcadores")
+      ranking = @juego.obtener_ranking
+      @vista.mostrar(ranking)
+      @vista.esperar
+      @vista.mostrar("Muchas gracias por jugar. Esperamos que os hayáis divertido y volváis a jugar pronto! :)")
     end
     
     def cambio_turno
       @juego.siguiente_jugador
       @jugador = @juego.jugadorActual
-      @casilla = @jugador.casilla_actual
+      actualizar_casilla
     end
     
-    def jugador_en_bancarrota
+    def bancarrota
       return @jugador.saldo <= 0
     end
     
@@ -86,7 +160,7 @@ module InterfazTextualQytetet
       controlador.desarrollo_juego
     end
     
-    private :jugador_en_bancarrota, :cambio_turno
+    private :bancarrota, :cambio_turno, :actualizar_casilla
   end
   
     ControladorQytetet.main

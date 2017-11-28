@@ -29,7 +29,7 @@ module ModeloQytetet
 
     def actualizar_posicion(casilla)
       tengo_propietario = false
-      if(casilla.numeroCasilla < @casillaActual.numeroCasilla)
+      if(casilla.numeroCasilla < @casilla_actual.numeroCasilla)
         modificar_saldo(Qytetet.SALDO_SALIDA);
       end
       
@@ -47,12 +47,15 @@ module ModeloQytetet
             
           end
         end
-      else
-        casilla.tipo == TipoCasilla::IMPUESTO
+        
+        else if casilla.tipo == TipoCasilla::IMPUESTO
         coste = casilla.coste
-        modificar_saldo(coste)
+        modificar_saldo(-coste)
+        end
       end
+      return tengo_propietario
     end
+    
 
     
     def comprar_titulo()
@@ -84,6 +87,8 @@ module ModeloQytetet
     end
     
     def ir_a_carcel(casilla)
+      @casilla_actual = casilla
+      @encarcelado = true
       
     end
     
@@ -93,7 +98,12 @@ module ModeloQytetet
     end
     
     def obtener_capital()
-      
+      capital = @saldo;
+        
+        for i in @propiedades
+          capital = capital + (i.casilla.numCasas + i.casilla.numHoteles * i.precioEdificar + i.casilla.coste)
+        end
+      return capital
     end
     
     def obtener_propiedades_hipotecadas(hipotecada)
@@ -108,11 +118,17 @@ module ModeloQytetet
     end
     
     def pagar_cobrar_por_casa_y_hotel(cantidad)
-      
+      numero_total = cuantas_casas_y_hoteles_tengo
+      modificar_saldo(numero_total*cantidad)  
     end
     
     def pagar_libertad(cantidad)
+      tengo_saldo = tengo_saldo(cantidad)
       
+      if(tengo_saldo)
+        modificar_saldo(-cantidad)
+      end
+      return tengo_saldo
     end
     
     def puedo_edificar_casa(casilla)
@@ -126,15 +142,31 @@ module ModeloQytetet
     end
     
     def puedo_edificar_hotel(casilla)
+      puedo_edificar = false
+      es_mia = es_de_mi_propiedad(casilla)
       
+      if(casilla.numCasas == 4 && casilla.precioEdificar < @saldo)
+        puedo_edificar = true
+      end
+      return puedo_edificar
     end
     
     def puedo_hipotecar(casilla)
+      puedo_hipotecar = false
       
+      if(es_de_mi_propiedad(casilla))
+        puedo_hipotecar = true
+      end
+      return puedo_hipotecar
     end
     
     def puedo_pagar_hipoteca(casilla)
-      
+      hipoteca = casilla.hipoteca_propiedad(casilla)
+      puedo_pagar = false
+      if(hipoteca < @saldo)
+        puedo_pagar = true
+      end
+      return puedo_pagar
     end
     
     def puedo_vender_propiedad(casilla)
@@ -146,11 +178,21 @@ module ModeloQytetet
     end
     
     def vender_propiedad(casilla)
-      
+      es_mia = es_de_mi_propiedad
+      hipotecada = casilla.esta_hipotecada
+      precio_venta = casilla.vender_propiedad(casilla)
+      modificar_saldo(precio_venta)
+      eliminar_de_mis_propiedades(casilla)  
     end
     
     def cuantas_casas_y_hoteles_tengo()
-      
+        numCasas = 0;
+        numHoteles = 0;
+        for i in @propiedades
+          numCasas += @propiedades.index(i).casilla.numCasas
+          numHoteles += @propiedades.index(i).casilla.numHoteles
+        end
+        return numCasas + numHoteles;
     end
     
     def eliminar_de_mis_propiedades(casilla)

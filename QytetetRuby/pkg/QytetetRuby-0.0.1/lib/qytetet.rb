@@ -125,7 +125,7 @@ module ModeloQytetet
     def intentar_salir_carcel(metodo)
       libre = false
       
-      if (metodo == MetodosSalirCarcel::TIRANDODADO)
+      if (metodo == MetodoSalirCarcel::TIRANDODADO)
         valor_dado = @dado.tirar
         libre = valor_dado > 5
         
@@ -144,6 +144,9 @@ module ModeloQytetet
     
     def jugar
       valor_dado = @dado.tirar
+      
+      puts "Ha salido un #{valor_dado}!"
+      
       casilla_posicion = @jugadorActual.casilla_actual
       nueva_casilla = @tablero.obtener_nueva_casilla(casilla_posicion, valor_dado)
       tiene_propietario = @jugadorActual.actualizar_posicion(nueva_casilla)
@@ -228,11 +231,11 @@ module ModeloQytetet
     def inicializar_cartas_sorpresa
       @mazo = Array.new
       
-      @mazo << Sorpresa.new("Te han pillado evadiendo impuestos. Te vas derechito a la cárcel.", @tablero.carcel.numeroCasilla, TipoSorpresa::IRACASILLA)
       @mazo << Sorpresa.new("Un diplomático anónimo ha pagado tu salida de la cárcel. Eres libre de irte." , 0, TipoSorpresa::SALIRCARCEL)
       @mazo << Sorpresa.new("Te has dejado a tu perro en una tienda de la Avenida de Móstoles.", 7, TipoSorpresa::IRACASILLA)
       @mazo << Sorpresa.new("Decides ir a visitar los jardines de la Calle de los Nardos.", 19, TipoSorpresa::IRACASILLA)
       @mazo << Sorpresa.new("Has recibido una jugosa transacción de una gran empresa.", 450, TipoSorpresa::PAGARCOBRAR)
+      @mazo << Sorpresa.new("Te han pillado evadiendo impuestos. Te vas derechito a la cárcel.", @tablero.carcel.numeroCasilla, TipoSorpresa::IRACASILLA)
       @mazo << Sorpresa.new("No has hecho bien la declaración de la renta y tienes que pagar los impuestos.", -300, TipoSorpresa::PAGARCOBRAR)
       @mazo << Sorpresa.new("Es tu cumpleaños. Entre todos hte han regalado una suma de dinero para que la gastes en lo que quieras.", 125, TipoSorpresa::PORJUGADOR)
       @mazo << Sorpresa.new("Has roto la estatua que te prestaron tus amigos para tu fiesta. Debes pagarles a cada uno lo que le pertoque.", -100, TipoSorpresa::PORJUGADOR)
