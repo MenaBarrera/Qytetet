@@ -20,11 +20,11 @@ public class ControladorQytetet {
        boolean finJuego = false;
        System.out.println("\n\n\n\ninterfaz_textual_qytetet.ControladorQytetet.desarrolloJuego()");
        vista.mostrar("Turno del jugador " +  jugador);
-       vista.mostrar("Informacion de la casilla actual" + casilla);
+       vista.mostrar("\n\n\nInformacion de la casilla actual" + casilla);
        
-       //while(!finJuego){
+       while(!finJuego){
            boolean libre = !jugador.getEncarcelado();
-           
+           int opcion = -1;
            if(!libre){
              vista.mostrar("El jugador " + jugador.getNombre() + " está encarcelado");
              int metodo = vista.menuSalirCarcel();
@@ -40,8 +40,8 @@ public class ControladorQytetet {
                boolean noTienePropietario;
                noTienePropietario = juego.jugar();
                actualizarCasilla();
-               vista.mostrar(jugador.getNombre() + " se desplaza hasta la casilla numero " + casilla.getNumeroCasilla());
-               vista.mostrar("Información de la casilla:" + casilla);
+               vista.mostrar(jugador.getNombre() + " \n\nse desplaza hasta la casilla numero " + casilla.getNumeroCasilla());
+               vista.mostrar("\n\nInformación de la casilla:" + casilla);
                
                if(!bancarrota()){
                    if(!jugador.getEncarcelado()){
@@ -84,15 +84,96 @@ public class ControladorQytetet {
                        }
                        //OTRO
                        if(!jugador.getEncarcelado() && !bancarrota() && jugador.tengoPropiedades()){
-                           listaPropiedades = elegirPropiedad(jugador.getPropiedades());
-                           int opcion = vista.menuElegirPropiedad(listaPropiedades)
+                           
+                           ArrayList<TituloPropiedad> listaPropiedades = jugador.getPropiedades();
+                           ArrayList<Casilla> casillas = new ArrayList();
+                           ArrayList<String> names = new ArrayList();
+                           
+                           for( TituloPropiedad i : listaPropiedades){
+                                   casillas.add(i.getCasilla());
+                                   names.add(i.getNombre());
+                               
+                           }
+                           
+                           boolean correcto;
+                           
+                           while(opcion != 0){
+                               
+                               opcion = vista.menuElegirPropiedad(names);
+                               Casilla casilla_metodo = elegirPropiedad(casillas);
+
+                               if(opcion == 1){
+                                   vista.mostrar("saldo previo: " + jugador.getSaldo());
+                                   correcto = juego.edificarCasa(casilla_metodo);
+                                   vista.mostrar("saldo despues: " + jugador.getSaldo());
+                                   if(correcto){
+                                      
+                                      vista.mostrar("se ha edificado la casa en" + casilla_metodo);
+                                      
+                                   }
+                                   else{
+                                       vista.mostrar("Error al edificar la casa");
+                                   }
+                               }
+                               if(opcion == 2){
+                                    vista.mostrar("saldo previo: " + jugador.getSaldo());                                  
+
+                                   correcto = juego.edificarHotel(casilla_metodo);
+                                   vista.mostrar("saldo despues: " + jugador.getSaldo());
+                                   if(correcto){
+                                      vista.mostrar("se ha edificado la hotel en" + casilla_metodo);
+                                   }
+                                   else{
+                                       vista.mostrar("Error al edificar la hotel");
+                                   }
+                               }                               
+                               if(opcion == 3){
+                                   vista.mostrar("saldo previo: " + jugador.getSaldo());
+                                   correcto = juego.venderPropiedad(casilla_metodo);
+                                   vista.mostrar("saldo despues: " + jugador.getSaldo());
+                                   if(correcto){
+                                      vista.mostrar("se ha vendido la propiedad de " + casilla_metodo);
+                                   }
+                                   else{
+                                       vista.mostrar("Error al vender");
+                                   }
+                               }
+                               if(opcion == 4){
+                                   vista.mostrar("saldo previo: " + jugador.getSaldo());
+                                  correcto = juego.hipotecaPropiedad(casilla_metodo);
+                                  vista.mostrar("saldo despues: " + jugador.getSaldo());
+                                  if(correcto){
+                                      vista.mostrar("se ha hipotecado la casilla " + casilla_metodo);
+                                   }
+                                   else{
+                                       vista.mostrar("Error al hipotecar ");
+                                   }
+                               }
+                               if(opcion == 5){
+                                   vista.mostrar("saldo previo: " + jugador.getSaldo());
+                                   correcto= juego.cancelarHipoteca(casilla_metodo);
+                                   vista.mostrar("saldo despues: " + jugador.getSaldo());
+                                   if(correcto){
+                                      vista.mostrar("se ha cancelado la hipoteca " + casilla_metodo);
+                                   }
+                                   else{
+                                       vista.mostrar("Error al deshipotecar ");
+                                   }
+                               } 
+                           }
                        }
-                   }
-               }
-           //}
-               
-       }
-       
+                    }
+                }
+            }
+            if(!bancarrota()){
+                juego.siguienteJugador();
+                vista.mostrar("Siguente jugador ::: Nombre::: "+ jugador.getNombre());
+            }
+            if(bancarrota()){
+                juego.obtenerRanking();
+                finJuego = true;
+            }
+        }
    }
  
    boolean bancarrota(){
@@ -108,8 +189,10 @@ public class ControladorQytetet {
        jugador = juego.getJugadorActual();
        casilla = jugador.getCasillaActual();
        
+       //vista.mostrar(casilla);
+       
        System.out.println("---------------- JUEGO -------------");
-       System.out.print(juego.toString());
+       //System.out.print(juego.toString());
     
    }
       public static void main(String[] args) {

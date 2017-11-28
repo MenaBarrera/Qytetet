@@ -56,7 +56,7 @@ public class TituloPropiedad {
         return precioEdificar;
     }
 
-    Casilla getCasilla() {
+    public Casilla getCasilla() {
         return casilla;
     }
 

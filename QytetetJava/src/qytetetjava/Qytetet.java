@@ -346,6 +346,7 @@ public class Qytetet {
     public static Qytetet getQytetet(){
         return qytetet;
     }
+    
 
     @Override
     public String toString() {
