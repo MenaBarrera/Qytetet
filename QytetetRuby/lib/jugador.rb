@@ -174,7 +174,10 @@ module ModeloQytetet
     end
     
     def puedo_vender_propiedad(casilla)
-      return es_de_mi_propiedad && !casilla.hipotecada
+      es_mia = es_de_mi_propiedad(casilla)
+      hipotecada = casilla.esta_hipotecada
+      
+      return es_mia && !hipotecada
     end
     
     def tengo_carta_libertad()
@@ -182,8 +185,6 @@ module ModeloQytetet
     end
     
     def vender_propiedad(casilla)
-      es_mia = es_de_mi_propiedad
-      hipotecada = casilla.esta_hipotecada
       precio_venta = casilla.vender_propiedad(casilla)
       modificar_saldo(precio_venta)
       eliminar_de_mis_propiedades(casilla)  

@@ -277,11 +277,16 @@ public class Qytetet {
     }
     
     public boolean venderPropiedad(Casilla casilla){
-        boolean puedoVender = jugadorActual.puedoVenderPropiedad(casilla);
+        boolean puedoVender = false;
         
-        if (puedoVender) {
-            jugadorActual.venderPropiedad(casilla);
+        if (casilla.soyEdificable()) {
+            puedoVender = jugadorActual.puedoVenderPropiedad(casilla);
+        
+            if (puedoVender) {
+                jugadorActual.venderPropiedad(casilla);
+            }
         }
+        
         
         return puedoVender;
     }

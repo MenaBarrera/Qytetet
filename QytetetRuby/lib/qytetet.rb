@@ -237,11 +237,15 @@ module ModeloQytetet
     end
     
     def vender_propiedad(casilla)
-      puedo_vender = @jugadorActual.puedo_vender_propiedad(casilla)
+      puedo_vender = false
       
-      if (puedo_vender)
-        @jugadorActual.vender_propiedad(casilla)
-      end
+      if (casilla.soy_edificable)
+        puedo_vender = @jugadorActual.puedo_vender_propiedad(casilla)
+      
+        if (puedo_vender)
+          @jugadorActual.vender_propiedad(casilla)
+        end
+      end      
       
       return puedo_vender
     end
