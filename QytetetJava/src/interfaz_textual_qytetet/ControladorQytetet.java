@@ -17,6 +17,7 @@ public class ControladorQytetet {
    private VistaTextualQytetet vista = new VistaTextualQytetet();
    
    public void desarrolloJuego(){
+       int eleccion = -1;
        boolean finJuego = false;
        System.out.println("\n\n\n\ninterfaz_textual_qytetet.ControladorQytetet.desarrolloJuego()");
        vista.mostrar("Turno del jugador " +  jugador);
@@ -38,7 +39,7 @@ public class ControladorQytetet {
            
            if(libre){
                boolean noTienePropietario;
-               noTienePropietario = juego.jugar();
+               noTienePropietario = !(juego.jugar());
                actualizarCasilla();
                vista.mostrar(jugador.getNombre() + " \n\nse desplaza hasta la casilla numero " + casilla.getNumeroCasilla());
                vista.mostrar("\n\nInformación de la casilla:" + casilla);
@@ -97,12 +98,16 @@ public class ControladorQytetet {
                            
                            boolean correcto;
                            
-                           while(opcion != 0){
-                               
-                               opcion = vista.menuElegirPropiedad(names);
+                           while(eleccion != 0){
+                               vista.mostrar("ELIGE PROPIEDADES\n");
                                Casilla casilla_metodo = elegirPropiedad(casillas);
+                               
+                               
+                               vista.mostrar("\ncasilla_actual" + casilla_metodo);
+                               
+                               eleccion = vista.menuGestionInmobiliaria();
 
-                               if(opcion == 1){
+                               if(eleccion == 1){
                                    vista.mostrar("saldo previo: " + jugador.getSaldo());
                                    correcto = juego.edificarCasa(casilla_metodo);
                                    vista.mostrar("saldo despues: " + jugador.getSaldo());
@@ -115,7 +120,7 @@ public class ControladorQytetet {
                                        vista.mostrar("Error al edificar la casa");
                                    }
                                }
-                               if(opcion == 2){
+                               if(eleccion == 2){
                                     vista.mostrar("saldo previo: " + jugador.getSaldo());                                  
 
                                    correcto = juego.edificarHotel(casilla_metodo);
@@ -127,7 +132,7 @@ public class ControladorQytetet {
                                        vista.mostrar("Error al edificar la hotel");
                                    }
                                }                               
-                               if(opcion == 3){
+                               if(eleccion == 3){
                                    vista.mostrar("saldo previo: " + jugador.getSaldo());
                                    correcto = juego.venderPropiedad(casilla_metodo);
                                    vista.mostrar("saldo despues: " + jugador.getSaldo());
@@ -138,7 +143,7 @@ public class ControladorQytetet {
                                        vista.mostrar("Error al vender");
                                    }
                                }
-                               if(opcion == 4){
+                               if(eleccion == 4){
                                    vista.mostrar("saldo previo: " + jugador.getSaldo());
                                   correcto = juego.hipotecaPropiedad(casilla_metodo);
                                   vista.mostrar("saldo despues: " + jugador.getSaldo());
@@ -149,7 +154,7 @@ public class ControladorQytetet {
                                        vista.mostrar("Error al hipotecar ");
                                    }
                                }
-                               if(opcion == 5){
+                               if(eleccion == 5){
                                    vista.mostrar("saldo previo: " + jugador.getSaldo());
                                    correcto= juego.cancelarHipoteca(casilla_metodo);
                                    vista.mostrar("saldo despues: " + jugador.getSaldo());
