@@ -39,7 +39,7 @@ module ModeloQytetet
         tengo_propietario = casilla.tengo_propietario
         
         if(tengo_propietario)
-          @encarcelado = casilla.propietario_encarcelado
+          encarcelado = casilla.propietario_encarcelado
           
           if(!encarcelado)
             if (!casilla.esta_hipotecada)

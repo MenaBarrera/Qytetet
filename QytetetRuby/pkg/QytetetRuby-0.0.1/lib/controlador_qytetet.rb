@@ -317,13 +317,17 @@ module InterfazTextualQytetet
       if (saldo_anterior != @jugador.saldo)
         if (@casilla.soy_edificable && @casilla.tengo_propietario)
           @vista.mostrar("El jugador #{@jugador.nombre} ha caido en la casilla de #{@casilla.titulo.propietario.nombre} y le tiene que pagar")
+        end
 
-        elsif (@casilla.tipo == TipoCasilla::IMPUESTO)
+        if (@casilla.tipo == TipoCasilla::IMPUESTO)
           @vista.mostrar("El jugador #{@jugador.nombre} ha caido en una casilla de impuesto")
+        end
 
-        elsif (@casilla.tipo == TipoCasilla::SALIDA)
+        if (@casilla.tipo == TipoCasilla::SALIDA)
           @vista.mostrar("El jugador #{@jugador.nombre} ha pasado por la salida y su saldo se ha visto modificado")
-        elsif (@casilla.tipo == TipoCasilla::SORPRESA)
+        end
+        
+        if (@casilla.tipo == TipoCasilla::SORPRESA)
           @vista.mostrar("El jugador #{@jugador.nombre} ha caido en una casilla sorpresa y su saldo se ha visto modificado")
         end
         @vista.esperar

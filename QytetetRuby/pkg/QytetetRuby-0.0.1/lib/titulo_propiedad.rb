@@ -19,7 +19,7 @@ module ModeloQytetet
     end
     
     def cobrar_alquiler(coste)
-      @propietario.modificar_saldo(-coste)
+      @propietario.modificar_saldo(coste)
     end
     
     
