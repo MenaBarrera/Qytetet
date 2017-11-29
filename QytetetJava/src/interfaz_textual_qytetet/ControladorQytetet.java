@@ -26,9 +26,13 @@ public class ControladorQytetet {
        
        while(!finJuego){
            boolean libre = !(jugador.getEncarcelado());
+           System.out.println("libre " + libre);
            eleccion = -1;
+           
            if(!libre){
+             separador();
              vista.mostrar("El jugador " + jugador.getNombre() + " está encarcelado");
+             separador();
              int metodo = vista.menuSalirCarcel();
              libre = juego.intentarSalirCarcel(metodo);
              
@@ -259,9 +263,9 @@ public class ControladorQytetet {
         
         String n;
         separador();
-        vista.mostrar("\n\nESPERA: PULSA CUALQUIER TECLA");
-        separador();
-        n = in.nextLine();
+        vista.mostrar("\n\nESPERA: PULSA enter");
+        
+        in.nextLine();
         
     }
     

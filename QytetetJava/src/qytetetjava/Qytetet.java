@@ -189,7 +189,7 @@ public class Qytetet {
     public boolean intentarSalirCarcel(int metodo){
         boolean libre;
         
-        if (metodo == 1) {
+        if (metodo == 0) {
             int valorDado = dado.tirar();
             libre = (valorDado > 5);
         }
