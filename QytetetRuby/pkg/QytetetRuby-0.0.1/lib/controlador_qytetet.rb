@@ -52,20 +52,48 @@ module InterfazTextualQytetet
         libre = !@jugador.encarcelado
         
         if (!libre)
-          @vista.mostrar("#{@jugador.nombre}, estas encarcelado/a")
+          @vista.mostrar("El jugador #{@jugador.nombre} esta encarcelado")
+          @vista.esperar
+          saldo_anterior = @jugador.saldo
           metodo = @vista.menu_salir_carcel
-          libre = @juego.intentar_salir_carcel(metodo)
+          if (metodo == 0)
+            libre = @juego.intentar_salir_carcel(MetodoSalirCarcel::TIRANDODADO)
+          else
+            libre = @juego.intentar_salir_carcel(MetodoSalirCarcel::PAGANDOLIBERTAD)
+          end
           @vista.mostrar((libre ? "Has" : "No has") + " logrado salir de la carcel")
           @vista.esperar
+          
+          if (libre && @jugador.saldo != saldo_anterior)
+            @vista.mostrar("El saldo del jugador #{@jugador.nombre} se ha visto afectado.")
+            @vista.mostrar("Saldo Anterior: #{saldo_anterior} -> Saldo Actual: #{@jugador.saldo}")
+            @vista.mostrar("Ha habido una diferencia de #{saldo_anterior - @jugador.saldo}")
+            @vista.esperar
+          end
         end
         
         if (libre)
           @vista.mostrar("#{@jugador.nombre} tira el dado")
           @vista.esperar
           no_tiene_propietario = @juego.jugar
+          saldo_anterior = @jugador.saldo
           actualizar_casilla
           
           @vista.mostrar("#{@jugador.nombre} se desplaza hasta la casilla numero #{@casilla.numeroCasilla}")
+          @vista.esperar
+          
+          if (saldo_anterior != @jugador.saldo)
+            @vista.mostrar("El saldo del jugador #{@jugador.nombre} se ha visto afectado.")
+            @vista.mostrar("Saldo Anterior: #{saldo_anterior} -> Saldo Actual: #{@jugador.saldo}")
+            @vista.mostrar("Ha habido una diferencia de #{saldo_anterior - @jugador.saldo}")
+            @vista.esperar
+          end
+          
+          if (@jugador.encarcelado)
+            @vista.mostrar("El jugador ha sido enviado a la cárcel por el juez")
+            @vista.esperar            
+          end
+          
           @vista.mostrar("Información de la casilla:\n#{@casilla.to_s}")
           @vista.esperar
           
@@ -76,22 +104,22 @@ module InterfazTextualQytetet
                   @vista.mostrar("La casilla actual se puede adquirir")
                   @vista.esperar
                   quiero_comprar = @vista.elegir_quiero_comprar
-                  saldo = @jugador.saldo
+                  saldo_anterior = @jugador.saldo
                   @vista.mostrar("El jugador " + (quiero_comprar ? "desea" : "no desea") + " adquirir la propiedad")
-                  @vista.mostrar("El saldo actual de #{@jugador.nombre} es #{saldo}")
+                  @vista.mostrar("El saldo actual de #{@jugador.nombre} es #{saldo_anterior}")
                   @vista.esperar
 
                   if (quiero_comprar)
                     comprado = @juego.comprar_titulo_propiedad(@casilla)
                     
                     if (comprado)
-                      @vista.mostrar("Gracias por tu compra.")
+                      @vista.mostrar("Gracias por la compra.")
                       @vista.mostrar("El saldo de #{@jugador.nombre} se ha quedado en #{@jugador.saldo}")
-                      @vista.mostrar("El importe ha sido de #{saldo - @jugador.saldo}")
+                      @vista.mostrar("El importe ha sido de #{saldo_anterior - @jugador.saldo}")
                       @vista.esperar
                       
                     else
-                      @vista.mostrar("Que pena, no has podido comprar la propiedad!")
+                      @vista.mostrar("Desgraciadamente no se ha podido comprar la propiedad porque no se disponia de suficiente dinero.")
                       @vista.esperar
                     end
                   end
@@ -101,6 +129,9 @@ module InterfazTextualQytetet
                 @vista.mostrar("Has caido en una casilla de tipo sorpresa!")
                 @vista.mostrar("La carta que se va activar es la siguiente")
                 @vista.mostrar(@juego.cartaActual)
+                @vista.esperar
+                carta_liber_anterior = @jugador.tengo_carta_libertad
+                saldo_anterior = @jugador.saldo
                 no_tiene_propietario = @juego.aplicar_sorpresa
               
                 #Actualizar la posicion actual de ser necesario
@@ -110,13 +141,30 @@ module InterfazTextualQytetet
                   @vista.mostrar("Información de la casilla:\n#{@casilla.to_s}")
                   @vista.esperar
                 end
+                
+                if (@jugador.encarcelado)
+                  @vista.mostrar("El jugador ha sido mandado a la cárcel por una carta sorpresa")
+                  @vista.esperar
+                end
+                
+                if (carta_liber_anterior != @jugador.tengo_carta_libertad)
+                  @vista.mostrar("El jugador #{@jugador.nombre} ha cogido una carta de libertad y se la ha guardado")
+                  @vista.esperar
+                end
+                
+                if (saldo_anterior != @jugador.saldo)
+                  @vista.mostrar("El saldo del jugador #{@jugador.nombre} se ha visto afectado.")
+                  @vista.mostrar("Saldo Anterior: #{saldo_anterior} -> Saldo Actual: #{@jugador.saldo}")
+                  @vista.mostrar("Ha habido una diferencia de #{saldo_anterior - @jugador.saldo}")
+                  @vista.esperar
+                end
               
 
                 if (!bancarrota)
                   if (!@jugador.encarcelado)
                     if (@casilla.tipo == TipoCasilla::CALLE)
                       if (!no_tiene_propietario)
-                        @vista.mostrar("La casilla actul se puede adquirir")
+                        @vista.mostrar("La casilla actual se puede adquirir")
                         quiero_comprar = @vista.elegir_quiero_comprar
                         saldo = @jugador.saldo
                         @vista.mostrar("El saldo actual de #{@jugador.nombre} es #{saldo}")
@@ -125,12 +173,12 @@ module InterfazTextualQytetet
                           comprado = @juego.comprar_titulo_propiedad(@casilla)
                           
                           if (comprado)
-                            @vista.mostrar("Gracias por tu compra.")
+                            @vista.mostrar("Gracias por la compra.")
                             @vista.mostrar("El saldo de #{@jugador.nombre} se ha quedado en #{@jugador.saldo}")
                             @vista.mostrar("El importe ha sido de #{saldo - @jugador.saldo}")
                             @vista.esperar                      
                           else
-                            @vista.mostrar("Que pena, no has podido comprar la propiedad!")
+                            @vista.mostrar("Desgraciadamente no se ha podido comprar la propiedad porque no se disponia de suficiente dinero.")
                             @vista.esperar
                           end
                         end
@@ -144,8 +192,10 @@ module InterfazTextualQytetet
               if (!@jugador.encarcelado && !bancarrota && @jugador.tengo_propiedades)
                 opcion = @vista.menu_gestion_inmobiliaria
                 
-                while (opcion != 0)
+                while (opcion != 0 && @jugador.tengo_propiedades)
                   casilla = elegir_propiedad(@jugador.propiedades)
+                  @vista.mostrar("Se van a realizar operaciones sobre la siguiente casilla:")
+                  @vista.mostrar(casilla.casilla.to_s)
                   saldo_actual = @jugador.saldo
                   
                   if (opcion == 1)
@@ -155,27 +205,71 @@ module InterfazTextualQytetet
                     edificado = @juego.edificar_casa(casilla.casilla)
                     
                     if (edificado)
-                      @vista.mostrar("Gracias por la compra. El precio de la compra ha sido #{saldo_actual - @jugador.saldo}")
+                      @vista.mostrar("Gracias por la compra. El precio de la edificacion ha sido #{saldo_actual - @jugador.saldo}")
                       @vista.mostrar("El saldo actual es #{@jugador.saldo} y el numero de casas ha pasado a ser #{casilla.casilla.numCasas}")
                     else
                       @vista.mostrar("Desgraciadamente no se ha podido edificar una nueva casa. No dispones del suficiente dinero o ya se ha llegado al máximo de casas posible.")
                     end
-                    @vista.esperar
                     
                   elsif (opcion == 2)
-                    @juego.edificar_hotel(casilla.casilla)
+                    @vista.mostrar("El jugador #{@jugador.nombre} ha decidido edificar un hotel. Actualmente posee #{casilla.casilla.numHoteles} hoteles")
+                    @vista.mostrar("Saldo actual: #{saldo_actual}")
+                    @vista.esperar
+                    edificado = @juego.edificar_hotel(casilla.casilla)
+                    
+                    if (edificado)
+                      @vista.mostrar("Gracias por la compra. El precio de la compra ha sido #{saldo_actual - @jugador.saldo}")
+                      @vista.mostrar("El saldo actual es #{@jugador.saldo}. El numero de casas ha pasado a ser #{casilla.casilla.numCasas} y el numero de hoteles a ser #{casilla.casilla.numHoteles}")
+                    else
+                      @vista.mostrar("Desgraciadamente no se ha podido edificar un nuevo hotel. No dispones del suficiente dinero, ya se ha llegado al máximo de hoteles o no dispones de suficientes casas.")
+                    end
                     
                   elsif (opcion == 3)
-                    @juego.vender_propiedad(casilla.casilla)
+                    @vista.mostrar("El jugador ha decidido vender la propiedad.")
+                    @vista.mostrar("El saldo actual del jugador es de #{saldo_actual}")
+                    @vista.esperar
+                    vendido = @juego.vender_propiedad(casilla.casilla)
+                    
+                    if (vendido)
+                      @vista.mostrar("El jugador ha conseguido vender la propiedad por un importe total de #{saldo_actual - @jugador.saldo}")
+                      @vista.mostrar("El saldo del jugador se ha quedado en #{@jugador.saldo}")
+                    else
+                      @vista.mostrar("No se ha podido vender la propiedad ya que o no se posee o está hipotecada")
+                    end
                     
                   elsif (opcion == 4)
-                    @juego.hipotecar_propiedad(casilla.casilla)
+                    @vista.mostrar("El jugador ha decidido hipotecar la propiedad")
+                    @vista.mostrar("El saldo actual del jugador es de #{saldo_actual}")
+                    @vista.esperar
+                    hipotecar = @juego.hipotecar_propiedad(casilla.casilla)
+                    
+                    if (hipotecar)
+                      @vista.mostrar("El jugador ha conseguido hipotecar la propiedad por un importe total de #{saldo_actual - @jugador.saldo}")
+                      @vista.mostrar("El saldo actual del jugador es #{@jugador.saldo}")
+                    else
+                      @vista.mostrar("No se ha podido hipotecar la propiedad, bien porque ya está hipotecada o porque no se posee")
+                    end
                     
                   elsif (opcion == 5)
-                    @juego.cancelar_hipoteca(casilla.casilla)
+                    cancelar = @juego.cancelar_hipoteca(casilla.casilla)
+                    @vista.mostrar("El jugador ha decidido cancelar la hipoteca de la propiedad")
+                    @vista.mostrar("El saldo actual del jugador es de #{saldo_actual}")
+                    @vista.esperar
+                    if (cancelar)
+                      @vista.mostrar("El jugador ha conseguido cancelar la hipoteca de la propiedad por un importe total de #{saldo_actual - @jugador.saldo}")
+                      @vista.mostrar("El saldo actual del jugador es #{@jugador.saldo}")
+                    else
+                      @vista.mostrar("No se ha podido cancelar la hipoteca de la propiedad, bien porque ya está hipotecada o porque no se posee")
+                    end
+                    
                   end
+                  @vista.esperar
+                  @vista.mostrar(casilla.casilla.to_s)
+                  @vista.esperar
                   
-                  opcion = @vista.menu_gestion_inmobiliaria
+                  if (@jugador.tengo_propiedades)
+                    opcion = @vista.menu_gestion_inmobiliaria
+                  end                  
                 end
               end
             end            
@@ -197,6 +291,7 @@ module InterfazTextualQytetet
       
       @vista.mostrar("Fin de la partida!")
       @vista.mostrar("A continuación puedes consultar los marcadores")
+      @vista.esperar
       ranking = @juego.obtener_ranking
       @vista.mostrar(ranking)
       @vista.esperar

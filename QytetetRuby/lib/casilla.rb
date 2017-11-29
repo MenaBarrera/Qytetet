@@ -147,7 +147,7 @@ module ModeloQytetet
     
     def to_s
       if (@tipo == TipoCasilla::CALLE)
-        "Número casilla: #{@numeroCasilla} \n Coste: #{@coste} \n Número Hoteles: #{@numHoteles} \n Número Casas: #{@numCasas} \n Tipo: #{@tipo} \n Título propiedad: #{@tituloPropiedad}"
+        "Número casilla: #{@numeroCasilla} \n Coste: #{@coste} \n Número Hoteles: #{@numHoteles} \n Número Casas: #{@numCasas} \n Tipo: #{@tipo} \n Título propiedad: #{@titulo}"
       else
         "Número casilla: #{@numeroCasilla}  \n Tipo: #{@tipo}"
 

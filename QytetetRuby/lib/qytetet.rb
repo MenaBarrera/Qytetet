@@ -67,12 +67,14 @@ module ModeloQytetet
     
     def cancelar_hipoteca(casilla)
       puedo_cancelar = false
+      
       if (casilla.soy_edificable)
         se_puede_cancelar = casilla.esta_hipotecada
+
         
         if (se_puede_cancelar)
-          puedo_cancelar = @jugadorActual == casilla.titulo.propietario
-          
+          puedo_cancelar = @jugadorActual.puedo_pagar_hipoteca(casilla)
+
           if (puedo_cancelar)
             coste_cancelar = casilla.cancelar_hipoteca
             @jugadorActual.modificar_saldo(-coste_cancelar)
@@ -127,7 +129,7 @@ module ModeloQytetet
       return puedo_edificar
     end
     
-    def hipoteca_propiedad(casilla)
+    def hipotecar_propiedad(casilla)
       puedo_hipotecar = false
       if (casilla.soy_edificable)
         se_puede_hipotecar = !casilla.esta_hipotecada
@@ -195,7 +197,7 @@ module ModeloQytetet
     def obtener_ranking
       ranking = {}
       
-      jugadores = @jugadores.sort { |j1,j2| j1.obtener_capital < j2.obtener_capital }
+      jugadores = @jugadores.sort { |j1,j2| j2.obtener_capital - j1.obtener_capital }
       
       jugadores.each do |jugador|
         capital = jugador.obtener_capital
@@ -303,6 +305,10 @@ module ModeloQytetet
       "QYTETET
       \n->cartaActual #{@cartaActual} \n\n->mazo #{@mazo.to_s} \n\n->jugadores #{@jugadores}
       \n\n->jugadorActual #{@jugadorActual.to_s} \n\n->tablero #{@tablero.to_s} \n\n->dado #{@dado.to_s}"
+    end
+    
+    def self.SALDO_SALIDA
+      return @@SALDO_SALIDA
     end
     
     private :inicializar_cartas_sorpresa, :inicializar_jugadores, :inicializar_tablero

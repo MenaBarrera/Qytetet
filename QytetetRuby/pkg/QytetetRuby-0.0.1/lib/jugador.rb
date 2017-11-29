@@ -69,7 +69,6 @@ module ModeloQytetet
           
           if(coste_compra <= @saldo)
             titulo = @casilla_actual.asignar_propietario(self) #NO ESTOY SEGURO DE QUE SEA SELF
-            @casilla_actual.titulo.propietario = self
             @propiedades << titulo                              # no hay que hacer new de titulo?
             modificar_saldo(-coste_compra)
             puedo_comprar = true
@@ -101,7 +100,7 @@ module ModeloQytetet
       capital = @saldo;
         
         for i in @propiedades
-          capital = capital + (i.casilla.numCasas + i.casilla.numHoteles * i.precioEdificar + i.casilla.coste)
+          capital = capital + (i.casilla.numCasas + i.casilla.numHoteles) * i.precioEdificar + i.casilla.coste
         end
       return capital
     end
@@ -165,7 +164,7 @@ module ModeloQytetet
     end
     
     def puedo_pagar_hipoteca(casilla)
-      hipoteca = casilla.hipoteca_propiedad(casilla)
+      hipoteca = casilla.calcular_valor_hipoteca * 1.1
       puedo_pagar = false
       if(hipoteca < @saldo)
         puedo_pagar = true
@@ -185,7 +184,7 @@ module ModeloQytetet
     end
     
     def vender_propiedad(casilla)
-      precio_venta = casilla.vender_propiedad(casilla)
+      precio_venta = casilla.vender_titulo
       modificar_saldo(precio_venta)
       eliminar_de_mis_propiedades(casilla)  
     end
