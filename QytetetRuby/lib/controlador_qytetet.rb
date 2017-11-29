@@ -63,7 +63,7 @@ module InterfazTextualQytetet
           else
             libre = @juego.intentar_salir_carcel(MetodoSalirCarcel::PAGANDOLIBERTAD)
           end
-          @vista.mostrar((libre ? "Has" : "No has") + " logrado salir de la carcel")
+          @vista.mostrar("El jugador " + (libre ? "ha" : "no ha") + " logrado salir de la carcel")
           @vista.esperar
           
           if (libre && @jugador.saldo != saldo_anterior)
@@ -202,7 +202,7 @@ module InterfazTextualQytetet
                     edificado = @juego.edificar_casa(casilla.casilla)
                     
                     if (edificado)
-                      @vista.mostrar("Gracias por la compra. El precio de la edificacion ha sido #{saldo_actual - @jugador.saldo}")
+                      @vista.mostrar("Gracias por la compra. El precio de la edificacion ha sido #{@jugador.saldo - saldo_actual}")
                       @vista.mostrar("El saldo actual es #{@jugador.saldo} y el numero de casas ha pasado a ser #{casilla.casilla.numCasas}")
                     else
                       @vista.mostrar("Desgraciadamente no se ha podido edificar una nueva casa. No dispones del suficiente dinero o ya se ha llegado al máximo de casas posible.")
@@ -215,7 +215,7 @@ module InterfazTextualQytetet
                     edificado = @juego.edificar_hotel(casilla.casilla)
                     
                     if (edificado)
-                      @vista.mostrar("Gracias por la compra. El precio de la compra ha sido #{saldo_actual - @jugador.saldo}")
+                      @vista.mostrar("Gracias por la compra. El precio de la compra ha sido #{@jugador.saldo - saldo_actual}")
                       @vista.mostrar("El saldo actual es #{@jugador.saldo}. El numero de casas ha pasado a ser #{casilla.casilla.numCasas} y el numero de hoteles a ser #{casilla.casilla.numHoteles}")
                     else
                       @vista.mostrar("Desgraciadamente no se ha podido edificar un nuevo hotel. No dispones del suficiente dinero, ya se ha llegado al máximo de hoteles o no dispones de suficientes casas.")
@@ -228,7 +228,7 @@ module InterfazTextualQytetet
                     vendido = @juego.vender_propiedad(casilla.casilla)
                     
                     if (vendido)
-                      @vista.mostrar("El jugador ha conseguido vender la propiedad por un importe total de #{@jugador.saldo - saldo_actual}")
+                      @vista.mostrar("El jugador ha conseguido vender la propiedad por un importe total de #{saldo_actual - @jugador.saldo}")
                       @vista.mostrar("El saldo del jugador se ha quedado en #{@jugador.saldo}")
                     else
                       @vista.mostrar("No se ha podido vender la propiedad ya que o no se posee o está hipotecada")
@@ -253,7 +253,7 @@ module InterfazTextualQytetet
                     @vista.mostrar("El saldo actual del jugador es de #{saldo_actual}")
                     @vista.esperar
                     if (cancelar)
-                      @vista.mostrar("El jugador ha conseguido cancelar la hipoteca de la propiedad por un importe total de #{saldo_actual - @jugador.saldo}")
+                      @vista.mostrar("El jugador ha conseguido cancelar la hipoteca de la propiedad por un importe total de #{@jugador.saldo - saldo_actual}")
                       @vista.mostrar("El saldo actual del jugador es #{@jugador.saldo}")
                     else
                       @vista.mostrar("No se ha podido cancelar la hipoteca de la propiedad, bien porque ya está hipotecada o porque no se posee")
@@ -261,7 +261,11 @@ module InterfazTextualQytetet
                     
                   end
                   @vista.esperar
+                  @vista.mostrar("Informacion de como ha quedado la casilla:")
                   @vista.mostrar(casilla.casilla.to_s)
+                  @vista.esperar
+                  @vista.mostrar("Estado actual del jugador:")
+                  @vista.mostrar(@jugador.to_s)
                   @vista.esperar
                   
                   if (@jugador.tengo_propiedades)
@@ -341,7 +345,7 @@ module InterfazTextualQytetet
       end
       seleccion=@vista.menu_elegir_propiedad(listaPropiedades)  # elige de esa lista del menu
       propiedades.at(seleccion)
-  end
+    end
     
     def self.main
       controlador = ControladorQytetet.new
