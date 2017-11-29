@@ -68,7 +68,6 @@ module ModeloQytetet
           
           if(coste_compra <= @saldo)
             titulo = @casilla_actual.asignar_propietario(self) #NO ESTOY SEGURO DE QUE SEA SELF
-            @casilla_actual.titulo.propietario = self
             @propiedades << titulo                              # no hay que hacer new de titulo?
             modificar_saldo(-coste_compra)
             puedo_comprar = true

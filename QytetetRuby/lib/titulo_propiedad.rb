@@ -22,9 +22,6 @@ module ModeloQytetet
       @propietario.modificar_saldo(-coste)
     end
     
-    def propietario()
-      
-    end
     
     def propietario_encarcelado
       return @propietario.encarcelado

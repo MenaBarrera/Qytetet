@@ -176,7 +176,6 @@ module ModeloQytetet
     
     def jugar
       valor_dado = @dado.tirar
-      valor_dado = 7
       
       casilla_posicion = @jugadorActual.casilla_actual
       nueva_casilla = @tablero.obtener_nueva_casilla(casilla_posicion, valor_dado)
