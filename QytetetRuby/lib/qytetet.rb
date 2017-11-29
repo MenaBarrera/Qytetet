@@ -48,7 +48,7 @@ module ModeloQytetet
         @jugadores.each do |jugador|
           if (jugador != @jugadorActual)
             cantidad = @cartaActual.valor
-            jugador.modificar_saldo(cantidad)
+            jugador.modificar_saldo(-cantidad)
             @jugadorActual.modificar_saldo(cantidad)
           end
         end

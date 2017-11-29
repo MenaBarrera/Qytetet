@@ -193,9 +193,9 @@ module ModeloQytetet
     def cuantas_casas_y_hoteles_tengo()
         numCasas = 0;
         numHoteles = 0;
-        for i in @propiedades
-          numCasas += @propiedades.index(i).casilla.numCasas
-          numHoteles += @propiedades.index(i).casilla.numHoteles
+        @propiedades.each do |prop|
+          numCasas += prop.casilla.numCasas
+          numHoteles += prop.casilla.numHoteles
         end
         return numCasas + numHoteles;
     end
