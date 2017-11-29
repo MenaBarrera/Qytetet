@@ -13,7 +13,7 @@ module ModeloQytetet
     end
 
     def to_s
-      "Texto: #{@texto} \n Valor: #{@valor} \n Tipo: #{@tipo}"
+      "Texto: #{@texto}\n Valor: #{@valor}\n Tipo: #{@tipo}"
     end
   end
 end

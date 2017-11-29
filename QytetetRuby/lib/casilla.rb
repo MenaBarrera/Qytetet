@@ -22,7 +22,11 @@ module ModeloQytetet
     end
     
     def self.iniciar_casilla(numCas, tipoCas)
-      new(numCas, tipoCas, 0, nil)
+      if (tipoCas == TipoCasilla::IMPUESTO)
+        new(numCas, tipoCas, 200, nil)
+      else
+        new(numCas, tipoCas, 0, nil)
+      end
     end
     
     def self.iniciar_calle(numCas, cost, prop)
@@ -147,13 +151,13 @@ module ModeloQytetet
     
     def to_s
       if (@tipo == TipoCasilla::CALLE)
-        "Número casilla: #{@numeroCasilla} \n Coste: #{@coste} \n Número Hoteles: #{@numHoteles} \n Número Casas: #{@numCasas} \n Tipo: #{@tipo} \n Título propiedad: #{@titulo}"
+        "Número casilla: #{@numeroCasilla}\n Coste: #{@coste}\n Número Hoteles: #{@numHoteles}\n Número Casas: #{@numCasas}\n Tipo: #{@tipo}\n Título propiedad: #{@titulo}"
       else
-        "Número casilla: #{@numeroCasilla}  \n Tipo: #{@tipo}"
+        "Número casilla: #{@numeroCasilla}\n Tipo: #{@tipo}" + (@tipo == TipoCasilla::IMPUESTO ? "\n Coste: #{@coste}" : "")
 
       end
     end
     
-    private :titulo= , :asignar_titulo_propiedad
+    private  :asignar_titulo_propiedad
   end
 end

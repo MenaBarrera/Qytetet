@@ -43,7 +43,9 @@ module InterfazTextualQytetet
       fin_juego = false
       
       while (!fin_juego)
-        @vista.mostrar("Turno de " + @jugador.nombre)
+        @vista.mostrar("Turno de " + @jugador.nombre + "\nInformacion del jugador:")
+        @vista.mostrar(@jugador.to_s)
+        @vista.esperar
         @vista.mostrar("Informacion de la casilla actual:\n#{@casilla}")
         @vista.esperar
         
@@ -75,19 +77,14 @@ module InterfazTextualQytetet
         if (libre)
           @vista.mostrar("#{@jugador.nombre} tira el dado")
           @vista.esperar
-          no_tiene_propietario = @juego.jugar
           saldo_anterior = @jugador.saldo
+          no_tiene_propietario = @juego.jugar
           actualizar_casilla
           
           @vista.mostrar("#{@jugador.nombre} se desplaza hasta la casilla numero #{@casilla.numeroCasilla}")
           @vista.esperar
           
-          if (saldo_anterior != @jugador.saldo)
-            @vista.mostrar("El saldo del jugador #{@jugador.nombre} se ha visto afectado.")
-            @vista.mostrar("Saldo Anterior: #{saldo_anterior} -> Saldo Actual: #{@jugador.saldo}")
-            @vista.mostrar("Ha habido una diferencia de #{saldo_anterior - @jugador.saldo}")
-            @vista.esperar
-          end
+          comprobar_cambio_saldo(saldo_anterior)
           
           if (@jugador.encarcelado)
             @vista.mostrar("El jugador ha sido enviado a la cárcel por el juez")
@@ -148,17 +145,17 @@ module InterfazTextualQytetet
                 end
                 
                 if (carta_liber_anterior != @jugador.tengo_carta_libertad)
-                  @vista.mostrar("El jugador #{@jugador.nombre} ha cogido una carta de libertad y se la ha guardado")
+                  if (@jugador.tengo_carta_libertad)
+                    @vista.mostrar("El jugador #{@jugador.nombre} ha cogido una carta de libertad y se la ha guardado")
+                    
+                  else
+                    @vista.mostrar("El #{@jugador.nombre} ha evitado ir a la carcel usando su carta de libertad y la devuelve al mazo")
+                  end
+                  
                   @vista.esperar
                 end
                 
-                if (saldo_anterior != @jugador.saldo)
-                  @vista.mostrar("El saldo del jugador #{@jugador.nombre} se ha visto afectado.")
-                  @vista.mostrar("Saldo Anterior: #{saldo_anterior} -> Saldo Actual: #{@jugador.saldo}")
-                  @vista.mostrar("Ha habido una diferencia de #{saldo_anterior - @jugador.saldo}")
-                  @vista.esperar
-                end
-              
+                comprobar_cambio_saldo(saldo_anterior)              
 
                 if (!bancarrota)
                   if (!@jugador.encarcelado)
@@ -231,7 +228,7 @@ module InterfazTextualQytetet
                     vendido = @juego.vender_propiedad(casilla.casilla)
                     
                     if (vendido)
-                      @vista.mostrar("El jugador ha conseguido vender la propiedad por un importe total de #{saldo_actual - @jugador.saldo}")
+                      @vista.mostrar("El jugador ha conseguido vender la propiedad por un importe total de #{@jugador.saldo - saldo_actual}")
                       @vista.mostrar("El saldo del jugador se ha quedado en #{@jugador.saldo}")
                     else
                       @vista.mostrar("No se ha podido vender la propiedad ya que o no se posee o está hipotecada")
@@ -312,6 +309,28 @@ module InterfazTextualQytetet
       @casilla = @jugador.casilla_actual
     end
     
+    def comprobar_cambio_saldo(saldo_anterior)
+      if (saldo_anterior != @jugador.saldo)
+        if (@casilla.soy_edificable && @casilla.tengo_propietario)
+          @vista.mostrar("El jugador #{@jugador.nombre} ha caido en la casilla de #{@casilla.titulo.propietario.nombre} y le tiene que pagar")
+
+        elsif (@casilla.tipo == TipoCasilla::IMPUESTO)
+          @vista.mostrar("El jugador #{@jugador.nombre} ha caido en una casilla de impuesto")
+
+        elsif (@casilla.tipo == TipoCasilla::SALIDA)
+          @vista.mostrar("El jugador #{@jugador.nombre} ha pasado por la salida y su saldo se ha visto modificado")
+        elsif (@casilla.tipo == TipoCasilla::SORPRESA)
+          @vista.mostrar("El jugador #{@jugador.nombre} ha caido en una casilla sorpresa y su saldo se ha visto modificado")
+        end
+        @vista.esperar
+
+        @vista.mostrar("El saldo del jugador #{@jugador.nombre} se ha visto afectado.")
+        @vista.mostrar("Saldo Anterior: #{saldo_anterior} -> Saldo Actual: #{@jugador.saldo}")
+        @vista.mostrar("Ha habido una diferencia de #{@jugador.saldo - saldo_anterior}")
+        @vista.esperar
+      end
+    end
+    
     def elegir_propiedad(propiedades) # lista de propiedades a elegir
       @vista.mostrar("\tCasilla\tTitulo");
        
@@ -330,7 +349,7 @@ module InterfazTextualQytetet
       controlador.desarrollo_juego
     end
     
-    private :bancarrota, :cambio_turno, :actualizar_casilla
+    private :bancarrota, :cambio_turno, :actualizar_casilla, :comprobar_cambio_saldo
   end
   
     ControladorQytetet.main

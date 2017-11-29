@@ -45,11 +45,11 @@ module ModeloQytetet
         @jugadorActual.pagar_cobrar_por_casa_y_hotel(cantidad)
         
       elsif (@cartaActual.tipo == TipoSorpresa::PORJUGADOR)
-        for jugador in @jugadores
+        @jugadores.each do |jugador|
           if (jugador != @jugadorActual)
-            cantidad = @cartaActual
+            cantidad = @cartaActual.valor
             jugador.modificar_saldo(cantidad)
-            @jugadorActual.modificar_saldo(-cantidad)
+            @jugadorActual.modificar_saldo(cantidad)
           end
         end
         
@@ -176,6 +176,7 @@ module ModeloQytetet
     
     def jugar
       valor_dado = @dado.tirar
+      valor_dado = 7
       
       casilla_posicion = @jugadorActual.casilla_actual
       nueva_casilla = @tablero.obtener_nueva_casilla(casilla_posicion, valor_dado)
@@ -266,15 +267,18 @@ module ModeloQytetet
       @mazo = Array.new
       
       @mazo << Sorpresa.new("Un diplomático anónimo ha pagado tu salida de la cárcel. Eres libre de irte." , 0, TipoSorpresa::SALIRCARCEL)
+      @mazo << Sorpresa.new("Es tu cumpleaños. Entre todos te han regalado una suma de dinero para que la gastes en lo que quieras.", 125, TipoSorpresa::PORJUGADOR)
+      @mazo << Sorpresa.new("Te han pillado evadiendo impuestos. Te vas derechito a la cárcel.", @tablero.carcel.numeroCasilla, TipoSorpresa::IRACASILLA)
       @mazo << Sorpresa.new("Te has dejado a tu perro en una tienda de la Avenida de Móstoles.", 7, TipoSorpresa::IRACASILLA)
       @mazo << Sorpresa.new("Decides ir a visitar los jardines de la Calle de los Nardos.", 19, TipoSorpresa::IRACASILLA)
-      @mazo << Sorpresa.new("Has recibido una jugosa transacción de una gran empresa.", 450, TipoSorpresa::PAGARCOBRAR)
-      @mazo << Sorpresa.new("Te han pillado evadiendo impuestos. Te vas derechito a la cárcel.", @tablero.carcel.numeroCasilla, TipoSorpresa::IRACASILLA)
+      @mazo << Sorpresa.new("Has recibido una jugosa transacción de una gran empresa.", 450, TipoSorpresa::PAGARCOBRAR)      
       @mazo << Sorpresa.new("No has hecho bien la declaración de la renta y tienes que pagar los impuestos.", -300, TipoSorpresa::PAGARCOBRAR)
-      @mazo << Sorpresa.new("Es tu cumpleaños. Entre todos hte han regalado una suma de dinero para que la gastes en lo que quieras.", 125, TipoSorpresa::PORJUGADOR)
       @mazo << Sorpresa.new("Has roto la estatua que te prestaron tus amigos para tu fiesta. Debes pagarles a cada uno lo que le pertoque.", -100, TipoSorpresa::PORJUGADOR)
-      @mazo << Sorpresa.new("Tienes que devolver el préstamo que pediste para poder cada una de tus propiedaes edificar." , -20, TipoSorpresa::PORCASAHOTEL)
+      @mazo << Sorpresa.new("Tienes que devolver el préstamo que pediste para poder edificar cada una de tus propiedaes." , -20, TipoSorpresa::PORCASAHOTEL)
       @mazo << Sorpresa.new("Tus propiedades han sido muy bien valoradas y están llegando muchos inquilinos nuevos. Obtienes ganancias por cada propiedad.", 15, TipoSorpresa::PORCASAHOTEL)
+      
+      # Ordena el meazo de forma aleatoria
+      @mazo.shuffle!
     end
     
     def inicializar_jugadores(nombres)
@@ -302,9 +306,7 @@ module ModeloQytetet
     end
     
     def to_s
-      "QYTETET
-      \n->cartaActual #{@cartaActual} \n\n->mazo #{@mazo.to_s} \n\n->jugadores #{@jugadores}
-      \n\n->jugadorActual #{@jugadorActual.to_s} \n\n->tablero #{@tablero.to_s} \n\n->dado #{@dado.to_s}"
+      "QYTETET\n Carta Actual: #{@cartaActual}\n Mazo: #{@mazo.to_s}\n Jugadores: " + @jugadores.to_s + "\n Jugador Actual: #{@jugadorActual.to_s}\n Tablero #{@tablero}\n Dado #{@dado.to_s}"
     end
     
     def self.SALDO_SALIDA

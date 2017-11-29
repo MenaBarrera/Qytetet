@@ -48,10 +48,9 @@ module ModeloQytetet
           end
         end
         
-        else if casilla.tipo == TipoCasilla::IMPUESTO
+      elsif (casilla.tipo == TipoCasilla::IMPUESTO)
         coste = casilla.coste
         modificar_saldo(-coste)
-        end
       end
       return tengo_propietario
     end
@@ -69,6 +68,7 @@ module ModeloQytetet
           
           if(coste_compra <= @saldo)
             titulo = @casilla_actual.asignar_propietario(self) #NO ESTOY SEGURO DE QUE SEA SELF
+            @casilla_actual.titulo.propietario = self
             @propiedades << titulo                              # no hay que hacer new de titulo?
             modificar_saldo(-coste_compra)
             puedo_comprar = true
@@ -79,10 +79,10 @@ module ModeloQytetet
     end
     
     def devolver_carta_libertad()
-       @cartaAux = Sorpresa.new(cartaLibertad.getTexto(), cartaLibertad.getValor(), cartaLibertad.getTipo())
-       @cartaLibertad = nil
+       cartaAux = Sorpresa.new(@carta_libertad.texto, @carta_libertad.valor, @carta_libertad.tipo)
+       @carta_libertad = nil
        
-      return @cartaAux   
+      return cartaAux   
     end
     
     def ir_a_carcel(casilla)
@@ -227,9 +227,7 @@ module ModeloQytetet
     end
     
     def to_s
-      "Encarcelado #{@encarcelado} \n Nombre: #{@nombre} \n  Saldo: #{@saldo}
-        \n Carta Liberdad: #{@cartaLibertad}  \n  
-       Casilla actual: #{@casilla_actual}\n Propiedades #{@propiedades} "
+      " Encarcelado #{@encarcelado} \n Nombre: #{@nombre} \n Saldo: #{@saldo}\n Carta Liberdad: #{@cartaLibertad}  \n Casilla actual: #{@casilla_actual}\n Propiedades #{@propiedades} "
     end
     
     private :cuantas_casas_y_hoteles_tengo, :eliminar_de_mis_propiedades, :es_de_mi_propiedad, :tengo_saldo
