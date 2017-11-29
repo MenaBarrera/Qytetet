@@ -118,71 +118,76 @@ public class ControladorQytetet {
                            separador();
                            while(eleccion != 0){
                                separador();
-                               vista.mostrar("ELIGE PROPIEDADES\n");
-                               Casilla casilla_metodo = elegirPropiedad(casillas);
-                               
-                               separador();
-                               vista.mostrar("\ncasilla_actual" + casilla_metodo);
-                               separador();
-                               eleccion = vista.menuGestionInmobiliaria();
-                               separador();
-                               if(eleccion == 1){
-                                   vista.mostrar("saldo previo: " + jugador.getSaldo());
-                                   correcto = juego.edificarCasa(casilla_metodo);
-                                   vista.mostrar("saldo despues: " + jugador.getSaldo());
-                                   if(correcto){
-                                      
-                                      vista.mostrar("se ha edificado la casa en" + casilla_metodo);
-                                      
-                                   }
-                                   else{
-                                       vista.mostrar("Error al edificar la casa");
-                                   }
+                               if(casillas.size() == 0){
+                                   System.out.println("Ya no tienes propiedades");
                                }
-                               if(eleccion == 2){
-                                    vista.mostrar("saldo previo: " + jugador.getSaldo());                                  
+                               else{
+                                   vista.mostrar("ELIGE PROPIEDADES\n");
+                                   Casilla casilla_metodo = elegirPropiedad(casillas);
 
-                                   correcto = juego.edificarHotel(casilla_metodo);
-                                   vista.mostrar("saldo despues: " + jugador.getSaldo());
-                                   if(correcto){
-                                      vista.mostrar("se ha edificado la hotel en" + casilla_metodo);
+                                   separador();
+                                   vista.mostrar("\ncasilla_actual" + casilla_metodo);
+                                   separador();
+                                   eleccion = vista.menuGestionInmobiliaria();
+                                   separador();
+                                   if(eleccion == 1){
+                                       vista.mostrar("saldo previo: " + jugador.getSaldo());
+                                       correcto = juego.edificarCasa(casilla_metodo);
+                                       vista.mostrar("saldo despues: " + jugador.getSaldo());
+                                       if(correcto){
+
+                                          vista.mostrar("se ha edificado la casa en" + casilla_metodo);
+
+                                       }
+                                       else{
+                                           vista.mostrar("Error al edificar la casa");
+                                       }
                                    }
-                                   else{
-                                       vista.mostrar("Error al edificar la hotel");
+                                   if(eleccion == 2){
+                                        vista.mostrar("saldo previo: " + jugador.getSaldo());                                  
+
+                                       correcto = juego.edificarHotel(casilla_metodo);
+                                       vista.mostrar("saldo despues: " + jugador.getSaldo());
+                                       if(correcto){
+                                          vista.mostrar("se ha edificado la hotel en" + casilla_metodo);
+                                       }
+                                       else{
+                                           vista.mostrar("Error al edificar la hotel");
+                                       }
+                                   }                               
+                                   if(eleccion == 3){
+                                       vista.mostrar("saldo previo: " + jugador.getSaldo());
+                                       correcto = juego.venderPropiedad(casilla_metodo);
+                                       vista.mostrar("saldo despues: " + jugador.getSaldo());
+                                       if(correcto){
+                                          vista.mostrar("se ha vendido la propiedad de " + casilla_metodo);
+                                          casillas.remove(casilla_metodo);
+                                       }
+                                       else{
+                                           vista.mostrar("Error al vender");
+                                       }
                                    }
-                               }                               
-                               if(eleccion == 3){
-                                   vista.mostrar("saldo previo: " + jugador.getSaldo());
-                                   correcto = juego.venderPropiedad(casilla_metodo);
-                                   vista.mostrar("saldo despues: " + jugador.getSaldo());
-                                   if(correcto){
-                                      vista.mostrar("se ha vendido la propiedad de " + casilla_metodo);
-                                      casillas.remove(casilla_metodo);
+                                   if(eleccion == 4){
+                                       vista.mostrar("saldo previo: " + jugador.getSaldo());
+                                      correcto = juego.hipotecaPropiedad(casilla_metodo);
+                                      vista.mostrar("saldo despues: " + jugador.getSaldo());
+                                      if(correcto){
+                                          vista.mostrar("se ha hipotecado la casilla " + casilla_metodo);
+                                       }
+                                       else{
+                                           vista.mostrar("Error al hipotecar ");
+                                       }
                                    }
-                                   else{
-                                       vista.mostrar("Error al vender");
-                                   }
-                               }
-                               if(eleccion == 4){
-                                   vista.mostrar("saldo previo: " + jugador.getSaldo());
-                                  correcto = juego.hipotecaPropiedad(casilla_metodo);
-                                  vista.mostrar("saldo despues: " + jugador.getSaldo());
-                                  if(correcto){
-                                      vista.mostrar("se ha hipotecado la casilla " + casilla_metodo);
-                                   }
-                                   else{
-                                       vista.mostrar("Error al hipotecar ");
-                                   }
-                               }
-                               if(eleccion == 5){
-                                   vista.mostrar("saldo previo: " + jugador.getSaldo());
-                                   correcto= juego.cancelarHipoteca(casilla_metodo);
-                                   vista.mostrar("saldo despues: " + jugador.getSaldo());
-                                   if(correcto){
-                                      vista.mostrar("se ha cancelado la hipoteca " + casilla_metodo);
-                                   }
-                                   else{
-                                       vista.mostrar("Error al deshipotecar ");
+                                   if(eleccion == 5){
+                                       vista.mostrar("saldo previo: " + jugador.getSaldo());
+                                       correcto= juego.cancelarHipoteca(casilla_metodo);
+                                       vista.mostrar("saldo despues: " + jugador.getSaldo());
+                                       if(correcto){
+                                          vista.mostrar("se ha cancelado la hipoteca " + casilla_metodo);
+                                       }
+                                       else{
+                                           vista.mostrar("Error al deshipotecar ");
+                                       }
                                    }
                                } 
                            }
