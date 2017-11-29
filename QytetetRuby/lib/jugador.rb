@@ -42,8 +42,10 @@ module ModeloQytetet
           @encarcelado = casilla.propietario_encarcelado
           
           if(!encarcelado)
-            coste_alquiler = casilla.cobrar_alquiler()
-            modificar_saldo(-coste_alquiler)
+            if (!casilla.esta_hipotecada)
+              coste_alquiler = casilla.cobrar_alquiler()
+              modificar_saldo(-coste_alquiler)
+            end
             
           end
         end
