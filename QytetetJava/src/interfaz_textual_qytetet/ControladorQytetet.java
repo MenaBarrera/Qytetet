@@ -153,6 +153,7 @@ public class ControladorQytetet {
                                    vista.mostrar("saldo despues: " + jugador.getSaldo());
                                    if(correcto){
                                       vista.mostrar("se ha vendido la propiedad de " + casilla_metodo);
+                                      casillas.remove(casilla_metodo);
                                    }
                                    else{
                                        vista.mostrar("Error al vender");
