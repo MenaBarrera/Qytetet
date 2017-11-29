@@ -226,7 +226,7 @@ module ModeloQytetet
     end
     
     def to_s
-      " Encarcelado #{@encarcelado} \n Nombre: #{@nombre} \n Saldo: #{@saldo}\n Carta Liberdad: #{@cartaLibertad}  \n Casilla actual: #{@casilla_actual}\n Propiedades #{@propiedades} "
+      " Encarcelado #{@encarcelado} \n Nombre: #{@nombre} \n Saldo: #{@saldo}\n Carta Liberdad: #{@carta_libertad}  \n Casilla actual: #{@casilla_actual}\n Propiedades #{@propiedades} "
     end
     
     private :cuantas_casas_y_hoteles_tengo, :eliminar_de_mis_propiedades, :es_de_mi_propiedad, :tengo_saldo

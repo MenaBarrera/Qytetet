@@ -228,7 +228,7 @@ module InterfazTextualQytetet
                     vendido = @juego.vender_propiedad(casilla.casilla)
                     
                     if (vendido)
-                      @vista.mostrar("El jugador ha conseguido vender la propiedad por un importe total de #{saldo_actual - @jugador.saldo}")
+                      @vista.mostrar("El jugador ha conseguido vender la propiedad por un importe total de #{@jugador.saldo - saldo_actual}")
                       @vista.mostrar("El saldo del jugador se ha quedado en #{@jugador.saldo}")
                     else
                       @vista.mostrar("No se ha podido vender la propiedad ya que o no se posee o está hipotecada")
@@ -241,7 +241,7 @@ module InterfazTextualQytetet
                     hipotecar = @juego.hipotecar_propiedad(casilla.casilla)
                     
                     if (hipotecar)
-                      @vista.mostrar("El jugador ha conseguido hipotecar la propiedad por un importe total de #{saldo_actual - @jugador.saldo}")
+                      @vista.mostrar("El jugador ha conseguido hipotecar la propiedad por un importe total de #{@jugador.saldo - saldo_actual}")
                       @vista.mostrar("El saldo actual del jugador es #{@jugador.saldo}")
                     else
                       @vista.mostrar("No se ha podido hipotecar la propiedad, bien porque ya está hipotecada o porque no se posee")
