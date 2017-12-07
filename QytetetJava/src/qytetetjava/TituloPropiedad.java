@@ -29,7 +29,7 @@ public class TituloPropiedad {
         this.precioEdificar = precioEdificar;
     }
     void cobrarAlquiler(int coste){
-        propietario.modificarSaldo(-coste);
+        propietario.modificarSaldo(coste);
     }
     
     public String getNombre() {

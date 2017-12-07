@@ -30,16 +30,16 @@ public class ControladorQytetet {
            eleccion = -1;
            
            if(!libre){
-             separador();
-             vista.mostrar("El jugador " + jugador.getNombre() + " está encarcelado");
-             separador();
-             int metodo = vista.menuSalirCarcel();
-             libre = juego.intentarSalirCarcel(metodo);
-             
-             if(libre)
-                 vista.mostrar("has salido de la carcel ");
-             else
-                 vista.mostrar("no has salido de la carcel ");
+                separador();
+                vista.mostrar("El jugador " + jugador.getNombre() + " está encarcelado");
+                separador();
+                int metodo = vista.menuSalirCarcel();
+                libre = juego.intentarSalirCarcel(metodo);
+
+                if(libre)
+                    vista.mostrar("has salido de la carcel ");
+                else
+                    vista.mostrar("no has salido de la carcel ");
            }
            
            if(libre){

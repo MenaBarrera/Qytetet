@@ -30,6 +30,8 @@ public class Casilla {
     public Casilla(int numeroCasilla, TipoCasilla tipo) {
         this.numeroCasilla = numeroCasilla;
         this.tipo = tipo;
+        if (tipo == TipoCasilla.IMPUESTO)
+            this.coste = 200;
     }
 
     public int getNumeroCasilla() {

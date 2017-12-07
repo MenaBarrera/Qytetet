@@ -9,6 +9,7 @@ package qytetetjava;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.LinkedHashMap;
+import java.util.Collections;
 /**
  *
  * @author vladislav
@@ -78,8 +79,8 @@ public class Qytetet {
             for (Jugador jugador: jugadores) {
                 if (jugador != jugadorActual) {
                     int cantidad = cartaActual.getValor();
-                    jugador.modificarSaldo(cantidad);
-                    jugadorActual.modificarSaldo(-cantidad);
+                    jugador.modificarSaldo(-cantidad);
+                    jugadorActual.modificarSaldo(cantidad);
                 }
             }
         }
@@ -319,6 +320,8 @@ public class Qytetet {
         mazo.add(new Sorpresa ("Has roto la estatua que te prestaron tus amigos para tu fiesta. Debes pagarles a cada uno lo que le pertoque.", -100, TipoSorpresa.PORJUGADOR));
         mazo.add(new Sorpresa ("Tienes que devolver el préstamo que pediste para poder cada una de tus propiedaes edificar." , -20, TipoSorpresa.PORCASAHOTEL));
         mazo.add(new Sorpresa ("Tus propiedades han sido muy bien valoradas y están llegando muchos inquilinos nuevos. Obtienes ganancias por cada propiedad.", 15, TipoSorpresa.PORCASAHOTEL));
+    
+        Collections.shuffle(mazo);
     }
     
     private void inicializarJugadores(ArrayList<String> nombres) throws IllegalArgumentException{

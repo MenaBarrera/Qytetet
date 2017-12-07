@@ -65,8 +65,10 @@ public class Jugador {
                 encarcelado = casilla.propietarioEncarcelado();
             
                 if(!encarcelado){
-                   int costeAlquiler = casilla.cobrarAlquiler();
-                   this.modificarSaldo(-costeAlquiler);
+                    if (!casilla.estaHipotecada()) {
+                        int costeAlquiler = casilla.cobrarAlquiler();
+                        this.modificarSaldo(-costeAlquiler);
+                    }                   
                 }
             }
         }
