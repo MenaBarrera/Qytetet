@@ -9,6 +9,11 @@ package qytetetjava;
  *
  * @author vladislav
  */
-public enum TipoSorpresa {
-    IRACASILLA, SALIRCARCEL, PAGAROBRAR, PORCASAHOTEL, PORJUGADOR, CONVERTIRME;
+public class Especulador extends Jugador {
+    private int fianza;
+    
+    public Especulador(Jugador jugador, int fianza) {
+        super(jugador);
+        this.fianza = fianza;
+    }
 }
