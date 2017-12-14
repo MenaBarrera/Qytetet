@@ -9,7 +9,7 @@ package qytetetjava;
  *
  * @author vladislav
  */
-public class Casilla {
+public abstract class Casilla {
     private int numeroCasilla;
     private int coste;
     private int numHoteles = 0;
