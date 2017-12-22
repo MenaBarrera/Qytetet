@@ -85,6 +85,10 @@ public class Qytetet {
             }
         }
         
+        else if (cartaActual.getTipo() == TipoSorpresa.CONVERTIRME) {
+            jugadorActual.convertirme(cartaActual.getValor());
+        }
+        
         if (cartaActual.getTipo() == TipoSorpresa.SALIRCARCEL) {
             jugadorActual.setCartaLibertad(cartaActual);
         }
@@ -124,7 +128,7 @@ public class Qytetet {
         boolean puedoEdificar = false;
         
         if(casilla.soyEdificable()){
-            boolean sePuedeEdificar = casilla.sePuedeEdificarCasa();
+            boolean sePuedeEdificar = casilla.sePuedeEdificarCasa(jugadorActual.getFactorEspeculador());
             
             if(sePuedeEdificar){
                 puedoEdificar = jugadorActual.puedoEdificarCasa(casilla);
@@ -142,7 +146,7 @@ public class Qytetet {
         boolean puedoEdificar = false;
         
         if (casilla.soyEdificable()) {
-            boolean sePuedeEdificar = casilla.sePuedeEdificarHotel();
+            boolean sePuedeEdificar = casilla.sePuedeEdificarHotel(jugadorActual.getFactorEspeculador());
             
             if (sePuedeEdificar) {
                 puedoEdificar = jugadorActual.puedoEdificarHotel(casilla);
@@ -236,7 +240,7 @@ public class Qytetet {
         
         
         // ESTO ES EXPERIMENTAL, NO SE SI FUNCIONARA
-        aux.sort((j1, j2) -> j1.obtenerCapital() - j2.obtenerCapital());
+        aux.sort((j1, j2) -> j2.obtenerCapital() - j1.obtenerCapital());
         
         for (Jugador jugador: aux) {
             int capital = jugador.obtenerCapital();
@@ -320,7 +324,9 @@ public class Qytetet {
         mazo.add(new Sorpresa ("Has roto la estatua que te prestaron tus amigos para tu fiesta. Debes pagarles a cada uno lo que le pertoque.", -100, TipoSorpresa.PORJUGADOR));
         mazo.add(new Sorpresa ("Tienes que devolver el préstamo que pediste para poder cada una de tus propiedaes edificar." , -20, TipoSorpresa.PORCASAHOTEL));
         mazo.add(new Sorpresa ("Tus propiedades han sido muy bien valoradas y están llegando muchos inquilinos nuevos. Obtienes ganancias por cada propiedad.", 15, TipoSorpresa.PORCASAHOTEL));
-    
+        mazo.add(new Sorpresa ("Después de mucho trabajo y mucho esfuerzo, has conseguido convertirte en un Especulador. Disfruta de poder edificar más propiedades y de tus ventajas fiscales.", 3000, TipoSorpresa.CONVERTIRME));
+        mazo.add(new Sorpresa ("Felicidades por haberte convertido en un Especulador. disfruta de tus ventajas fiscales y de edificar más que los menos afortunados", 5000, TipoSorpresa.CONVERTIRME));
+        
         Collections.shuffle(mazo);
     }
     

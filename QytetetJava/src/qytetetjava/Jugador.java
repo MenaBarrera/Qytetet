@@ -20,7 +20,7 @@ public class Jugador {
     private Casilla casillaActual;
     private Sorpresa cartaLibertad;
     private ArrayList<TituloPropiedad> propiedades = new ArrayList();
-    int FactorEspeculador = 1;
+    static int FactorEspeculador = 1;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
@@ -50,6 +50,11 @@ public class Jugador {
     public String getNombre() {
         return nombre;
     }
+
+    public int getFactorEspeculador() {
+        return FactorEspeculador;
+    }    
+    
     
     
     public boolean tengoPropiedades(){
@@ -84,7 +89,7 @@ public class Jugador {
         }
         else if(casilla.getTipo() == TipoCasilla.IMPUESTO){
             int coste = casilla.getCoste();
-            this.modificarSaldo(-coste);
+            this.pagarImpuestos(-coste);
         }
        return tengoPropietario; // QUE DEVUELVE ESTO ???
     }
@@ -271,12 +276,15 @@ public class Jugador {
         return ret;
     }
     
-    protected void pagarImpuesto(int cantidad) {
-        
+    protected void pagarImpuestos(int cantidad) {
+        this.modificarSaldo(cantidad);
     }
     
     protected Especulador convertirme(int fianza) {
         Especulador espec = new Especulador(this, fianza);
+        
+        for (TituloPropiedad propiedad: espec.getPropiedades())
+            propiedad.setPropietario(this);
         
         return espec;
     }

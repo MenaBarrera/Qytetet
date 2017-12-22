@@ -158,11 +158,11 @@ public abstract class Casilla {
         return encarcelado;
     }
     
-    boolean sePuedeEdificarCasa() {
+    boolean sePuedeEdificarCasa(int factor) {
         return numCasas < 4;
     }
     
-    boolean sePuedeEdificarHotel() {
+    boolean sePuedeEdificarHotel(int factor) {
         return numHoteles < 4 && numCasas == 4;
     }
     
