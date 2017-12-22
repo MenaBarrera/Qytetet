@@ -40,14 +40,14 @@ public int menuGestionInmobiliaria(){ //ejemplo de men�
       String lectura;
       boolean ret;
       
-      mostrar("Quieres comprar la propiedad? \n0 -> si\n1 -> no ");
+      mostrar("Quieres comprar la propiedad? \n0 -> No\n1 -> Si");
       lectura = in.nextLine();
       quieroComprar = Integer.parseInt(lectura);
       
       if(quieroComprar == 0)
-          ret = true;
-      else
           ret = false;
+      else
+          ret = true;
       
       return ret;
  }
