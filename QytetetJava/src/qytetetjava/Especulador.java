@@ -33,8 +33,8 @@ public class Especulador extends Jugador {
         
         if (this.getSaldo() > fianza) {
             puedePagar = true;
-            // se supone que hay que pasar la fianza como parametro
-            this.modificarSaldo(-cantidad);
+            // se supone que hay que pasar la fianza como parametro, pero se usa la finaza
+            this.modificarSaldo(-fianza);
         }
         
         return puedePagar;
@@ -58,7 +58,9 @@ public class Especulador extends Jugador {
     public int getFactorEspeculador() {
         return FactorEspeculador;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Especulador:" + "\n Nombre: " + getNombre() + "\n Encarcelado: " + getEncarcelado() + "\n Saldo: " + getSaldo() + "\n Casilla Actual: " + getCasillaActual() + "\n Carta Libertad: " + getCartaLibertad() + "\n Propiedades: " + getPropiedades() + "\n Fianza: " + fianza;
+    }   
 }

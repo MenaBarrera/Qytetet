@@ -106,12 +106,12 @@ module ModeloQytetet
       return encarcelado
     end
     
-    def se_puede_edificar_casa
-      return @numCasas < 4
+    def se_puede_edificar_casa(factor)
+      return @numCasas < 4 * factor
     end
     
-    def se_puede_edificar_hotel
-      return @numHoteles < 4 && @numCasas == 4
+    def se_puede_edificar_hotel(factor)
+      return @numHoteles < (4 * factor) && @numCasas == 4 * factor
     end
     
     def soy_edificable

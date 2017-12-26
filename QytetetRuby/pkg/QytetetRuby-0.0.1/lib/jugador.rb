@@ -5,17 +5,17 @@
 module ModeloQytetet
 
   class Jugador
-    attr_accessor :casilla_actual, :encarcelado
-    attr_writer :carta_libertad
-    attr_reader :nombre, :saldo, :propiedades
+    attr_accessor :casilla_actual, :encarcelado, :carta_libertad
+    attr_reader :nombre, :saldo, :propiedades, :factorEspeculador
 
-    def initialize(nom)
-      @encarcelado = false
+    def initialize(nom, encarcelado = false, saldo = 7500, carta = nil, propiedades = Array.new, casilla = Casilla.iniciar_casilla(0, TipoCasilla::SALIDA), factor = 1)
       @nombre = nom
-      @saldo = 7500
-      @carta_libertad = nil
-      @propiedades = Array.new
-      @casilla_actual = Casilla.iniciar_casilla(0, TipoCasilla::SALIDA)
+      @encarcelado = encarcelado
+      @saldo = saldo
+      @carta_libertad = carta
+      @propiedades = propiedades
+      @casilla_actual = casilla
+      @factorEspeculador = factor
     end
 
     def tengo_propiedades()
@@ -52,8 +52,9 @@ module ModeloQytetet
         
       elsif (casilla.tipo == TipoCasilla::IMPUESTO)
         coste = casilla.coste
-        modificar_saldo(-coste)
+        pagar_impuestos(-coste)
       end
+      
       return tengo_propietario
     end
     
@@ -93,8 +94,7 @@ module ModeloQytetet
     end
     
     def modificar_saldo(cantidad)
-      @saldo += cantidad
-      
+      @saldo += cantidad      
     end
     
     def obtener_capital()
@@ -227,11 +227,26 @@ module ModeloQytetet
       return ret
     end
     
+    def convertirme(fianza)
+      espec = Especulador.new(self, fianza)
+      
+      espec.propiedades.each do |prop|
+        prop.propietario = espec
+      end
+      
+      return espec
+    end
+    
+    def pagar_impuestos(cantidad)
+      modificar_saldo(cantidad)
+    end
+    
     def to_s
       " Encarcelado #{@encarcelado} \n Nombre: #{@nombre} \n Saldo: #{@saldo}\n Carta Liberdad: #{@carta_libertad}  \n Casilla actual: #{@casilla_actual}\n Propiedades #{@propiedades} "
     end
     
     private :cuantas_casas_y_hoteles_tengo, :eliminar_de_mis_propiedades, :es_de_mi_propiedad, :tengo_saldo
+    protected :pagar_impuestos, :convertirme
     
   end #clase
 end #module

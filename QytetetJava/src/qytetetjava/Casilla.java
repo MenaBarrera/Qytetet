@@ -159,11 +159,11 @@ public abstract class Casilla {
     }
     
     boolean sePuedeEdificarCasa(int factor) {
-        return numCasas < 4;
+        return numCasas < 4 * factor;
     }
     
     boolean sePuedeEdificarHotel(int factor) {
-        return numHoteles < 4 && numCasas == 4;
+        return numHoteles < (4 * factor) && numCasas == 4 * factor;
     }
     
     boolean soyEdificable() {

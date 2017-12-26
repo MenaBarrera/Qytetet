@@ -54,8 +54,10 @@ public class Jugador {
     public int getFactorEspeculador() {
         return FactorEspeculador;
     }    
-    
-    
+
+    public Sorpresa getCartaLibertad() {
+        return cartaLibertad;
+    }   
     
     public boolean tengoPropiedades(){
         boolean ret = false;
@@ -224,8 +226,7 @@ public class Jugador {
     boolean tengoCartaLibertad(){
         if( cartaLibertad != null ){
             return true;
-        }
-        else{
+        } else{
             return false;
         }
     }
@@ -292,9 +293,5 @@ public class Jugador {
     @Override
     public String toString() {
         return "Jugador{" + "encarcelado=" + encarcelado + ", nombre=" + nombre + ", saldo=" + saldo + ", casillaActual=" + casillaActual + ", cartaLibertad=" + cartaLibertad + ", propiedades=" + propiedades + '}';
-    }
-    
-    
-           
-    
+    }   
 } // FIN CLASE

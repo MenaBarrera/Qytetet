@@ -26,24 +26,20 @@ module ModeloQytetet
       
       if (@cartaActual.tipo == TipoSorpresa::PAGARCOBRAR)
         cantidad = @cartaActual.valor
-        @jugadorActual.modificar_saldo(cantidad)
-        
+        @jugadorActual.modificar_saldo(cantidad)        
       elsif (@cartaActual.tipo == TipoSorpresa::IRACASILLA)
         numero_casilla = @cartaActual.valor
         es_carcel = @tablero.es_casilla_carcel(numero_casilla)
         
         if (es_carcel)
-          encarcelar_jugador
-          
+          encarcelar_jugador          
         else
           nueva_casilla = @tablero.obtener_casilla_numero(numero_casilla)
           tiene_propietario = @jugadorActual.actualizar_posicion(nueva_casilla)
-        end
-        
+        end        
       elsif (@cartaActual.tipo == TipoSorpresa::PORCASAHOTEL)
         cantidad = @cartaActual.valor
-        @jugadorActual.pagar_cobrar_por_casa_y_hotel(cantidad)
-        
+        @jugadorActual.pagar_cobrar_por_casa_y_hotel(cantidad)        
       elsif (@cartaActual.tipo == TipoSorpresa::PORJUGADOR)
         @jugadores.each do |jugador|
           if (jugador != @jugadorActual)
@@ -51,13 +47,13 @@ module ModeloQytetet
             jugador.modificar_saldo(-cantidad)
             @jugadorActual.modificar_saldo(cantidad)
           end
-        end
-        
+        end      
+      elsif (@cartaActual.tipo == TipoSorpresa::CONVERTIRME)
+        @jugadorActual = @jugadorActual.convertirme(@cartaActual.valor)
       end
       
       if (@cartaActual.tipo == TipoSorpresa::SALIRCARCEL)
-        @jugadorActual.carta_libertad = @cartaActual
-        
+        @jugadorActual.carta_libertad = @cartaActual        
       else
         @mazo << @cartaActual
       end
@@ -94,7 +90,7 @@ module ModeloQytetet
       puedo_edificar = false
       
       if (casilla.soy_edificable)
-        se_puede_edificar = casilla.se_puede_edificar_casa
+        se_puede_edificar = casilla.se_puede_edificar_casa(@jugadorActual.factorEspeculador)
         
         if (se_puede_edificar)
           puedo_edificar = @jugadorActual.puedo_edificar_casa(casilla)
@@ -114,7 +110,7 @@ module ModeloQytetet
       soy_edificable = casilla.soy_edificable
       
       if (soy_edificable)
-        se_puede_edificar = casilla.se_puede_edificar_hotel
+        se_puede_edificar = casilla.se_puede_edificar_hotel(@jugadorActual.factorEspeculador)
         
         if (se_puede_edificar)
           puedo_edificar = @jugadorActual.puedo_edificar_hotel(casilla)
@@ -275,8 +271,10 @@ module ModeloQytetet
       @mazo << Sorpresa.new("Has roto la estatua que te prestaron tus amigos para tu fiesta. Debes pagarles a cada uno lo que le pertoque.", -100, TipoSorpresa::PORJUGADOR)
       @mazo << Sorpresa.new("Tienes que devolver el préstamo que pediste para poder edificar cada una de tus propiedaes." , -20, TipoSorpresa::PORCASAHOTEL)
       @mazo << Sorpresa.new("Tus propiedades han sido muy bien valoradas y están llegando muchos inquilinos nuevos. Obtienes ganancias por cada propiedad.", 15, TipoSorpresa::PORCASAHOTEL)
+      @mazo << Sorpresa.new("Después de mucho trabajo y mucho esfuerzo, has conseguido convertirte en un Especulador. Disfruta de poder edificar más propiedades y de tus ventajas fiscales.", 3000, TipoSorpresa::CONVERTIRME)
+      @mazo << Sorpresa.new("Felicidades por haberte convertido en un Especulador. disfruta de tus ventajas fiscales y de edificar más que los menos afortunados", 5000, TipoSorpresa::CONVERTIRME)
       
-      # Ordena el meazo de forma aleatoria
+      # Ordena el mazo de forma aleatoria y lo guarda en si mismo
       @mazo.shuffle!
     end
     

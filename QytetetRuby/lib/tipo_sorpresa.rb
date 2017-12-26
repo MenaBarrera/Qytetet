@@ -10,5 +10,6 @@ module ModeloQytetet
     PAGARCOBRAR = :PagarCobrar
     PORCASAHOTEL = :PorCasaHotel
     PORJUGADOR = :PorJugador
+    CONVERTIRME = :Convertirme
   end
 end

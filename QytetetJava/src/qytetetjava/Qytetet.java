@@ -55,9 +55,7 @@ public class Qytetet {
         if (cartaActual.getTipo() == TipoSorpresa.PAGAROBRAR) {
             int cantidad = cartaActual.getValor();
             jugadorActual.modificarSaldo(cantidad);
-        }
-        
-        else if (cartaActual.getTipo() == TipoSorpresa.IRACASILLA) {
+        } else if (cartaActual.getTipo() == TipoSorpresa.IRACASILLA) {
             int numeroCasilla = cartaActual.getValor();
             boolean esCarcel = tablero.esCasillaCarcel(numeroCasilla);
             
@@ -68,14 +66,10 @@ public class Qytetet {
                 Casilla nuevaCasilla = tablero.obtenerCasillaNumero(numeroCasilla);
                 tienePropietario = jugadorActual.actualizarPosicion(nuevaCasilla);
             }
-        }
-        
-        else if(cartaActual.getTipo() == TipoSorpresa.PORCASAHOTEL) {
+        } else if(cartaActual.getTipo() == TipoSorpresa.PORCASAHOTEL) {
             int cantidad = cartaActual.getValor();
             jugadorActual.pagarCobrarPorCasaYHotel(cantidad);
-        }
-        
-        else if (cartaActual.getTipo() == TipoSorpresa.PORJUGADOR) {
+        } else if (cartaActual.getTipo() == TipoSorpresa.PORJUGADOR) {
             for (Jugador jugador: jugadores) {
                 if (jugador != jugadorActual) {
                     int cantidad = cartaActual.getValor();
@@ -83,17 +77,13 @@ public class Qytetet {
                     jugadorActual.modificarSaldo(cantidad);
                 }
             }
-        }
-        
-        else if (cartaActual.getTipo() == TipoSorpresa.CONVERTIRME) {
-            jugadorActual.convertirme(cartaActual.getValor());
+        } else if (cartaActual.getTipo() == TipoSorpresa.CONVERTIRME) {
+            jugadorActual = jugadorActual.convertirme(cartaActual.getValor());
         }
         
         if (cartaActual.getTipo() == TipoSorpresa.SALIRCARCEL) {
             jugadorActual.setCartaLibertad(cartaActual);
-        }
-        
-        else {
+        } else {
             mazo.add(cartaActual);          // hay que hacer esto?
         }
         
