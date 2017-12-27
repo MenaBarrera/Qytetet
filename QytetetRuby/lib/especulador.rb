@@ -40,7 +40,11 @@ module ModeloQytetet
       return puede_pagar
     end
     
-    protected :pagar_impuestos, :convertirme, :ir_a_carcel
+    def to_s
+      super
+    end
+    
+    protected :pagar_impuestos
     private :pagar_fianza
   end
 end

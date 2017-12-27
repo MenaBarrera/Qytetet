@@ -49,7 +49,18 @@ module ModeloQytetet
           end
         end      
       elsif (@cartaActual.tipo == TipoSorpresa::CONVERTIRME)
+        pos = 0
+        long = @jugadores.length
+        
+        # Cambiar la clase del jugador actual dentro del array
+        for i in 0..long
+          if (@jugadorActual == @jugadores.at(i))
+            pos = i
+          end
+        end
+        
         @jugadorActual = @jugadorActual.convertirme(@cartaActual.valor)
+        @jugadores[pos] = @jugadorActual
       end
       
       if (@cartaActual.tipo == TipoSorpresa::SALIRCARCEL)
@@ -261,18 +272,18 @@ module ModeloQytetet
     def inicializar_cartas_sorpresa
       @mazo = Array.new
       
-      @mazo << Sorpresa.new("Un diplomático anónimo ha pagado tu salida de la cárcel. Eres libre de irte." , 0, TipoSorpresa::SALIRCARCEL)
-      @mazo << Sorpresa.new("Es tu cumpleaños. Entre todos te han regalado una suma de dinero para que la gastes en lo que quieras.", 125, TipoSorpresa::PORJUGADOR)
+      @mazo << Sorpresa.new("Después de mucho trabajo y mucho esfuerzo, has conseguido convertirte en un Especulador. Disfruta de poder edificar más propiedades y de tus ventajas fiscales.", 3000, TipoSorpresa::CONVERTIRME)
       @mazo << Sorpresa.new("Te han pillado evadiendo impuestos. Te vas derechito a la cárcel.", @tablero.carcel.numeroCasilla, TipoSorpresa::IRACASILLA)
+      @mazo << Sorpresa.new("Felicidades por haberte convertido en un Especulador. disfruta de tus ventajas fiscales y de edificar más que los menos afortunados", 5000, TipoSorpresa::CONVERTIRME)
       @mazo << Sorpresa.new("Te has dejado a tu perro en una tienda de la Avenida de Móstoles.", 7, TipoSorpresa::IRACASILLA)
+      @mazo << Sorpresa.new("Es tu cumpleaños. Entre todos te han regalado una suma de dinero para que la gastes en lo que quieras.", 125, TipoSorpresa::PORJUGADOR)      
       @mazo << Sorpresa.new("Decides ir a visitar los jardines de la Calle de los Nardos.", 19, TipoSorpresa::IRACASILLA)
-      @mazo << Sorpresa.new("Has recibido una jugosa transacción de una gran empresa.", 450, TipoSorpresa::PAGARCOBRAR)      
+      @mazo << Sorpresa.new("Has recibido una jugosa transacción de una gran empresa.", 450, TipoSorpresa::PAGARCOBRAR)
+      @mazo << Sorpresa.new("Un diplomático anónimo ha pagado tu salida de la cárcel. Eres libre de irte." , 0, TipoSorpresa::SALIRCARCEL)
       @mazo << Sorpresa.new("No has hecho bien la declaración de la renta y tienes que pagar los impuestos.", -300, TipoSorpresa::PAGARCOBRAR)
       @mazo << Sorpresa.new("Has roto la estatua que te prestaron tus amigos para tu fiesta. Debes pagarles a cada uno lo que le pertoque.", -100, TipoSorpresa::PORJUGADOR)
       @mazo << Sorpresa.new("Tienes que devolver el préstamo que pediste para poder edificar cada una de tus propiedaes." , -20, TipoSorpresa::PORCASAHOTEL)
       @mazo << Sorpresa.new("Tus propiedades han sido muy bien valoradas y están llegando muchos inquilinos nuevos. Obtienes ganancias por cada propiedad.", 15, TipoSorpresa::PORCASAHOTEL)
-      @mazo << Sorpresa.new("Después de mucho trabajo y mucho esfuerzo, has conseguido convertirte en un Especulador. Disfruta de poder edificar más propiedades y de tus ventajas fiscales.", 3000, TipoSorpresa::CONVERTIRME)
-      @mazo << Sorpresa.new("Felicidades por haberte convertido en un Especulador. disfruta de tus ventajas fiscales y de edificar más que los menos afortunados", 5000, TipoSorpresa::CONVERTIRME)
       
       # Ordena el mazo de forma aleatoria y lo guarda en si mismo
       @mazo.shuffle!
