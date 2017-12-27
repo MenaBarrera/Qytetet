@@ -22,6 +22,8 @@ public abstract class Casilla {
         this.tipo = tipo; 
     }
     
+    public abstract void metodo();
+    
     /*
     public Casilla(int numeroCasilla, int coste, TituloPropiedad titulo) {
         this.numeroCasilla = numeroCasilla;
@@ -43,6 +45,17 @@ public abstract class Casilla {
     }
     */
     
+    public int getNumeroCasilla() {
+        return numeroCasilla;
+    }
+    
+    public int getCoste() {
+        return coste;
+    }
+
+    public TipoCasilla getTipo() {
+        return tipo;
+    }
     
     boolean soyEdificable() {
         boolean ret = false;
@@ -66,5 +79,10 @@ public abstract class Casilla {
         }
     }
     */
+
+    @Override
+    public String toString() {
+        return "Casilla{" + "numeroCasilla=" + numeroCasilla + ", coste=" + coste + ", tipo=" + tipo + '}';
+    }
     
 }

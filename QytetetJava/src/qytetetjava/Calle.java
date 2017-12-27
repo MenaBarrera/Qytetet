@@ -9,6 +9,7 @@ package qytetetjava;
  *
  * @author mena
  */
+
 public class Calle extends Casilla {
     private TituloPropiedad titulo;
     private int numHoteles = 0;
@@ -30,6 +31,10 @@ public class Calle extends Casilla {
     public int getNumCasas() {
         return numCasas;
     }
+    
+    
+    @Override
+    public void metodo(){ int a = 1; } 
     
     public TituloPropiedad getTitulo() {
         return titulo;
@@ -154,17 +159,8 @@ public class Calle extends Casilla {
     //////////////////////////////////////////////////////
     
     
-    public int getNumeroCasilla() {
-        return numeroCasilla;
-    }
+    
 
-    public int getCoste() {
-        return coste;
-    }
-
-    public TipoCasilla getTipo() {
-        return tipo;
-    }
     
     public void setNumeroCasilla(int numeroCasilla) {
         this.numeroCasilla = numeroCasilla;

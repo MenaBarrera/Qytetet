@@ -90,17 +90,22 @@ public class Qytetet {
         return tienePropietario;
     }
     
+    // OJO ////////////////
+    
     public boolean cancelarHipoteca(Casilla casilla){
         boolean puedoCancelar = false;
         
-        if (casilla.soyEdificable()) {
-            boolean sePuedeCancelar = casilla.estaHipotecada();
+        Calle calle = (Calle)casilla;
+        
+        if (calle.soyEdificable()) {
+            
+            boolean sePuedeCancelar = calle.estaHipotecada();
             
             if (sePuedeCancelar) {
-                puedoCancelar = jugadorActual == casilla.getTitulo().getPropietario();
+                puedoCancelar = jugadorActual == calle.getTitulo().getPropietario();
                 
                 if (puedoCancelar) {
-                    int costeCancelar = casilla.cancelarHipoteca();
+                    int costeCancelar = calle.cancelarHipoteca();
                     jugadorActual.modificarSaldo(costeCancelar);
                 }
             }

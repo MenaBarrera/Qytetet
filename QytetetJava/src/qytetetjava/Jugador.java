@@ -79,7 +79,7 @@ public class Jugador {
             tengoPropietario = casilla.tengoPropietario(); 
         
             if(casilla.tengoPropietario()){
-                encarcelado = casilla.propietarioEncarcelado();
+                encarcelado = casilla.propietarioEncarcelado());
             
                 if(!encarcelado){
                     if (!casilla.estaHipotecada()) {
