@@ -109,7 +109,8 @@ public class ControladorQytetet {
                            ArrayList<String> names = new ArrayList();
                            
                            for( TituloPropiedad i : listaPropiedades){
-                                   casillas.add(i.getCasilla());
+                                   Casilla a = i.getCasilla();
+                                   casillas.add(a);
                                    names.add(i.getNombre());
                                
                            }
@@ -256,7 +257,8 @@ public class ControladorQytetet {
         int seleccion;
         ArrayList<String> listaPropiedades= new ArrayList();
         for ( Casilla casilla1: propiedades) {
-            listaPropiedades.add( "\t"+casilla1.getNumeroCasilla()+"\t"+casilla1.getTitulo().getNombre()); 
+            Calle calle = (Calle)casilla1;
+            listaPropiedades.add( "\t"+casilla1.getNumeroCasilla()+"\t"+calle.getTitulo().getNombre()); 
         }
         seleccion=vista.menuElegirPropiedad(listaPropiedades);  
         

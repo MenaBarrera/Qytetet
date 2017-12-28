@@ -19,7 +19,7 @@ public class TituloPropiedad {
     private int hipotecaBase;
     private int precioEdificar;
     private Jugador propietario; 
-    private Casilla casilla;
+    private Calle casilla;
 
     public TituloPropiedad(String nombre, int alquilerBase, float factorRevalorizacion, int hipotecaBase, int precioEdificar) {
         this.nombre = nombre;
@@ -87,7 +87,7 @@ public class TituloPropiedad {
     }
     
     void setCasilla(Casilla casilla){
-        this.casilla = casilla;
+        this.casilla = (Calle) casilla;
     }
     
     

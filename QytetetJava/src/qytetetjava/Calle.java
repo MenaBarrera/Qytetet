@@ -18,6 +18,7 @@ public class Calle extends Casilla {
     public Calle(int ncas, int coste, TituloPropiedad titulo){
         super(ncas,coste,TipoCasilla.CALLE);
         setTituloPropiedad(titulo);
+        this.titulo.setCasilla(this);
     }
     
     private void setTituloPropiedad(TituloPropiedad titulo){
@@ -159,4 +160,9 @@ public class Calle extends Casilla {
     
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
+
+    @Override
+    public String toString() {
+        return super.toString() + "Calle{" + "titulo=" + titulo + ", numHoteles=" + numHoteles + ", numCasas=" + numCasas + '}';
+    }
 }
