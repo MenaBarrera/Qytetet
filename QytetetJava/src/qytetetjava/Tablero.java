@@ -64,26 +64,26 @@ public class Tablero {
         titulosCalles.add(new TituloPropiedad("Calle de los Nardos", 750, 0.2f, 100, 1000));
         
         // Añadimos todas las casillas en orden menos la carcel
-        this.casillas.add(new Casilla(0, TipoCasilla.SALIDA));
-        this.casillas.add(new Casilla(1, 400, titulosCalles.get(i++)));
-        this.casillas.add(new Casilla(2, 360, titulosCalles.get(i++)));
-        this.casillas.add(new Casilla(3, 380, titulosCalles.get(i++)));
-        this.casillas.add(new Casilla(4, 300, titulosCalles.get(i++)));
-        this.casillas.add(new Casilla(5, TipoCasilla.CARCEL));
+        this.casillas.add(new OtraCasilla(0, TipoCasilla.SALIDA));
+        this.casillas.add(new Calle(1, 400, titulosCalles.get(i++)));
+        this.casillas.add(new Calle(2, 360, titulosCalles.get(i++)));
+        this.casillas.add(new Calle(3, 380, titulosCalles.get(i++)));
+        this.casillas.add(new Calle(4, 300, titulosCalles.get(i++)));
+        this.casillas.add(new OtraCasilla(5, TipoCasilla.CARCEL));
         this.carcel = this.casillas.get(5);
-        this.casillas.add(new Casilla(6, TipoCasilla.SORPRESA));
-        this.casillas.add(new Casilla(7, 500, titulosCalles.get(i++)));
-        this.casillas.add(new Casilla(8, 490, titulosCalles.get(i++)));
-        this.casillas.add(new Casilla(9, 400, titulosCalles.get(i++)));
-        this.casillas.add(new Casilla(10, TipoCasilla.IMPUESTO));
-        this.casillas.add(new Casilla(11, 550, titulosCalles.get(i++)));
-        this.casillas.add(new Casilla(12, TipoCasilla.SORPRESA));
-        this.casillas.add(new Casilla(13, 600, titulosCalles.get(i++)));
-        this.casillas.add(new Casilla(14, TipoCasilla.PARKING));
-        this.casillas.add(new Casilla(15, TipoCasilla.JUEZ));
-        this.casillas.add(new Casilla(16, 550, titulosCalles.get(i++)));
-        this.casillas.add(new Casilla(17, 700, titulosCalles.get(i++)));
-        this.casillas.add(new Casilla(18, TipoCasilla.SORPRESA)); 
-        this.casillas.add(new Casilla(19, 790, titulosCalles.get(i)));        
+        this.casillas.add(new OtraCasilla(6, TipoCasilla.SORPRESA));
+        this.casillas.add(new Calle(7, 500, titulosCalles.get(i++)));
+        this.casillas.add(new Calle(8, 490, titulosCalles.get(i++)));
+        this.casillas.add(new Calle(9, 400, titulosCalles.get(i++)));
+        this.casillas.add(new OtraCasilla(10, TipoCasilla.IMPUESTO));
+        this.casillas.add(new Calle(11, 550, titulosCalles.get(i++)));
+        this.casillas.add(new OtraCasilla(12, TipoCasilla.SORPRESA));
+        this.casillas.add(new Calle(13, 600, titulosCalles.get(i++)));
+        this.casillas.add(new OtraCasilla(14, TipoCasilla.PARKING));
+        this.casillas.add(new OtraCasilla(15, TipoCasilla.JUEZ));
+        this.casillas.add(new Calle(16, 550, titulosCalles.get(i++)));
+        this.casillas.add(new Calle(17, 700, titulosCalles.get(i++)));
+        this.casillas.add(new OtraCasilla(18, TipoCasilla.SORPRESA)); 
+        this.casillas.add(new Calle(19, 790, titulosCalles.get(i)));        
     }
 }

@@ -33,9 +33,6 @@ public class Calle extends Casilla {
     }
     
     
-    @Override
-    public void metodo(){ int a = 1; } 
-    
     public TituloPropiedad getTitulo() {
         return titulo;
     }
@@ -160,16 +157,6 @@ public class Calle extends Casilla {
     
     
     
-
-    
-    public void setNumeroCasilla(int numeroCasilla) {
-        this.numeroCasilla = numeroCasilla;
-    }
-
-    public void setCoste(int coste) {
-        this.coste = coste;
-    }
-     
     //////////////////////////////////////////////////////
     //////////////////////////////////////////////////////
 }

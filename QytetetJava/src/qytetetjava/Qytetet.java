@@ -122,14 +122,16 @@ public class Qytetet {
     public boolean edificarCasa(Casilla casilla){
         boolean puedoEdificar = false;
         
+         Calle calle = (Calle)casilla;
+        
         if(casilla.soyEdificable()){
-            boolean sePuedeEdificar = casilla.sePuedeEdificarCasa(jugadorActual.getFactorEspeculador());
+            boolean sePuedeEdificar = calle.sePuedeEdificarCasa(jugadorActual.getFactorEspeculador());
             
             if(sePuedeEdificar){
                 puedoEdificar = jugadorActual.puedoEdificarCasa(casilla);
                 
                 if(puedoEdificar){
-                    int costeEdificarCasa = casilla.edificarCasa();
+                    int costeEdificarCasa = calle.edificarCasa();
                     jugadorActual.modificarSaldo(-costeEdificarCasa);
                 }
             }
@@ -140,14 +142,16 @@ public class Qytetet {
     public boolean edificarHotel(Casilla casilla){
         boolean puedoEdificar = false;
         
+        Calle calle = (Calle)casilla;
+        
         if (casilla.soyEdificable()) {
-            boolean sePuedeEdificar = casilla.sePuedeEdificarHotel(jugadorActual.getFactorEspeculador());
+            boolean sePuedeEdificar = calle.sePuedeEdificarHotel(jugadorActual.getFactorEspeculador());
             
             if (sePuedeEdificar) {
                 puedoEdificar = jugadorActual.puedoEdificarHotel(casilla);
                 
                 if (puedoEdificar) {
-                    int costeEdificarHotel = casilla.edificarHotel();
+                    int costeEdificarHotel = calle.edificarHotel();
                     jugadorActual.modificarSaldo(-costeEdificarHotel);
                 }
             }
@@ -164,13 +168,15 @@ public class Qytetet {
     public boolean hipotecaPropiedad(Casilla casilla){
         boolean sePuedeHipotecar, puedoHipotecar = false;
         if (casilla.soyEdificable()) {
-            sePuedeHipotecar = !casilla.estaHipotecada();
+            Calle calle = (Calle)casilla;
+            
+            sePuedeHipotecar = !calle.estaHipotecada();
             
             if (sePuedeHipotecar) {
                 puedoHipotecar = jugadorActual.puedoHipotecar(casilla);
                 
                 if (puedoHipotecar) {
-                    int cantidadRecibida = casilla.hipotecar();
+                    int cantidadRecibida = calle.hipotecar();
                     jugadorActual.modificarSaldo(cantidadRecibida);
                 }
             }
@@ -252,7 +258,8 @@ public class Qytetet {
         
         for (int i = 0; i < MAX_CASILLAS; i++){
             for (TituloPropiedad aux: prop){
-                if (aux == tablero.obtenerCasillaNumero(i).getTitulo())
+                Calle calle = (Calle)(tablero.obtenerCasillaNumero(i));
+                if (aux == calle.getTitulo())
                     casillas.add(tablero.obtenerCasillaNumero(i));
             }            
         }
