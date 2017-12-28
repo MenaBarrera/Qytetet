@@ -48,11 +48,11 @@ public class ControladorQytetet {
                noTienePropietario = !(juego.jugar());
                actualizarCasilla();
                separador();
-               vista.mostrar(jugador.getNombre() + " \n\nse desplaza hasta la casilla numero " + casilla.getNumeroCasilla());
+               vista.mostrar(jugador.getNombre() + " \nse desplaza hasta la casilla numero " + casilla.getNumeroCasilla());
                separador();
-               vista.mostrar("\n\nInformación de la casilla:" + casilla);
+               vista.mostrar("\nInformación de la casilla:" + casilla);
                separador();
-               vista.mostrar("jugador name::: " + jugador.getNombre());
+               vista.mostrar("El saldo actual del jugador " +jugador.getNombre() + " es de " + jugador.getSaldo());
                provocarEspera();
                
                if(!bancarrota()){
@@ -76,6 +76,7 @@ public class ControladorQytetet {
                        }
                        else if(casilla.getTipo() == TipoCasilla.SORPRESA){
                            noTienePropietario = juego.aplicarSorpresa();
+                           vista.mostrar("La sorpresa es: " + juego.getTextoCarta() );
                            if(!jugador.getEncarcelado()){
                                if(!bancarrota()){
                                    if(casilla.getTipo() == TipoCasilla.CALLE){
@@ -121,6 +122,7 @@ public class ControladorQytetet {
                                separador();
                                if(casillas.size() == 0){
                                    System.out.println("Ya no tienes propiedades");
+                                   break;
                                }
                                else{
                                    vista.mostrar("ELIGE PROPIEDADES\n");

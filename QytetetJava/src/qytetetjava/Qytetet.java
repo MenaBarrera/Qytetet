@@ -48,6 +48,9 @@ public class Qytetet {
         qytetet = new Qytetet();
         return qytetet;
     }
+    public String getTextoCarta(){
+        return cartaActual.getTexto();
+    }
     
     public boolean aplicarSorpresa(){
         boolean tienePropietario = false;

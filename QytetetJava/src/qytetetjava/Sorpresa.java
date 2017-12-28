@@ -20,7 +20,7 @@ public class Sorpresa {
         this.tipo = tipo;
     }
 
-    String getTexto() {
+    public String getTexto() {
         return texto;
     }
 
