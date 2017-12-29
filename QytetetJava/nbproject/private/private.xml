@@ -3,16 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/Casilla.java</file>
-            <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/interfaz_textual_qytetet/ControladorQytetet.java</file>
             <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/TituloPropiedad.java</file>
             <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/Calle.java</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/GUIQytetet/VistaCartaSorpresa.java</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/Qytetet.java</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/GUIQytetet/VistaJugador.java</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/Sorpresa.java</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/Casilla.java</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/interfaz_textual_qytetet/ControladorQytetet.java</file>
+            <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/GUIQytetet/VistaCasilla.java</file>
             <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/Tablero.java</file>
             <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/Especulador.java</file>
-            <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/Qytetet.java</file>
             <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/OtraCasilla.java</file>
             <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/Jugador.java</file>
-            <file>file:/Users/mena/Desktop/Qytetet/QytetetJava/src/qytetetjava/Sorpresa.java</file>
         </group>
     </open-files>
 </project-private>
