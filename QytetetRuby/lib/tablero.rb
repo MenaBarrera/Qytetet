@@ -48,37 +48,37 @@ module ModeloQytetet
       titulos_calles << TituloPropiedad.new("Calle de los Nardos", 750, 0.2, 100, 1000)
       
       @casillas << Casilla.iniciar_casilla(0, TipoCasilla::SALIDA)
-      @casillas << Casilla.iniciar_calle(1, 400, titulos_calles[i])
+      @casillas << Calle.new(1, 400, titulos_calles[i])
       i += 1
-      @casillas << Casilla.iniciar_calle(2, 360, titulos_calles[i])
+      @casillas << Calle.new(2, 360, titulos_calles[i])
       i+= 1
-      @casillas << Casilla.iniciar_calle(3, 380, titulos_calles[i])
+      @casillas << Calle.new(3, 380, titulos_calles[i])
       i+= 1
-      @casillas << Casilla.iniciar_calle(4, 300, titulos_calles[i])
+      @casillas << Calle.new(4, 300, titulos_calles[i])
       i+= 1
       @casillas << Casilla.iniciar_casilla(5, TipoCasilla::CARCEL)
       @carcel = @casillas.at(5)
       @casillas << Casilla.iniciar_casilla(6, TipoCasilla::SORPRESA)
-      @casillas << Casilla.iniciar_calle(7, 500, titulos_calles[i])
+      @casillas << Calle.new(7, 500, titulos_calles[i])
       i+= 1
-      @casillas << Casilla.iniciar_calle(8, 490, titulos_calles[i])
+      @casillas << Calle.new(8, 490, titulos_calles[i])
       i+= 1
-      @casillas << Casilla.iniciar_calle(9, 400, titulos_calles[i])
+      @casillas << Calle.new(9, 400, titulos_calles[i])
       i+= 1
       @casillas << Casilla.iniciar_casilla(10, TipoCasilla::IMPUESTO)
-      @casillas << Casilla.iniciar_calle(11, 550, titulos_calles[i])
+      @casillas << Calle.new(11, 550, titulos_calles[i])
       i+= 1
       @casillas << Casilla.iniciar_casilla(12, TipoCasilla::SORPRESA)
-      @casillas << Casilla.iniciar_calle(13, 600, titulos_calles[i])
+      @casillas << Calle.new(13, 600, titulos_calles[i])
       i+= 1
       @casillas << Casilla.iniciar_casilla(14, TipoCasilla::PARKING)
       @casillas << Casilla.iniciar_casilla(15, TipoCasilla::JUEZ)
-      @casillas << Casilla.iniciar_calle(16, 550, titulos_calles[i])
+      @casillas << Calle.new(16, 550, titulos_calles[i])
       i+= 1
-      @casillas << Casilla.iniciar_calle(17, 700, titulos_calles[i])
+      @casillas << Calle.new(17, 700, titulos_calles[i])
       i+= 1
       @casillas << Casilla.iniciar_casilla(18, TipoCasilla::SORPRESA)
-      @casillas << Casilla.iniciar_calle(19, 790, titulos_calles[i])
+      @casillas << Calle.new(19, 790, titulos_calles[i])
     end
         
     def to_s

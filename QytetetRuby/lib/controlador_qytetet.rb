@@ -15,6 +15,7 @@ require_relative "jugador"
 require_relative "dado"
 require_relative "vista_textual_qytetet"
 require_relative "especulador"
+require_relative "calle"
 
 module InterfazTextualQytetet
   class ControladorQytetet
@@ -173,7 +174,7 @@ module InterfazTextualQytetet
                     @vista.mostrar("El jugador #{@jugador.nombre} ha decidido edificar una casa. Actualmente posee #{casilla.casilla.numCasas} casas")
                     @vista.mostrar("Saldo actual: #{saldo_actual}")
                     @vista.esperar
-                    edificado = @juego.edificar_casa(casilla.casilla)
+                    edificado = @juego.edificar_casa(@casilla)
                     
                     if (edificado)
                       @vista.mostrar("Gracias por la compra. El precio de la edificacion ha sido #{@jugador.saldo - saldo_actual}")
