@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.LinkedHashMap;
 import java.util.Collections;
+import GUIQytetet.Dado;
 /**
  *
  * @author vladislav
@@ -27,7 +28,7 @@ public class Qytetet {
     private ArrayList<Jugador> jugadores;
     private Jugador jugadorActual;
     private Tablero tablero;
-    private Dado dado;
+    //private Dado dado;
     
     // Atributo de clase que contiene el singleton Qytetet
     private static Qytetet qytetet;
@@ -37,8 +38,9 @@ public class Qytetet {
     private Qytetet() throws IllegalArgumentException{
         
         inicializarTablero();       
-        inicializarCartasSorpresa();
-        dado = Dado.getInstance();
+        inicializarCartasSorpresa();        
+        Dado dado = GUIQytetet.Dado.getInstance();        
+
        // salidaJugadores();
     }
     public Jugador getJugadorActual(){
@@ -199,6 +201,7 @@ public class Qytetet {
         boolean libre;
         
         if (metodo == 0) {
+            Dado dado = GUIQytetet.Dado.getInstance();
             int valorDado = dado.tirar();
             libre = (valorDado > 5);
         }
@@ -216,6 +219,7 @@ public class Qytetet {
     }
     
     public boolean jugar(){
+        Dado dado = GUIQytetet.Dado.getInstance();
         int valorDado = dado.tirar();
         
         System.out.println("valorDado: " + valorDado);
@@ -364,6 +368,7 @@ public class Qytetet {
 
     @Override
     public String toString() {
+        Dado dado = GUIQytetet.Dado.getInstance();
         return "Qytetet{" + "\ncartaActual=" + cartaActual + "\nmazo=" + mazo.toString() + "\njugadores=" + jugadores.toString() + "\njugadorActual=" + jugadorActual.toString() + "\ntablero=" + tablero.toString() + "\ndado=" + dado.toString() + '}';
     }  
  
