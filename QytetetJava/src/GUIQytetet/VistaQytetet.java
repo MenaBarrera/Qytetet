@@ -20,10 +20,12 @@ public class VistaQytetet extends javax.swing.JPanel {
         initComponents();
     }
     
-    void Actualizar(Qytetet juego){
+    public void Actualizar(Qytetet juego){
         vistaJugador1.actualizar(juego.getJugadorActual().toString());
         vistaCasilla1.actualizar(juego.getJugadorActual().getCasillaActual().toString());
-        vistaCartaSorpresa1.actualizar(juego.getTextoCarta());
+        
+        if(juego.getTextoCarta() != null)
+            vistaCartaSorpresa1.actualizar(juego.getTextoCarta());
         
     }
 

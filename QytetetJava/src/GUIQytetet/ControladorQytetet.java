@@ -22,7 +22,7 @@ public class ControladorQytetet extends javax.swing.JFrame {
     }
     
     public void actualizar(Qytetet q){
-        modeloQytetet = q;
+        vistaQytetet1.Actualizar(q);
     }
 
     /**
@@ -70,6 +70,9 @@ public class ControladorQytetet extends javax.swing.JFrame {
         Qytetet juego = Qytetet.getInstance();
         juego.inicializarJuego(nombres);
         Dado.createInstance(controladorQytetet);
+        
+        controladorQytetet.actualizar(juego);
+        
 
         controladorQytetet.setVisible(true); //Esta debe ser la última
                                              //línea de código del main
