@@ -6,6 +6,8 @@
 package GUIQytetet;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import qytetetjava.MetodoSalirCarcel;
 import qytetetjava.Qytetet;
 
 /**
@@ -35,8 +37,41 @@ public class ControladorQytetet extends javax.swing.JFrame {
     private void initComponents() {
 
         vistaQytetet1 = new GUIQytetet.VistaQytetet();
+        jbSalirCarcelDado = new javax.swing.JButton();
+        jbSalirCarcelPagando = new javax.swing.JButton();
+        jbJugar = new javax.swing.JButton();
+        jbAplicarSorpresa = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jbSiguienteJugador = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jbSalirCarcelDado.setText("salir tirando dado");
+        jbSalirCarcelDado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirCarcelDadoActionPerformed(evt);
+            }
+        });
+
+        jbSalirCarcelPagando.setText("salir pagando");
+        jbSalirCarcelPagando.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirCarcelPagandoActionPerformed(evt);
+            }
+        });
+
+        jbJugar.setText("Jugar");
+
+        jbAplicarSorpresa.setText("Aplicar sorpresa");
+        jbAplicarSorpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAplicarSorpresaActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Comprar");
+
+        jbSiguienteJugador.setText("Pasar turno");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -44,25 +79,88 @@ public class ControladorQytetet extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(vistaQytetet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(vistaQytetet1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbAplicarSorpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbSiguienteJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbSalirCarcelDado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbSalirCarcelPagando, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbJugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(100, Short.MAX_VALUE)
                 .addComponent(vistaQytetet1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbSalirCarcelDado, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbSalirCarcelPagando, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbAplicarSorpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jbSiguienteJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jbJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbSalirCarcelDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirCarcelDadoActionPerformed
+      boolean resultado = modeloQytetet.intentarSalirCarcel(0);
+        this.jbSalirCarcelPagando.setEnabled(false);
+        this.jbSalirCarcelDado.setEnabled(false);
+        if(resultado){
+            JOptionPane.showMessageDialog(this, "Sales de la cárcel");
+            this.jbJugar.setEnabled(true);
+        }else {
+            JOptionPane.showMessageDialog(this, "NO sales de la carcel");
+            this.jbSiguienteJugador.setEnabled(true);
+        }
+        this.vistaQytetet1.Actualizar(modeloQytetet); 
+    }//GEN-LAST:event_jbSalirCarcelDadoActionPerformed
+
+    private void jbSalirCarcelPagandoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirCarcelPagandoActionPerformed
+        boolean resultado = modeloQytetet.intentarSalirCarcel(1);
+        this.jbSalirCarcelPagando.setEnabled(false);
+        this.jbSalirCarcelDado.setEnabled(false);
+        if(resultado){
+            JOptionPane.showMessageDialog(this, "Sales de la cárcel");
+            this.jbJugar.setEnabled(true);
+        }else {
+            JOptionPane.showMessageDialog(this, "NO sales de la carcel");
+            this.jbSiguienteJugador.setEnabled(true);
+        }
+        this.vistaQytetet1.Actualizar(modeloQytetet);
+    }//GEN-LAST:event_jbSalirCarcelPagandoActionPerformed
+
+    private void jbAplicarSorpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAplicarSorpresaActionPerformed
+        boolean res = modeloQytetet.aplicarSorpresa();
+        if(res){
+            JOptionPane.showMessageDialog(this, modeloQytetet.getTextoCarta());
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"no se ha podido aplicar sorpresa");
+        }
+        this.jbJugar.setEnabled(true);
+         this.vistaQytetet1.Actualizar(modeloQytetet);
+    }//GEN-LAST:event_jbAplicarSorpresaActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args){
         ControladorQytetet controladorQytetet= new ControladorQytetet();
+        
         
         CapturaNombreJugadores capturaNombres = new CapturaNombreJugadores(controladorQytetet, true);
         ArrayList<String> nombres= capturaNombres.obtenerNombres();
@@ -71,7 +169,7 @@ public class ControladorQytetet extends javax.swing.JFrame {
         Qytetet juego = Qytetet.getInstance();
         juego.inicializarJuego(nombres);
         
-        
+       
         controladorQytetet.actualizar(juego);
         
 
@@ -80,6 +178,12 @@ public class ControladorQytetet extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jbAplicarSorpresa;
+    private javax.swing.JButton jbJugar;
+    private javax.swing.JButton jbSalirCarcelDado;
+    private javax.swing.JButton jbSalirCarcelPagando;
+    private javax.swing.JButton jbSiguienteJugador;
     private GUIQytetet.VistaQytetet vistaQytetet1;
     // End of variables declaration//GEN-END:variables
 }
