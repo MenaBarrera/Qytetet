@@ -67,9 +67,10 @@ public class ControladorQytetet extends javax.swing.JFrame {
         CapturaNombreJugadores capturaNombres = new CapturaNombreJugadores(controladorQytetet, true);
         ArrayList<String> nombres= capturaNombres.obtenerNombres();
         
+        Dado.createInstance(controladorQytetet);
         Qytetet juego = Qytetet.getInstance();
         juego.inicializarJuego(nombres);
-        Dado.createInstance(controladorQytetet);
+        
         
         controladorQytetet.actualizar(juego);
         

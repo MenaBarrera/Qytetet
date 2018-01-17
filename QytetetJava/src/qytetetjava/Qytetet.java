@@ -51,7 +51,11 @@ public class Qytetet {
         return qytetet;
     }
     public String getTextoCarta(){
-        return cartaActual.getTexto();
+        if(cartaActual == null)
+            return null;
+        
+        else
+            return cartaActual.getTexto();
     }
     
     public boolean aplicarSorpresa(){
@@ -202,7 +206,7 @@ public class Qytetet {
         
         if (metodo == 0) {
             Dado dado = GUIQytetet.Dado.getInstance();
-            int valorDado = dado.tirar();
+            int valorDado = dado.nextNumber();
             libre = (valorDado > 5);
         }
         
@@ -220,7 +224,7 @@ public class Qytetet {
     
     public boolean jugar(){
         Dado dado = GUIQytetet.Dado.getInstance();
-        int valorDado = dado.tirar();
+        int valorDado = dado.nextNumber();
         
         System.out.println("valorDado: " + valorDado);
         Casilla casillaPosicion = jugadorActual.getCasillaActual();
@@ -368,8 +372,9 @@ public class Qytetet {
 
     @Override
     public String toString() {
-        Dado dado = GUIQytetet.Dado.getInstance();
-        return "Qytetet{" + "\ncartaActual=" + cartaActual + "\nmazo=" + mazo.toString() + "\njugadores=" + jugadores.toString() + "\njugadorActual=" + jugadorActual.toString() + "\ntablero=" + tablero.toString() + "\ndado=" + dado.toString() + '}';
+        return "Qytetet{" + "\ncartaActual=" + cartaActual + "\nmazo=" + mazo.toString() 
+                + "\njugadores=" + jugadores.toString() + "\njugadorActual=" + jugadorActual.toString()
+                + "\ntablero=" + tablero.toString() +  '}';
     }  
  
 }

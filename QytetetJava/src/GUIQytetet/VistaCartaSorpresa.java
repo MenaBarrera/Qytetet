@@ -19,6 +19,8 @@ public class VistaCartaSorpresa extends javax.swing.JPanel {
     }
     
     public void actualizar(String descripcionCarta){
+        
+        
         this.JTextCartaSopresa.setText(descripcionCarta);
         this.repaint(); //Investiga para qué sirven estos métodos
         this.revalidate();

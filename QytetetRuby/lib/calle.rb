@@ -125,5 +125,10 @@ class Calle < Casilla
     def asignar_titulo_propiedad
       
     end
+    
+    # llamar al super 
+    def to_s
+      super + " texto-- "
+    end
 end
 end
