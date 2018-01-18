@@ -220,6 +220,7 @@ public class ControladorQytetet extends javax.swing.JFrame {
                 if (modeloQytetet.getJugadorActual().getCasillaActual().getTipo() == qytetetjava.TipoCasilla.CALLE) {
                     if (!tienePropietario) {
                         this.jbComprar.setEnabled(true);
+                        this.jbSiguienteJugador.setEnabled(true);
                     }
                 } else if (modeloQytetet.getJugadorActual().getCasillaActual().getTipo() == qytetetjava.TipoCasilla.SORPRESA) {
                     this.jbAplicarSorpresa.setEnabled(true);
