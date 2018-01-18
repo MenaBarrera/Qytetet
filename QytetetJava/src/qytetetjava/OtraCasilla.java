@@ -28,7 +28,7 @@ public class OtraCasilla extends Casilla {
 
     @Override
     public String toString() {
-        return super.toString() + "OtraCasilla{" + '}';
+        return super.toString();
     }
 
    

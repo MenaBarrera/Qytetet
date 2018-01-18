@@ -21,7 +21,7 @@ public class VistaCartaSorpresa extends javax.swing.JPanel {
     public void actualizar(String descripcionCarta){
         
         
-        this.JTextCartaSopresa.setText(descripcionCarta);
+        this.jtTextoCartaSopresa.setText(descripcionCarta);
         this.repaint(); //Investiga para qué sirven estos métodos
         this.revalidate();
     }
@@ -36,21 +36,21 @@ public class VistaCartaSorpresa extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTextCartaSopresa = new javax.swing.JTextArea();
+        jtTextoCartaSopresa = new javax.swing.JTextArea();
 
-        JTextCartaSopresa.setEditable(false);
-        JTextCartaSopresa.setColumns(20);
-        JTextCartaSopresa.setRows(5);
-        jScrollPane1.setViewportView(JTextCartaSopresa);
+        jtTextoCartaSopresa.setEditable(false);
+        jtTextoCartaSopresa.setColumns(20);
+        jtTextoCartaSopresa.setRows(5);
+        jScrollPane1.setViewportView(jtTextoCartaSopresa);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,7 +63,7 @@ public class VistaCartaSorpresa extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea JTextCartaSopresa;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jtTextoCartaSopresa;
     // End of variables declaration//GEN-END:variables
 }

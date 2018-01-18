@@ -19,7 +19,7 @@ public class VistaJugador extends javax.swing.JPanel {
     }
     
     public void actualizar(String descripcionJugador){
-        this.JTextJugador.setText(descripcionJugador);
+        this.jtTextoJugador.setText(descripcionJugador);
         this.repaint(); //Investiga para qué sirven estos métodos
         this.revalidate();
     }
@@ -34,22 +34,22 @@ public class VistaJugador extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTextJugador = new javax.swing.JTextArea();
+        jtTextoJugador = new javax.swing.JTextArea();
 
-        JTextJugador.setEditable(false);
-        JTextJugador.setBackground(new java.awt.Color(204, 204, 255));
-        JTextJugador.setColumns(20);
-        JTextJugador.setRows(5);
-        jScrollPane1.setViewportView(JTextJugador);
+        jtTextoJugador.setEditable(false);
+        jtTextoJugador.setBackground(new java.awt.Color(204, 204, 255));
+        jtTextoJugador.setColumns(20);
+        jtTextoJugador.setRows(5);
+        jScrollPane1.setViewportView(jtTextoJugador);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -61,7 +61,7 @@ public class VistaJugador extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea JTextJugador;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jtTextoJugador;
     // End of variables declaration//GEN-END:variables
 }
