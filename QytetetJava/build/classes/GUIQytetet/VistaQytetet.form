@@ -23,7 +23,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="vistaCartaSorpresa2" alignment="1" pref="421" max="32767" attributes="0"/>
+                  <Component id="vistaCartaSorpresa2" alignment="1" max="32767" attributes="0"/>
                   <Component id="vistaCasilla1" alignment="1" max="32767" attributes="0"/>
                   <Component id="vistaJugador1" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -39,8 +39,8 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="vistaCasilla1" min="-2" pref="182" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="vistaJugador1" min="-2" pref="136" max="-2" attributes="0"/>
-              <EmptySpace pref="54" max="32767" attributes="0"/>
+              <Component id="vistaJugador1" min="-2" pref="134" max="-2" attributes="0"/>
+              <EmptySpace pref="56" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

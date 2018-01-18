@@ -31,9 +31,9 @@
                       <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jbSalirCarcelDado" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbSalirCarcelPagando" min="-2" pref="139" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jbSalirCarcelDado" max="32767" attributes="0"/>
+                          <Component id="jbSalirCarcelPagando" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="jbJugar" min="-2" pref="139" max="-2" attributes="0"/>
@@ -57,14 +57,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jbSalirCarcelDado" min="-2" pref="42" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jbSalirCarcelPagando" min="-2" pref="41" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jbSiguienteJugador" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jbSalirCarcelDado" min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jbSalirCarcelPagando" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace pref="15" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -73,6 +68,7 @@
                           <Component id="jbJugar" alignment="3" min="-2" pref="77" max="-2" attributes="0"/>
                           <Component id="jbAplicarSorpresa" alignment="3" max="32767" attributes="0"/>
                           <Component id="jbComprar" alignment="3" max="32767" attributes="0"/>
+                          <Component id="jbSiguienteJugador" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
