@@ -36,6 +36,7 @@ public class ControladorQytetet extends javax.swing.JFrame {
         this.jbAplicarSorpresa.setEnabled(false);
         this.jbSalirCarcelPagando.setEnabled(false);
         this.jbSalirCarcelDado.setEnabled(false);
+        this.jbGestionInmobiliaria.setEnabled(false);
         if(modeloQytetet.getJugadorActual().getEncarcelado()){
             this.jbSalirCarcelPagando.setEnabled(true);
             this.jbSalirCarcelDado.setEnabled(true);
@@ -55,7 +56,8 @@ public class ControladorQytetet extends javax.swing.JFrame {
         this.jbAplicarSorpresa.setEnabled(false);
         this.jbSalirCarcelPagando.setEnabled(false);
         this.jbSalirCarcelDado.setEnabled(false);
-        this.jbJugar.setEnabled(false);        
+        this.jbJugar.setEnabled(false);   
+        this.jbGestionInmobiliaria.setEnabled(false);
     }
 
     /**
@@ -74,6 +76,7 @@ public class ControladorQytetet extends javax.swing.JFrame {
         jbComprar = new javax.swing.JButton();
         jbSiguienteJugador = new javax.swing.JButton();
         vistaQytetet2 = new GUIQytetet.VistaQytetet();
+        jbGestionInmobiliaria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,49 +122,58 @@ public class ControladorQytetet extends javax.swing.JFrame {
             }
         });
 
+        jbGestionInmobiliaria.setText("Gestion Inmobiliaria");
+        jbGestionInmobiliaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGestionInmobiliariaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(vistaQytetet2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(172, 172, 172))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbSalirCarcelDado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbSalirCarcelPagando, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(33, 33, 33)
-                        .addComponent(jbJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbAplicarSorpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                        .addComponent(jbComprar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbSiguienteJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbSalirCarcelDado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbSalirCarcelPagando, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jbJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbComprar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbAplicarSorpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbGestionInmobiliaria)
+                .addGap(18, 18, 18)
+                .addComponent(jbSiguienteJugador))
+            .addComponent(vistaQytetet2, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(vistaQytetet2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(vistaQytetet2, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jbSalirCarcelDado, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbSalirCarcelPagando, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(15, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jbJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbAplicarSorpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbComprar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbSiguienteJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbSalirCarcelDado, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbSalirCarcelPagando, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(56, 56, 56))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbAplicarSorpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jbSiguienteJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbGestionInmobiliaria, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -202,12 +214,13 @@ public class ControladorQytetet extends javax.swing.JFrame {
         
         jbComprar.setEnabled(res);
       
-        this.jbJugar.setEnabled(true);
+        //this.jbJugar.setEnabled(true);
         this.vistaQytetet2.Actualizar(modeloQytetet);
+        this.jbAplicarSorpresa.setEnabled(false);
+        this.jbSiguienteJugador.setEnabled(true);
     }//GEN-LAST:event_jbAplicarSorpresaActionPerformed
 
     private void jbJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbJugarActionPerformed
-        // TODO add your handling code here:
         boolean tienePropietario = modeloQytetet.jugar();
         this.vistaQytetet2.Actualizar(modeloQytetet);
         
@@ -215,14 +228,19 @@ public class ControladorQytetet extends javax.swing.JFrame {
             if (!modeloQytetet.getJugadorActual().getEncarcelado()) {
                 if (modeloQytetet.getJugadorActual().getCasillaActual().getTipo() == qytetetjava.TipoCasilla.CALLE) {
                     if (!tienePropietario) {
-                        this.jbComprar.setEnabled(true);
-                        
+                        this.jbComprar.setEnabled(true);                        
+                    } else {
+                        // Como no se puede comprar, se habilita la capacidad de
+                        // pasar al siguiente jugador
+                        this.jbSiguienteJugador.setEnabled(true);
                     }
                 } else if (modeloQytetet.getJugadorActual().getCasillaActual().getTipo() == qytetetjava.TipoCasilla.SORPRESA) {
+                    // Si se trata de una casilla de sorpresa, se habilita
+                    // ese boton
                     this.jbAplicarSorpresa.setEnabled(true);
                 } else {
                     this.jbSiguienteJugador.setEnabled(true);
-                    jbAplicarSorpresa.setEnabled(false);
+                    this.jbAplicarSorpresa.setEnabled(false);
                 }
                 this.jbJugar.setEnabled(false);
             }            
@@ -232,11 +250,24 @@ public class ControladorQytetet extends javax.swing.JFrame {
     }//GEN-LAST:event_jbJugarActionPerformed
 
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
-        // TODO add your handling code here:
+        int saldo = modeloQytetet.getJugadorActual().getSaldo();
+        qytetetjava.Calle calle = (qytetetjava.Calle) modeloQytetet.getJugadorActual().getCasillaActual();
+        int opcion = JOptionPane.showConfirmDialog(null,  "¿Deseas comprar esta propiedad?\nSaldo Disponible: " + saldo, "Menú Comprar", JOptionPane.YES_NO_OPTION);
+        
+        if (opcion == JOptionPane.YES_OPTION) {
+            boolean comprado = modeloQytetet.comprarTituloPropiedad(calle);
+            
+            if (comprado) {
+                this.vistaQytetet2.Actualizar(modeloQytetet);
+                JOptionPane.showMessageDialog(this, "Gracias por la compra. Se ha añadido a tu lista de propiedades.");                
+            }
+        }
+        
+        this.jbComprar.setEnabled(false);
+        this.jbSiguienteJugador.setEnabled(true);
     }//GEN-LAST:event_jbComprarActionPerformed
 
     private void jbSiguienteJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteJugadorActionPerformed
-        // TODO add your handling code here:
         modeloQytetet.siguienteJugador();
         actualizar(modeloQytetet);
         
@@ -244,6 +275,10 @@ public class ControladorQytetet extends javax.swing.JFrame {
             finJuego();
         }
     }//GEN-LAST:event_jbSiguienteJugadorActionPerformed
+
+    private void jbGestionInmobiliariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGestionInmobiliariaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbGestionInmobiliariaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,6 +305,7 @@ public class ControladorQytetet extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbAplicarSorpresa;
     private javax.swing.JButton jbComprar;
+    private javax.swing.JButton jbGestionInmobiliaria;
     private javax.swing.JButton jbJugar;
     private javax.swing.JButton jbSalirCarcelDado;
     private javax.swing.JButton jbSalirCarcelPagando;

@@ -163,6 +163,6 @@ public class Calle extends Casilla {
 
     @Override
     public String toString() {
-        return super.toString() + "Calle{" + "titulo=" + titulo + ", numHoteles=" + numHoteles + ", numCasas=" + numCasas + '}';
+        return super.toString() + "  Calle"  + "\n  Num Hoteles=" + numHoteles + "\n  NumCasas=" + numCasas + "\n  Titulo=" + titulo;
     }
 }

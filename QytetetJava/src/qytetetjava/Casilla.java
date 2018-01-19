@@ -66,7 +66,7 @@ public abstract class Casilla {
     @Override
     public String toString() {
         
-        return  "Casilla{" + "numeroCasilla=" + numeroCasilla + ", coste=" + coste + ", tipo=" + tipo +  '}';
+        return  "Casilla" + "\n Numero Casilla=" + numeroCasilla + "\n Coste=" + coste + "\n Tipo=" + tipo;
     }
     
 }

@@ -306,6 +306,6 @@ public class Jugador {
     
     @Override
     public String toString() {
-        return "Jugador" + "\n Encarcelado=" + encarcelado + "\n Nombre=" + nombre + "\n Saldo=" + saldo + "\n Casilla actual=" + casillaActual + "\n CartaLibertad=" + cartaLibertad + "\n Propiedades=" + propiedades;
+        return "Jugador" + "\n Encarcelado=" + encarcelado + "\n Nombre=" + nombre + "\n Saldo=" + saldo  + "\n CartaLibertad=" + cartaLibertad + "\n Propiedades=" + propiedades;
     }   
 } // FIN CLASE

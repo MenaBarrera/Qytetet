@@ -23,7 +23,7 @@ public class Tablero {
     }
     
     boolean esCasillaCarcel(int numeroCasilla){
-        return this.casillas.get(numeroCasilla).getTipo() == TipoCasilla.CALLE;
+        return this.casillas.get(numeroCasilla).getTipo() == TipoCasilla.CARCEL;
     }
     
     // precondicion: 0 <= numeroCasilla <= 19

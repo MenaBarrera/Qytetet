@@ -94,6 +94,7 @@ public class Qytetet {
             jugadorActual.setCartaLibertad(cartaActual);
         } else {
             mazo.add(cartaActual);          // hay que hacer esto?
+            cartaActual = null;
         }
         
         return tienePropietario;
@@ -335,10 +336,10 @@ public class Qytetet {
         mazo.add(new Sorpresa ("No has hecho bien la declaración de la renta y tienes que pagar los impuestos.", -300, TipoSorpresa.PAGAROBRAR));
         mazo.add(new Sorpresa ("Es tu cumpleaños. Entre todos hte han regalado una suma de dinero para que la gastes en lo que quieras.", 125, TipoSorpresa.PORJUGADOR));
         mazo.add(new Sorpresa ("Has roto la estatua que te prestaron tus amigos para tu fiesta. Debes pagarles a cada uno lo que le pertoque.", -100, TipoSorpresa.PORJUGADOR));
-        mazo.add(new Sorpresa ("Tienes que devolver el préstamo que pediste para poder cada una de tus propiedaes edificar." , -20, TipoSorpresa.PORCASAHOTEL));
+        mazo.add(new Sorpresa ("Tienes que devolver el préstamo que pediste para poder edificar cada una de tus propiedaes." , -20, TipoSorpresa.PORCASAHOTEL));
         mazo.add(new Sorpresa ("Tus propiedades han sido muy bien valoradas y están llegando muchos inquilinos nuevos. Obtienes ganancias por cada propiedad.", 15, TipoSorpresa.PORCASAHOTEL));
         mazo.add(new Sorpresa ("Después de mucho trabajo y mucho esfuerzo, has conseguido convertirte en un Especulador. Disfruta de poder edificar más propiedades y de tus ventajas fiscales.", 3000, TipoSorpresa.CONVERTIRME));
-        mazo.add(new Sorpresa ("Felicidades por haberte convertido en un Especulador. disfruta de tus ventajas fiscales y de edificar más que los menos afortunados", 5000, TipoSorpresa.CONVERTIRME));
+        mazo.add(new Sorpresa ("Felicidades por haberte convertido en un Especulador. Disfruta de tus ventajas fiscales y de edificar más que los menos afortunados", 5000, TipoSorpresa.CONVERTIRME));
         
         Collections.shuffle(mazo);
     }
