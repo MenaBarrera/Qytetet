@@ -21,13 +21,13 @@ public class VistaQytetet extends javax.swing.JPanel {
     }
     
     public void Actualizar(Qytetet juego){
-        vistaJugador1.actualizar(juego.getJugadorActual().toString());
-        vistaCasilla1.actualizar(juego.getJugadorActual().getCasillaActual().toString());
+        vistaJugador2.actualizar(juego.getJugadorActual().toString());
+        vistaCasilla2.actualizar(juego.getJugadorActual().getCasillaActual().toString());
         
         if(juego.getTextoCarta() != null)
-            vistaCartaSorpresa2.actualizar(juego.getTextoCarta());
+            vistaCartaSorpresa3.actualizar(juego.getTextoCarta());
         else
-            vistaCartaSorpresa2.actualizar("No hay carta sorpresa.");
+            vistaCartaSorpresa3.actualizar("No hay carta sorpresa.");
         
     }
 
@@ -41,40 +41,39 @@ public class VistaQytetet extends javax.swing.JPanel {
     private void initComponents() {
 
         vistaCartaSorpresa1 = new GUIQytetet.VistaCartaSorpresa();
-        vistaCartaSorpresa2 = new GUIQytetet.VistaCartaSorpresa();
-        vistaCasilla1 = new GUIQytetet.VistaCasilla();
-        vistaJugador1 = new GUIQytetet.VistaJugador();
+        vistaCartaSorpresa3 = new GUIQytetet.VistaCartaSorpresa();
+        vistaJugador2 = new GUIQytetet.VistaJugador();
+        vistaCasilla2 = new GUIQytetet.VistaCasilla();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(vistaCartaSorpresa2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(vistaCasilla1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(vistaJugador1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vistaCasilla2, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+                    .addComponent(vistaCartaSorpresa3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vistaJugador2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(vistaCartaSorpresa2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(vistaCasilla1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(vistaCartaSorpresa3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(vistaJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addComponent(vistaJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(vistaCasilla2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUIQytetet.VistaCartaSorpresa vistaCartaSorpresa1;
-    private GUIQytetet.VistaCartaSorpresa vistaCartaSorpresa2;
-    private GUIQytetet.VistaCasilla vistaCasilla1;
-    private GUIQytetet.VistaJugador vistaJugador1;
+    private GUIQytetet.VistaCartaSorpresa vistaCartaSorpresa3;
+    private GUIQytetet.VistaCasilla vistaCasilla2;
+    private GUIQytetet.VistaJugador vistaJugador2;
     // End of variables declaration//GEN-END:variables
 }
