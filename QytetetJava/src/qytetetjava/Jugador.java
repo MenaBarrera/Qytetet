@@ -192,7 +192,7 @@ public class Jugador {
         
         if(esMia){
             int costeEdificarCasa = calle.getPrecioEdificar();
-            tengoSaldo = this.tengoSaldo(-costeEdificarCasa);
+            tengoSaldo = this.tengoSaldo(costeEdificarCasa);
         }
         return esMia && tengoSaldo;
 
