@@ -39,9 +39,9 @@ public class VistaCartaSorpresa extends javax.swing.JPanel {
         jtTextoCartaSopresa = new javax.swing.JTextArea();
 
         jtTextoCartaSopresa.setEditable(false);
+        jtTextoCartaSopresa.setBackground(new java.awt.Color(255, 51, 102));
         jtTextoCartaSopresa.setColumns(20);
         jtTextoCartaSopresa.setRows(5);
-        jtTextoCartaSopresa.setText("Carta Sorpresa");
         jScrollPane1.setViewportView(jtTextoCartaSopresa);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

@@ -37,10 +37,9 @@ public class VistaJugador extends javax.swing.JPanel {
         jtTextoJugador = new javax.swing.JTextArea();
 
         jtTextoJugador.setEditable(false);
-        jtTextoJugador.setBackground(new java.awt.Color(204, 204, 255));
+        jtTextoJugador.setBackground(new java.awt.Color(0, 255, 0));
         jtTextoJugador.setColumns(20);
         jtTextoJugador.setRows(5);
-        jtTextoJugador.setText("Jugador Actual");
         jtTextoJugador.setToolTipText("");
         jScrollPane1.setViewportView(jtTextoJugador);
 

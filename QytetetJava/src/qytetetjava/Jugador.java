@@ -299,7 +299,7 @@ public class Jugador {
         Especulador espec = new Especulador(this, fianza);
         
         for (TituloPropiedad propiedad: espec.getPropiedades())
-            propiedad.setPropietario(this);
+            propiedad.setPropietario(espec);
         
         return espec;
     }

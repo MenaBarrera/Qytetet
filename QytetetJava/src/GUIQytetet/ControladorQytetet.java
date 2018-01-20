@@ -73,7 +73,7 @@ public class ControladorQytetet extends javax.swing.JFrame {
     }
     
     private void habilitarGestionInmobiliaria() {
-        if (modeloQytetet.getJugadorActual().tengoPropiedades()) {
+        if (modeloQytetet.getJugadorActual().tengoPropiedades() && !modeloQytetet.getJugadorActual().getEncarcelado()) {
             this.jbGestionInmobiliaria.setEnabled(true);
         } else {
             this.jbGestionInmobiliaria.setEnabled(false);
@@ -289,6 +289,7 @@ public class ControladorQytetet extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, modeloQytetet.getTextoCarta());
         int saldoActual = modeloQytetet.getJugadorActual().getSaldo();        
         boolean encarceladoActual = modeloQytetet.getJugadorActual().getEncarcelado();
+        boolean activarGestion = true, activarSiguienteJugador = true;
         
         boolean res = modeloQytetet.aplicarSorpresa();        
         
@@ -300,12 +301,15 @@ public class ControladorQytetet extends javax.swing.JFrame {
             // Se habilita el boton de compra con el resultado contrario al obtenido en
             // aplicarSorpresa
             this.jbComprar.setEnabled(!res);
+            activarGestion = activarSiguienteJugador = false;
         }
         
         this.jbAplicarSorpresa.setEnabled(false);
-        this.jbSiguienteJugador.setEnabled(true);
+        this.jbSiguienteJugador.setEnabled(activarSiguienteJugador);
         
-        habilitarGestionInmobiliaria();
+        if (activarGestion) {
+            habilitarGestionInmobiliaria();
+        }        
     }//GEN-LAST:event_jbAplicarSorpresaActionPerformed
 
     private void jbJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbJugarActionPerformed
@@ -349,11 +353,11 @@ public class ControladorQytetet extends javax.swing.JFrame {
                     activarGestion = true;
                 }
                 
-                if (modeloQytetet.getJugadorActual().getEncarcelado()) {
-                    JOptionPane.showMessageDialog(this, "El Juez te ha mandado a la cárcel");
-                    activarSiguienteJugador = true;
-                }                
+            } else {
+                JOptionPane.showMessageDialog(this, "El Juez te ha mandado a la cárcel");
+                activarSiguienteJugador = true;
             }
+            
         } else {
             finJuego();
         }

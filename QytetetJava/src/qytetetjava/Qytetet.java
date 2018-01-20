@@ -87,15 +87,27 @@ public class Qytetet {
                 }
             }
         } else if (cartaActual.getTipo() == TipoSorpresa.CONVERTIRME) {
+            Jugador copiaJugadorActual = jugadorActual;
+            int i = 0;
+            
             jugadorActual = jugadorActual.convertirme(cartaActual.getValor());
+            
+            while (i < jugadores.size()) {
+                if (jugadores.get(i) == copiaJugadorActual)
+                    break;
+                i++;
+            }
+            
+            jugadores.set(i, jugadorActual);            
         }
         
         if (cartaActual.getTipo() == TipoSorpresa.SALIRCARCEL) {
             jugadorActual.setCartaLibertad(cartaActual);
         } else {
-            mazo.add(cartaActual);          // hay que hacer esto?
-            cartaActual = null;
+            mazo.add(cartaActual);          // hay que hacer esto?            
         }
+        
+        cartaActual = null;
         
         return tienePropietario;
     }
@@ -328,9 +340,10 @@ public class Qytetet {
     private void inicializarCartasSorpresa(){
         mazo = new ArrayList();
         
+        mazo.add(new Sorpresa ("Te has dejado a tu perro en una tienda de la Avenida de Móstoles.", 7, TipoSorpresa.IRACASILLA));        
         mazo.add(new Sorpresa ("Te han pillado evadiendo impuestos. Te vas derechito a la cárcel.", tablero.getCarcel().getNumeroCasilla(), TipoSorpresa.IRACASILLA));
         mazo.add(new Sorpresa ("Un diplomático anónimo ha pagado tu salida de la cárcel. Eres libre de irte." , 0, TipoSorpresa.SALIRCARCEL));
-        mazo.add(new Sorpresa ("Te has dejado a tu perro en una tienda de la Avenida de Móstoles.", 7, TipoSorpresa.IRACASILLA));
+        mazo.add(new Sorpresa ("Felicidades por haberte convertido en un Especulador. Disfruta de tus ventajas fiscales y de edificar más que los menos afortunados", 5000, TipoSorpresa.CONVERTIRME));
         mazo.add(new Sorpresa ("Decides ir a visitar los jardines de la Calle de los Nardos.", 19, TipoSorpresa.IRACASILLA));
         mazo.add(new Sorpresa ("Has recibido una jugosa transacción de una gran empresa.", 450, TipoSorpresa.PAGAROBRAR));
         mazo.add(new Sorpresa ("No has hecho bien la declaración de la renta y tienes que pagar los impuestos.", -300, TipoSorpresa.PAGAROBRAR));
@@ -339,8 +352,7 @@ public class Qytetet {
         mazo.add(new Sorpresa ("Tienes que devolver el préstamo que pediste para poder edificar cada una de tus propiedaes." , -20, TipoSorpresa.PORCASAHOTEL));
         mazo.add(new Sorpresa ("Tus propiedades han sido muy bien valoradas y están llegando muchos inquilinos nuevos. Obtienes ganancias por cada propiedad.", 15, TipoSorpresa.PORCASAHOTEL));
         mazo.add(new Sorpresa ("Después de mucho trabajo y mucho esfuerzo, has conseguido convertirte en un Especulador. Disfruta de poder edificar más propiedades y de tus ventajas fiscales.", 3000, TipoSorpresa.CONVERTIRME));
-        mazo.add(new Sorpresa ("Felicidades por haberte convertido en un Especulador. Disfruta de tus ventajas fiscales y de edificar más que los menos afortunados", 5000, TipoSorpresa.CONVERTIRME));
-        
+       
         Collections.shuffle(mazo);
     }
     
