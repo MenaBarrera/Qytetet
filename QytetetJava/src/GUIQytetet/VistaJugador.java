@@ -40,6 +40,8 @@ public class VistaJugador extends javax.swing.JPanel {
         jtTextoJugador.setBackground(new java.awt.Color(204, 204, 255));
         jtTextoJugador.setColumns(20);
         jtTextoJugador.setRows(5);
+        jtTextoJugador.setText("Jugador Actual");
+        jtTextoJugador.setToolTipText("");
         jScrollPane1.setViewportView(jtTextoJugador);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

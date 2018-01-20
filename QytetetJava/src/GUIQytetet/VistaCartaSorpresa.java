@@ -41,6 +41,7 @@ public class VistaCartaSorpresa extends javax.swing.JPanel {
         jtTextoCartaSopresa.setEditable(false);
         jtTextoCartaSopresa.setColumns(20);
         jtTextoCartaSopresa.setRows(5);
+        jtTextoCartaSopresa.setText("Carta Sorpresa");
         jScrollPane1.setViewportView(jtTextoCartaSopresa);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

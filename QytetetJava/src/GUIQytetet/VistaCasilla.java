@@ -40,6 +40,8 @@ public class VistaCasilla extends javax.swing.JPanel {
         jtTextoCasilla.setBackground(new java.awt.Color(212, 228, 255));
         jtTextoCasilla.setColumns(20);
         jtTextoCasilla.setRows(5);
+        jtTextoCasilla.setText("Casilla Actual");
+        jtTextoCasilla.setToolTipText("");
         jScrollPane1.setViewportView(jtTextoCasilla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
