@@ -314,7 +314,18 @@ module ModeloQytetet
     end
     
     def to_s
-      "QYTETET\n Carta Actual: #{@cartaActual}\n Mazo: #{@mazo.to_s}\n Jugadores: " + @jugadores.to_s + "\n Jugador Actual: #{@jugadorActual.to_s}\n Tablero #{@tablero}\n Dado #{@dado.to_s}"
+      jugadores_sal = ""
+      mazo_sal = ""
+      
+      @jugadores.each do |jugador|
+        jugadores_sal += jugador.to_s
+      end
+      
+      @mazo.each do |carta|
+        mazo_sal += carta.to_s
+      end
+      
+      "QYTETET\n Carta Actual: #{@cartaActual}\n Mazo: #{mazo_sal}\n Jugadores: #{jugadores_sal}\n Jugador Actual: #{@jugadorActual.to_s}\n Tablero #{@tablero}\n Dado #{@dado.to_s}"
     end
     
     def self.SALDO_SALIDA

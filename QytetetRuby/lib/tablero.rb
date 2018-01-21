@@ -82,7 +82,13 @@ module ModeloQytetet
     end
         
     def to_s
-      "Tablero: \n Casillas: #{@casillas} \n Cárcel: #{@carcel}"
+      salida = ""
+      
+      @casillas.each do |casilla|
+        salida += casilla.to_s
+      end
+      
+      return "Tablero: \n Casillas: #{salida} \n Cárcel: #{@carcel}"
     end
         
     private :inicializar
